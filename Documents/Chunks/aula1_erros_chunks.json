@@ -1,0 +1,22 @@
+[
+  {
+    "source_path": "aula1_erros.md",
+    "chunk_text": "# Aritmética de ponto flutuante\n\n# Lilian Berti\n\n# Métodos Numéricos\n\n# Lilian Berti\n\n# Aritmética de ponto flutuante\n\n# Aritmética de ponto flutuante\n\nExemplo: Calcule a área de uma circunferência em que o raio é 100m.\n\nA = πr2 = 3, 14 · 1002 = 31.400m2\n\n(ou A = 3, 1416 · 1002 = 31.416m2\n\nou A = 31.415, 9265m2)\n\nComo justificar as diferenças entre os resultados? É possível obter o valor exato desta área?\n\nLilian Berti Aritmética de ponto flutuante\n\n# Aritmética de ponto flutuante\n\nUm número real tem a seguinte forma geral de representação:\n\n±0, d1d2 · · · dt × βE\n\nem que: di são os dígitos da parte fracionária, 0 ≤ di ≤ β − 1, i = 1, · · · , t, β é o valor da base, t é os dígitos da mantissa e E é o expoente inteiro (l ≤ E ≤ u). Se d1 = 0 diz-se que o número está normalizado.\n\nNotação:"
+  },
+  {
+    "source_path": "aula1_erros.md",
+    "chunk_text": "· , t, β é o valor da base, t é os dígitos da mantissa e E é o expoente inteiro (l ≤ E ≤ u). Se d1 = 0 diz-se que o número está normalizado.\n\nNotação: F(β, t, l, u)\n\n# Exemplos\n\n1) Representação de π = 3, 141592653 · · ·\n\na) F(10, 3, −2, 2)\n\nπ = 0, 314 × 101\n\nLilian Berti Aritmética de ponto flutuante\n\n# 2) Considere o sistema F(10, 3, −4, 4)\n\n| x | Representação |\n| ---------- | ------------------------------ |\n| -279 | −0, 279 × 103 |\n| 1,25 | 0, 125 × 101 |\n| 0,0123 | 0, 123 × 10−1 |\n| -0,0000052 | −0, 52 × 10−6 (erro underflow) |\n| 123456 | 0, 123 × 106 (erro overflow) |\n\nLilian Berti Aritmética de ponto flutuante\n\n3) Qual o maior e o menor valor em módulo representado no sistema F(10, 3, −4, 4) ?\n\nmenor: m = 0, 100 × 10−4 = 10−5 = 0, 00001\n\nMaior: M = 0, 999 × 104 = 9990\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula1_erros.md",
+    "chunk_text": "or valor em módulo representado no sistema F(10, 3, −4, 4) ?\n\nmenor: m = 0, 100 × 10−4 = 10−5 = 0, 00001\n\nMaior: M = 0, 999 × 104 = 9990\n\nLilian Berti Aritmética de ponto flutuante\n\nConsidere x = 0, d1d2d3 . . . dt dt+1 . . .\n\n# Aproximação com t dígitos por arredondamento:\n\nSe dt+1 < 5 ⇒ x = 0, d1d2d3 . . . dt\n\nSe dt+1 ≥ 5 ⇒ x = 0, d1d2d3 . . . (dt + 1)\n\n# Exemplo:\n\nSeja F(10, 3, −4, 4)\n\n| √ | Arredondamento |\n| ----- | ----------------- |\n| 2 | 1, 41421356 . . . |\n| e | 2, 71828182 . . . |\n| 100,5 | 0, 101 × 103 |\n\nLilian Berti Aritmética de ponto flutuante\n\n# Operações em aritmética de ponto flutuante com três dígitos significativos e arrendondamento\n\n1. (11,4 + 3,18) + 5,05 = 14,6 + 5,05 = 19,7\n2. 11,4 + (3,18 + 5,05) = 11,4 + 8,23 = 19,6\n3. 3,18 × 11,4 = 36,3 = 7,19\n\n5,05\n4. 3,¹⁸ ×"
+  },
+  {
+    "source_path": "aula1_erros.md",
+    "chunk_text": "rrendondamento\n\n1. (11,4 + 3,18) + 5,05 = 14,6 + 5,05 = 19,7\n2. 11,4 + (3,18 + 5,05) = 11,4 + 8,23 = 19,6\n3. 3,18 × 11,4 = 36,3 = 7,19\n\n5,05\n4. 3,¹⁸ × 11,4 = 0,63 × 11,4 = 7,18\n\n5,05\n5. 3,18 × (5,05 + 11,4) = 3,18 × 16,5 = 52,5\n6. 3,18 × 5,05 + 3,18 × 11,4 = 16,1 + 36,3 = 52,4\n\nOBS: As operações aritméticas são associativas e distributivas\n\nLilian Berti Aritmética de ponto flutuante\n\n# Erros:\n\nSejam x um número exato e x̄ uma aproximação para x.\n\n# Erro absoluto:\n\nE(¯) = |x̄ - x|\n\n# Erro relativo:\n\nE(¯) = |x̄ - x| / |x|, x ≠ 0\n\nLilian Berti Aritmética de ponto flutuante\n\nExemplos:\n\n1. x = 1 e x̄ = 1, 373\n\nE (x̄)     | − |\n\nA x     = 1     1, 373 = 0, 373\n\nE (x̄)     |1 − 1, 373|\n\nR x = 1     = 0, 373\n2. x = 3876 e x̄ = 3876, 373\n\nE (x̄)     | − |\n\nA x = 3876     3876, 373 = 0, 373\n\nE (x̄)"
+  },
+  {
+    "source_path": "aula1_erros.md",
+    "chunk_text": "373 = 0, 373\n\nE (x̄)     |1 − 1, 373|\n\nR x = 1     = 0, 373\n2. x = 3876 e x̄ = 3876, 373\n\nE (x̄)     | − |\n\nA x = 3876     3876, 373 = 0, 373\n\nE (x̄)     |3876 − 3876, 373|\n\nR x = |3876|     = 0, 000096\n\nLilian Berti Aritmética de ponto flutuante\n\n# Exemplo:\n\nConsidere o sistema de ponto flutuante com cinco dígitos significativos. Seja x = 49213 + 31,728 − 49244. Temos:\n\n# Valor Exato:\n\nx = 0,728\n\n# Valor aproximado:\n\n| x | − | − |\n| ------------------ | ----- | ------- |\n| ¯ = 49213 + 31,728 | 49244 | = 49245 |\n| 49244 | = 1 | |\n\nE (¯) Rx = 0,728 − 1 = 0,37363\n\nNote que, o erro relativo na adição inicial é:\n\nER = 49244,728 − 49245 = 5,5243 × 10−6\n\n49244,728\n\nOs dígitos perdidos na adição passa a ser importante na subtração.\n\nLilian Berti Aritmética de ponto flutuante"
+  }
+]
