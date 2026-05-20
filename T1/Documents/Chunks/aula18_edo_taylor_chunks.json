@@ -1,0 +1,34 @@
+[
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "# Solução Numérica de equações diferenciais ordinárias\n\n# Lilian Berti\n\n# Métodos Numéricos\n\n# Solução Numérica de equações diferenciais ordinárias\n\n# Lilian Berti\n\n# Equação diferencial\n\nEquação envolvendo derivadas de uma função incógnita.\n\n# Exemplos:\n\n- u = u u(t) = cet\n- v\" + v = 0 v(t) = α cos t + βsen t\n- ∂2u + ∂2u = 0 u = u(x, y)\n- ∂x2 ∂y2\n\n# Aplicações:\n\nestudo das redes elétricas, curvatura de vigas, estabilidade de aviões e etc.\n\n# Lilian Berti\n\n# Solução Numérica de equações diferenciais ordinárias\n\n# Equação diferencial ordinária (EDO)\n\na equação diferencial que tem apenas uma variável independente.\n\n# Exemplo:\n\ny (x) = −xy(x)\n\nTemos:\n\ndy = −xy\ndx\n\n1 dy = −x dx\ny\n\n1 dy = − x dx\ny\n\nln |y| = − x² + c\n\n|y| = e−ˣ₂² +c = ece−ˣ₂²\n\ny = k e−ˣ₂² para k ∈ R\n\nConsiderando a condição"
+  },
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "x)\n\nTemos:\n\ndy = −xy\ndx\n\n1 dy = −x dx\ny\n\n1 dy = − x dx\ny\n\nln |y| = − x² + c\n\n|y| = e−ˣ₂² +c = ece−ˣ₂²\n\ny = k e−ˣ₂² para k ∈ R\n\nConsiderando a condição inicial y(0) = 1, então: 1 = ke0 = k.\n\nDessa forma, a solução é dada por y = e−ˣ₂².\n\nLilian Berti Solução Numérica de equações diferenciais ordinárias\n\n# Solução Numérica de Equações Diferenciais Ordinárias\n\nEstudaremos métodos numéricos para resolver o problema de valor inicial (PVI)\n\ny (x) = f(x, y(x)), x > x0\n\ny(x0) = y0\n\nLilian Berti\n\n# Resolver numericamente um PVI\n\nResolver numericamente um PVI consiste em calcular aproximações para y = y(x) em pontos discretos x0, x1, · · ·, xN em um intervalo [a,b].\n\nDiscretizamos o intervalo [a,b] tomando N subintervalos (N ≥ 1) e fazemos\n\nxi = x0 + ih, i = 0, 1, · · · N,\n\nx0 = a, xN = b e h = (b −"
+  },
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "tervalo [a,b].\n\nDiscretizamos o intervalo [a,b] tomando N subintervalos (N ≥ 1) e fazemos\n\nxi = x0 + ih, i = 0, 1, · · · N,\n\nx0 = a, xN = b e h = (b − a) / N,\n\nsendo\n\n- h = tamanho do passo,\n- xi = pontos da malha e\n- N = número de passos.\n\nLilian Berti\n\nSolução Numérica de equações diferenciais ordinárias\n\n# Método de Taylor de ordem q\n\nConsidere o PVI, f sendo contínua suficientemente derivável até a ordem (q + 1) em relação a x e y. Seja y(x) a solução exata do PVI. A expansão em série de Taylor, para y(xi+1) em torno do ponto xi é dado por:\n\ny(xi+1) = y(xi) + hy'(xi) + h² y''(xi) + · · · + hq y(q)(xi) + (hq+1 y(q+1)(ξx))/(q + 1)!\n\nem que ξx está entre xi e xi+1 e além disso,\n\nei = (hq+1 y(q+1)(ξx))/(q + 1)! é o erro de truncamento local.\n\nLilian Berti Solução Numérica de equações"
+  },
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "m que ξx está entre xi e xi+1 e além disso,\n\nei = (hq+1 y(q+1)(ξx))/(q + 1)! é o erro de truncamento local.\n\nLilian Berti Solução Numérica de equações diferenciais ordinárias\n\n# Temos:\n\ny = f(x, y)\n\ny = f = ∂f dx + ∂f dy = f + f f\n\n∂x dx ∂y dx x y\n\ny = f = ∂fx + ∂fx dy + ∂fy + ∂fy dy f + fy ∂f + ∂f dy\n\n∂x ∂y dx ∂x ∂y dx ∂x ∂y dx\n\n= fxx + fxy f + fyxf + fyy f2 + fy fx + fy2f\n\nContinuando, podemos expressar qualquer derivada de y em torno de f(x, y) e de suas derivadas parciais.\n\nLilian Berti Solução Numérica de equações diferenciais ordinárias\n\nLimitando (1) após (q + 1) termos, obtemos:\n\ny(xi+1) = y(xi) + hf (xi, y(xi)) + h2 f (xi, y(xi)) + · · · + hq f(q−1)(xi, y(xi))\n\n2! q!\n\nSubstituindo y(xi) por yi, temos:\n\nyi+1 = yi + hf(xi, yi) + h2 f (xi, yi) + · · · + hq f(q−1)(xi, yi)\n\n2! q!\n\nem"
+  },
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "· · · + hq f(q−1)(xi, y(xi))\n\n2! q!\n\nSubstituindo y(xi) por yi, temos:\n\nyi+1 = yi + hf(xi, yi) + h2 f (xi, yi) + · · · + hq f(q−1)(xi, yi)\n\n2! q!\n\nem que i = 0, 1, · · · , N − 1, é denominado de método de Taylor de ordem q.\n\nQuando q = 1:\n\nyi+1 = yi + hf(xi, yi)\n\npara i = 0, 1, · · · , N − 1. Este método é conhecido como método de Euler.\n\nLilian Berti Solução Numérica de equações diferenciais ordinárias\n\n# Exemplo: Determine aproximações para a solução do PVI\n\ny = x − y + 2\n\ny(0) = 2\n\nna malha [0; 0, 2] com h = 0, 1.\n\nLilian Berti\n\n# Solução Numérica de equações diferenciais ordinárias\n\n# Método de Euler\n\nTemos:\n\nx0 = 0, x1 = 0,1, x2 = 0,2 y0 = 2, f(x, y) = x − y + 2\n\n# Método de Euler\n\nyi+1 = yi + hf(xi, yi) para i = 0, 1\n\n# i = 0\n\ny1 = y0 + hf(x0, y0) = 2 + 0,1 · 0 = 2 ⇒ y(0, 1) ≈ 2\n\n#"
+  },
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "y0 = 2, f(x, y) = x − y + 2\n\n# Método de Euler\n\nyi+1 = yi + hf(xi, yi) para i = 0, 1\n\n# i = 0\n\ny1 = y0 + hf(x0, y0) = 2 + 0,1 · 0 = 2 ⇒ y(0, 1) ≈ 2\n\n# i = 1\n\ny2 = y1 + hf(x1, y1) = 2 + 0,1 · 0,1 = 2,01 ⇒ y(0, 2) ≈ 2,01\n\nLilian Berti Solução Numérica de equações diferenciais ordinárias\n\n# b) utilizando o método de Taylor de ordem 2.\n\nPontos da malha:\n\n- x0 = 0\n- x1 = 0,1\n- x2 = 0,2\n- y0 = 2\n\nf(x, y) = x − y + 2\n\n# Método de Taylor de ordem 2\n\nyi+1 = yi + hf(xi, yi) + h2 f(2)(xi, yi) para i = 0, 1\n\ni = 0\n\ny1 = y0 + hf(x0, y0) + h2 f(2)(x0, y0)\n\n= 2 + 0,1 · 0 + (0,1)2 · 1 = 2,005 ⇒ y(0, 1) ≈ 2,005\n\ni = 1\n\ny2 = y1 + hf(x1, y1) + h2 f(2)(x1, y1)\n\n= 2 + 0,1 · 0,095 + (0,1)2 · 0,905 = 2,019 ⇒ y(0, 2) ≈ 2,019\n\nLilian Berti\n\nSolução Numérica de equações diferenciais ordinárias\n\n# Método de Euler\n\n#"
+  },
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "= 2 + 0,1 · 0,095 + (0,1)2 · 0,905 = 2,019 ⇒ y(0, 2) ≈ 2,019\n\nLilian Berti\n\nSolução Numérica de equações diferenciais ordinárias\n\n# Método de Euler\n\n# Método de Taylor\n\n# Solução exata de ordem 2\n\ny = e−x + x + 1\n\n| xi | yi |\n| --- | ---- |\n| 0 | 2 |\n| 0,1 | 2 |\n| 0,2 | 2,01 |\n\n| yi | y(xi) |\n| ----- | ------ |\n| 2 | 2 |\n| 2,005 | 2,0048 |\n| 2,019 | 2,0187 |\n\n# Lilian Berti\n\n# Solução Numérica de equações diferenciais ordinárias\n\n# Exemplo:\n\nEncontre uma aproximação para y(1) pelo método de Euler utilizando passo h = 0,5 sendo\n\ny = −xy\n\ny(0) = 1\n\nTemos:\n\nx0 = 0, x1 = 0,5, x2 = 1 e y0 = 1\n\nf(x, y) = −xy\n\n# Método de Euler\n\nyi+1 = yi + hf(xi, yi) para i = 0, 1\n\ni = 0\n\ny1 = y0 + hf(x0, y0) = 1 + 0,5 · 0 = 1\n\ni = 1\n\ny2 = y1 + hf(x1, y1) = 1 + 0,5 · (−0,5) = 0,75\n\nPortanto, y(1) ≈ 0,75\n\nLilian"
+  },
+  {
+    "source_path": "aula18_edo_taylor.md",
+    "chunk_text": "yi) para i = 0, 1\n\ni = 0\n\ny1 = y0 + hf(x0, y0) = 1 + 0,5 · 0 = 1\n\ni = 1\n\ny2 = y1 + hf(x1, y1) = 1 + 0,5 · (−0,5) = 0,75\n\nPortanto, y(1) ≈ 0,75\n\nLilian Berti\n\nSolução Numérica de equações diferenciais ordinárias"
+  }
+]
