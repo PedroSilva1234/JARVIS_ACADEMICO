@@ -28,7 +28,10 @@ from retrieval import IndicesRAG, buscar_hibrido
 # CONFIGURAÇÃO
 # ============================================================
 
-PASTA_INDICES = r"C:\Users\ppedr\Desktop\2025\UFMS\IA\T1\Documents\embeddings"
+# CARREGA AS VARIÁVEIS DO ARQUIVO .env PARA A MEMÓRIA DO PYTHON
+load_dotenv() 
+
+PASTA_INDICES = os.getenv(r'PASTA_EMBEDDINGS')  # Pasta onde estão os índices FAISS e BM25
 ARQUIVO_TAREFAS = "tarefas.json"
 
 MODEL_ID      = "google/gemma-3-12b-it"
@@ -45,9 +48,6 @@ logging.basicConfig(
     format='%(asctime)s - JARVIS LOG - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
-
-# CARREGA AS VARIÁVEIS DO ARQUIVO .env PARA A MEMÓRIA DO PYTHON
-load_dotenv() 
 chave_api = os.getenv('LIA_API_KEY')
 
 if not chave_api:

@@ -24,6 +24,9 @@ import pickle
 import numpy as np
 import faiss
 from rank_bm25 import BM25Okapi
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # ============================================================
@@ -231,10 +234,10 @@ def testar_busca(query_teste, pasta_indices):
 # ============================================================
 
 # Pasta onde estão os _embeddings.json gerados pelo gerar_embeddings.py
-PASTA_EMBEDDINGS = r"C:\Users\ppedr\Desktop\2025\UFMS\IA\T1\Documents\embeddings"
+PASTA_EMBEDDINGS = os.getenv(r'PASTA_EMBEDDINGS')
 
 # Pasta onde os índices serão salvos (pode ser a mesma)
-PASTA_SAIDA = r"C:\Users\ppedr\Desktop\2025\UFMS\IA\T1\Documents\embeddings"
+PASTA_SAIDA = os.getenv(r'PASTA_EMBEDDINGS')
 
 # Passo 1: Constrói e salva os índices FAISS + BM25
 construir_indices(PASTA_EMBEDDINGS, PASTA_SAIDA)

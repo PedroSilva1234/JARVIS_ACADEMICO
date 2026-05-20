@@ -217,3 +217,321 @@
   [1] Finalizar os tests do T1 de Tópicos II | Prazo: 2026-05-22 | Prioridade: alta
 2026-05-20 13:53:58 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
 2026-05-20 13:54:47 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:51:21 - JARVIS LOG - No device provided, using cpu
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:22 - JARVIS LOG - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:22 - JARVIS LOG - Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:22 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-20 14:51:23 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:23 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:23 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:23 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:23 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-20 14:51:23 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:23 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:24 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-20 14:51:24 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-20 14:51:24 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-20 14:51:24 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-20 14:51:24 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:24 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:25 - JARVIS LOG - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-20 14:51:26 - JARVIS LOG - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-20 14:51:27 - JARVIS LOG - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-20 14:51:28 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-20 14:51:28 - JARVIS LOG - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-20 14:51:28 - JARVIS LOG - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-20 14:52:03 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:52:04 - JARVIS LOG - file_cache is only supported with oauth2client<4.0.0
+2026-05-20 14:52:05 - JARVIS LOG - Ferramenta: adicionar_tarefa | Entrada: {'titulo': 'Dar commit no git do Jarvis com as novas atualizações', 'prazo': '2026-05-21', 'prioridade': 'alta'} | Saída: \u2705 Tarefa 'Dar commit no git do Jarvis com as novas atualizações' gravada localmente com ID 1 (Prazo: 2026-05-21).
+[Sincronização Nuvem]: Sucesso! Link do evento: https://www.google.com/calendar/event?eid=dXAzOXFtcDNpZGZtbDZwZWE0YmZxaW1nYWMgcHBlZHJvcGF1bG8zNDVAbQ
+2026-05-20 14:52:09 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:52:28 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:52:28 - JARVIS LOG - Ferramenta: listar_tarefas | Entrada: {'status': 'pendente'} | Saída: Tarefas pendentes no sistema local:
+  [1] Dar commit no git do Jarvis com as novas atualizações | Prazo: 2026-05-21 | Prioridade: alta
+2026-05-20 14:52:30 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:52:58 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:52:59 - JARVIS LOG - Ferramenta: buscar_material_rag | Entrada: {'query': 'método da tangente aproximação'} | Saída: [Trecho 1 — aula03_metodo_de_newton.md | score: 0.9485]
+todo de Newton
+
+
+
+
+
+# Zeros reais de Funções reais - Método de Newton
+
+# Observações:
+
+Se x0 não for uma aproximação razoável o que fazer?
+
+Aplicar um método menos restritivo para iniciar.
+
+Derivada quase nula
+
+A reta tangente é praticamente paralela ao eixo horizontal, fazendo que sua intersecção com o eixo acontecerá muito distante. Dessa forma, pode ir para outra raiz ou mesmo divergir.
+
+Lilian Berti
+
+
+
+
+N˜ao existe um critério de convergência geral para o Método de Newton. Sua convergência depende da natureza da função e da precisão da aproximação inicial. É bom ter uma aproximação inicial “suficientemente” próxima da raiz. E para algumas Funções não funcionária.
+
+# Lilian Berti
+
+# Zeros reais de Funções reais - Método de Newton
+
+
+
+
+
+Exemplo:
+
+Uma gamela de comprimento L tem seção
+
+[Trecho 2 — aula12_ajuste_2.md | score: 0.6126]
+ssa forma este é uma boa escolha para o ajuste dos dados.
+
+Lilian Berti Ajuste de Curvas pelo Método dos Quadrados Mínimos
+
+# Exemplo
+
+Aproximar y por uma função do tipo \u221aa + bx.
+
+y \u2248 \u221aa + bx
+
+# Linearizando
+
+z = y2 \u2248 a + bx
+
+Lilian Berti Ajuste de Curvas pelo Método dos Quadrados Mínimos
+
+# Exemplo
+
+Aproximar y por uma função do tipo x ln(a + bx)
+
+y \u2248 x ln(a + bx)
+
+# Linearizando
+
+y \u2248 ln(a + bx)
+
+x
+
+y
+
+z = e x \u2248 a + bx
+
+Lilian Berti Ajuste de Curvas pelo Método dos Quadrados Mínimos
+
+[Trecho 3 — aula04_metodo_da_secante_2.md | score: 0.5955]
+ia sçao as mesmas do método de Newton, mas a ordem de convergência é superlinear.
+
+(p = 1+\u221a\u2075 \u2248 1, 618)
+
+# Lilian Berti
+
+Zeros reais de Funções reais - Método da Secante
+
+# Método da Falsa Posição
+
+Este método pode ser interpretado como uma combinação do método da secante e o método da bissecção.
+
+No método da bissecção alteramos o cálculo de *xk = (a + b) / 2* por:
+
+*xk = (a * f(b) - b * f(a)) / (f(b) - f(a))*
+
+Lilian Berti
+
+Zeros reais de Funções reais - Método da Secante
+
+Encontre um zero de f(x) = x3 \u2212 9x + 3, pelo método da falsa posição utilizando I = (0, 1) e com critério de parada |b \u2212 a| &#x3C; \u03b5 = 0, 09
+
+# 1ª iteração:
+
+I = (0, 1)
+
+x1 = af(b)\u2212bf(a) = 0(\u22125)\u22121.3 = 0, 375
+
+f(b)\u2212f(a) = \u22125\u22123
+
+f(0) = 3
+
+f(0, 375) = \u22120, 3223
+
+f(1) = \u22125
+
+Novo intervalo I = (0; 0, 375) |b \u2212 a| = 0, 375 >
+
+[Trecho 4 — lista1_final.md | score: 0.5815]
+lativo inferior a 10\u2212².
+- (c) Caso o método da Bisseção fosse utilizado, em quantas iterações o método obteria uma solução com o erro inferior a 10\u22122, sabendo que a solução está no intervalo [0,2; 0,4].
+- (d) Comente os resultados obtidos nos itens anteriores, analisando a convergência de cada método.
+
+# 1a Lista de Exercícios - Respostas
+
+1. (a) ¯ 0, 6875
+
+x =
+
+(b) ¯ 0, 5625
+
+x =
+2. Como f(1) · f(3) < 0, f contínua, pelo teorema do Bolzano, segue que, f admite pelo menos uma raiz no intervalo (1,3). No entanto, como f (x) = 1 + 3x² + 1 > 0 para todo x em seu domínio, segue que f é estritamente crescente. Então, podemos afirmar que f admite uma única raiz positiva em seu domínio, e a raiz está no intervalo (1,3).
+3. m \u2248 59, 8438 (3 iterações)
+4. 23 iterações
+5. 14 iterações
+6. Se f (x)
+2026-05-20 14:53:14 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:54:20 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"
+2026-05-20 14:54:21 - JARVIS LOG - Ferramenta: buscar_material_rag | Entrada: {'query': 'exercício método da tangente'} | Saída: [Trecho 1 — aula03_metodo_de_newton.md | score: 1.0]
+todo de Newton
+
+
+
+
+
+# Zeros reais de Funções reais - Método de Newton
+
+# Observações:
+
+Se x0 não for uma aproximação razoável o que fazer?
+
+Aplicar um método menos restritivo para iniciar.
+
+Derivada quase nula
+
+A reta tangente é praticamente paralela ao eixo horizontal, fazendo que sua intersecção com o eixo acontecerá muito distante. Dessa forma, pode ir para outra raiz ou mesmo divergir.
+
+Lilian Berti
+
+
+
+
+N˜ao existe um critério de convergência geral para o Método de Newton. Sua convergência depende da natureza da função e da precisão da aproximação inicial. É bom ter uma aproximação inicial “suficientemente” próxima da raiz. E para algumas Funções não funcionária.
+
+# Lilian Berti
+
+# Zeros reais de Funções reais - Método de Newton
+
+
+
+
+
+Exemplo:
+
+Uma gamela de comprimento L tem seção
+
+[Trecho 2 — aula04_metodo_da_secante_2.md | score: 0.5702]
+ia sçao as mesmas do método de Newton, mas a ordem de convergência é superlinear.
+
+(p = 1+\u221a\u2075 \u2248 1, 618)
+
+# Lilian Berti
+
+Zeros reais de Funções reais - Método da Secante
+
+# Método da Falsa Posição
+
+Este método pode ser interpretado como uma combinação do método da secante e o método da bissecção.
+
+No método da bissecção alteramos o cálculo de *xk = (a + b) / 2* por:
+
+*xk = (a * f(b) - b * f(a)) / (f(b) - f(a))*
+
+Lilian Berti
+
+Zeros reais de Funções reais - Método da Secante
+
+Encontre um zero de f(x) = x3 \u2212 9x + 3, pelo método da falsa posição utilizando I = (0, 1) e com critério de parada |b \u2212 a| &#x3C; \u03b5 = 0, 09
+
+# 1ª iteração:
+
+I = (0, 1)
+
+x1 = af(b)\u2212bf(a) = 0(\u22125)\u22121.3 = 0, 375
+
+f(b)\u2212f(a) = \u22125\u22123
+
+f(0) = 3
+
+f(0, 375) = \u22120, 3223
+
+f(1) = \u22125
+
+Novo intervalo I = (0; 0, 375) |b \u2212 a| = 0, 375 >
+
+[Trecho 3 — lista1_final.md | score: 0.5508]
+odo da bissecção e escolha o ponto médio do último intervalo obtido como aproximação inicial para o método de Newton. Aplique o método de Newton e use como critério de parada o erro relativo inferior a 10\u207b². Comparando com a localização dos zeros realizada no item (a), identifique qual o zero obtido neste processo e justifique por que a convergência foi para esta raiz.
+7. O método de Newton Modificado consiste em gerar a sequência x\u2096 através de:
+x\u2096\u208a\u2081 = x\u2096 \u2212 (f(x\u2096) / f'(x\u2080))
+
+em que x\u2080 é uma aproximação inicial.
+- (a) com auxílio de um gráfico, escreva a interpretação geométrica deste método;
+- (b) quando é conveniente utilizar este método em vez do método de Newton?
+
+# 8.
+
+Sabemos que, se y = f(x) é uma função contínua que satisfaz f(a)f(b) < 0 para a < b números reais dados, então existe
+
+[Trecho 4 — aula12_ajuste_2.md | score: 0.5418]
+# Ajuste de Curvas pelo Método dos Quadrados Mínimos
+
+# Lilian Berti
+
+# Métodos Numéricos
+
+# Ajuste de Curvas pelo Método dos Quadrados Mínimos
+
+# Lilian Berti
+
+# Caso contínuo
+
+Aproximamos f(x) por g(x)
+
+(f \u2248 g)
+
+em que g(x) = \u03b11g1(x) + \u03b12g2(x) + · · · + \u03b1mgm(x), gi(x) contínuas em [a, b].
+
+| | | | | | | | |
+| - | - | - | - | - | - | - | - |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+
+Minimizamos
+
+F(\u03b11, \u03b12, · · · , \u03b1m) = \u222bab [f(x) \u2212 g(x)]² dx
+
+Lilian Berti Ajuste de Curvas pelo Método dos Quadrados Mínimos
+
+De modo análogo ao caso discreto, caso m = 2, devemos resolver:
+
+< g1, g1 > \u03b11 + < g1, g2 > \u03b12 = < f, g1 >
+
+< g2, g1 > \u03b11 + < g2, g2 > \u03b12 = < f, g2 >,
+
+em que
+
+# Exemplo
+
+Aproximar f(x) = 4x3 por uma reta no intervalo [0, 1].
+
+Lilian Berti
+2026-05-20 14:54:27 - JARVIS LOG - HTTP Request: POST https://llm.liaufms.org/v1/gemma-3-12b-it/chat/completions "HTTP/1.1 200 OK"

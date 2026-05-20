@@ -4,7 +4,9 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+from dotenv import load_dotenv
 
+load_dotenv()
 # Permissão apenas para LER a agenda (segurança em primeiro lugar)
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
@@ -23,7 +25,7 @@ def autenticar_google():
             creds.refresh(Request())
         else:
             print("🔐 Abrindo navegador para autenticação do Google...")
-            flow = InstalledAppFlow.from_client_secrets_file('C:\\Users\\ppedr\\Desktop\\2025\\UFMS\\IA\\T1\\Codigos\\credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(os.getenv(r'CREDENTIALS_JSON'), SCOPES)
             creds = flow.run_local_server(port=0)
             
         # Salva as credenciais para a próxima execução
@@ -86,7 +88,7 @@ def consultar_agenda_real(data_str: str) -> str:
             inicio = evento['start'].get('dateTime', evento['start'].get('date'))
             # Limpa o horário para ficar mais legível, se houver
             horario = inicio[11:16] if 'T' in inicio else 'O dia todo'
-            resultado += f"  • {horario} - {evento['summary']}\n"
+            resultado += f"  • {horario} - {evento['summary']}sn"
             
         return resultado
 

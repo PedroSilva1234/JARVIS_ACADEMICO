@@ -1,7 +1,11 @@
+import os
 import re
 from pathlib import Path
 import ftfy
 import unicodedata
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def limpar_arquivo_md(caminho_arquivo):
     """Lê, higieniza e salva um único arquivo Markdown."""
@@ -67,7 +71,7 @@ def limpar_arquivo_md(caminho_arquivo):
 
 # Substitua pelo caminho exato da sua pasta de Markdowns
 # O "r" antes da string é importante no Windows para ignorar barras invertidas
-CAMINHO_DA_PASTA = r"C:\Programas\facul\IA\Trabalho\Documents\Markdows"
+CAMINHO_DA_PASTA = os.getenv(r'PASTA_MD')  # Pasta onde os arquivos .md convertidos estão salvos
 
 pasta = Path(CAMINHO_DA_PASTA)
 

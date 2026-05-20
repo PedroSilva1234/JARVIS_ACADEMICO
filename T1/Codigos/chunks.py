@@ -1,5 +1,8 @@
 import os
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def extract_text_from_md(md_path):
     """Lê o conteúdo de um arquivo Markdown."""
@@ -91,10 +94,10 @@ def processar_pasta_completa(input_folder, save_folder):
 # ==========================================
 
 # 1. Caminho para a pasta onde estão seus arquivos .md (Sua pasta 'data')
-pasta_entrada = r'C:\Users\ppedr\Desktop\2025\UFMS\IA\T1\Documents\Markdows'
+pasta_entrada = os.getenv(r'PASTA_MD') 
 
 # 2. Caminho para onde os JSONs devem ser salvos (Sua pasta 'rag' ou 'data')
-pasta_saida = r'C:\Users\ppedr\Desktop\2025\UFMS\IA\T1\Documents\Chunks'
+pasta_saida = os.getenv(r'PASTA_CHUNKS')
 
 # Executa o processamento para a pasta toda
 # (Lembre-se de criar alguns arquivos .md de teste na pasta de entrada antes de rodar)

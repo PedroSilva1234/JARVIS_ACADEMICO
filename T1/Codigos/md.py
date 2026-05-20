@@ -1,7 +1,9 @@
 import os
 import nest_asyncio
 from llama_parse import LlamaParse
+from dotenv import load_dotenv
 
+load_dotenv()
 # Necessário para rodar o LlamaParse sem conflitos no Windows/VS Code
 nest_asyncio.apply()
 
@@ -61,10 +63,10 @@ def converter_pdfs_para_md(pasta_entrada, pasta_saida, api_key):
 MINHA_API_KEY = "llx-lMTgbT8jLU3kpdqhZdYZsb17oYx6Gc3UWzjbWHBGIc3HqXWv" 
 
 # 2. Caminho onde estão os seus PDFs originais
-PASTA_PDFS = r"C:\Programas\facul\IA\Trabalho\Documents\Metodos_numericos"
+PASTA_PDFS = os.getenv(r'PASTA_PDF')  # Pasta onde estão os PDFs originais
 
 # 3. Caminho onde os arquivos .md serão salvos (Nossa pasta data)
-PASTA_MDS = r"C:\Programas\facul\IA\Trabalho\Documents\Markdows"
+PASTA_MDS = os.getenv(r'PASTA_MD')  # Pasta onde os arquivos .md convertidos serão salvos
 
 # Executa o robô
 converter_pdfs_para_md(PASTA_PDFS, PASTA_MDS, MINHA_API_KEY)

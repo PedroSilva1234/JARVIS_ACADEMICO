@@ -2,7 +2,9 @@ import json
 import os
 import glob
 from sentence_transformers import SentenceTransformer
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def gerar_embeddings_por_arquivo(caminho_chunks_json, pasta_saida, modelo):
     """
@@ -76,9 +78,9 @@ def processar_pasta(pasta_chunks, pasta_saida):
 # ==========================================
 
 # Pasta onde estão os _chunks.json gerados pelo chunks.py
-PASTA_CHUNKS = r"C:\Programas\facul\IA\Trabalho\Documents\Chunks"
+PASTA_CHUNKS = os.getenv('PASTA_CHUNKS')  # Pasta onde estão os arquivos _chunks.json
 
 # Pasta onde os _embeddings.json serão salvos (um por arquivo de chunks)
-PASTA_SAIDA = r"C:\Programas\facul\IA\Trabalho\Documents\embeddings"
+PASTA_SAIDA = os.getenv('PASTA_EMBEDDINGS')
 
 processar_pasta(PASTA_CHUNKS, PASTA_SAIDA)

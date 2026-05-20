@@ -5,13 +5,15 @@ from sentence_transformers import SentenceTransformer
 
 # Importa os motores de busca que criamos
 from retrieval import IndicesRAG, buscar_hibrido
+from dotenv import load_dotenv
 
+load_dotenv()
 # ==========================================
 # 1. CONFIGURAÇÕES INICIAIS
 # ==========================================
 load_dotenv()
 
-PASTA_INDICES = r"C:\Programas\facul\IA\Documents\embeddings"
+PASTA_INDICES = os.getenv(r'PASTA_EMBEDDINGS') 
 
 print("🧠 Acordando o JARVIS...")
 print("⏳ Carregando modelos de matemática (Aguarde)...")
