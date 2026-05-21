@@ -21,6 +21,11 @@ from dotenv import load_dotenv
 # Importa os módulos já construídos
 from retrieval import IndicesRAG, buscar_hibrido
 
+from agenda import (
+    consultar_agenda, adicionar_eventos, 
+    listar_tarefas, adicionar_tarefa, concluir_tarefa
+)
+
 # ============================================================
 # CONFIGURAÇÃO
 # ============================================================
@@ -45,55 +50,42 @@ client = OpenAI(
     api_key=chave_api
 )
 # ============================================================
-# BANCO DE DADOS SIMULADO (substitua pela sua implementação real)
+# IMPLEMENTAÇÃO DA AGENDA
 # ============================================================
-
-AGENDA = {
-    "2026-05-17": ["Aula de Métodos Numéricos - 14h", "Entrega do relatório - 23h59"],
-    "2026-05-18": ["Prova de Cálculo - 08h"],
-    "2026-05-20": ["Seminário de IA - 10h"],
-}
-
-TAREFAS = [
-    {"id": 1, "titulo": "Estudar interpolação de Lagrange", "prazo": "2026-05-18", "prioridade": "alta",   "status": "pendente"},
-    {"id": 2, "titulo": "Revisar regressão logística",      "prazo": "2026-05-20", "prioridade": "media",  "status": "pendente"},
-    {"id": 3, "titulo": "Lista de exercícios de IA",        "prazo": "2026-05-15", "prioridade": "alta",   "status": "concluida"},
-]
 
 
 # ============================================================
 # IMPLEMENTAÇÃO DAS FERRAMENTAS
 # ============================================================
 
-def consultar_agenda(data: str) -> str:
-    eventos = AGENDA.get(data, [])
-    if not eventos:
-        return f"Nenhum evento encontrado para {data}."
-    return f"Eventos em {data}:\n" + "\n".join(f"  • {e}" for e in eventos)
+#def consultar_agenda(data: str) -> str:
+ #   eventos = AGENDA.get(data, [])
+  #  if not eventos:
+   #     return f"Nenhum evento encontrado para {data}."
+   # return f"Eventos em {data}:\n" + "\n".join(f"  • {e}" for e in eventos)
 
 
-def listar_tarefas(status: str) -> str:
-    filtradas = [t for t in TAREFAS if t["status"] == status]
-    if not filtradas:
-        return f"Nenhuma tarefa com status '{status}'."
-    linhas = [f"  [{t['id']}] {t['titulo']} | Prazo: {t['prazo']} | Prioridade: {t['prioridade']}"
-              for t in filtradas]
-    return f"Tarefas {status}s:\n" + "\n".join(linhas)
+#def listar_tarefas(status: str) -> str:
+ #   filtradas = [t for t in TAREFAS if t["status"] == status]
+  #  if not filtradas:
+   #     return f"Nenhuma tarefa com status '{status}'."
+   # linhas = [f"  [{t['id']}] {t['titulo']} | Prazo: {t['prazo']} | Prioridade: {t['prioridade']}"
+    #          for t in filtradas]
+    #return f"Tarefas {status}s:\n" + "\n".join(linhas)
 
 
-def adicionar_tarefa(titulo: str, prazo: str, prioridade: str) -> str:
-    novo_id = max(t["id"] for t in TAREFAS) + 1
-    TAREFAS.append({"id": novo_id, "titulo": titulo, "prazo": prazo,
-                    "prioridade": prioridade, "status": "pendente"})
-    return f"✅ Tarefa '{titulo}' adicionada com ID {novo_id}, prazo {prazo}."
+#def adicionar_tarefa(titulo: str, prazo: str, prioridade: str) -> str:
+ #   novo_id = max(t["id"] for t in TAREFAS) + 1
+  #  TAREFAS.append({"id": novo_id, "titulo": titulo, "prazo": prazo,
+   #                 "prioridade": prioridade, "status": "pendente"})
+    #return f"✅ Tarefa '{titulo}' adicionada com ID {novo_id}, prazo {prazo}."
 
 
-def concluir_tarefa(id_tarefa: int) -> str:
-    for t in TAREFAS:
-        if t["id"] == id_tarefa:
-            t["status"] = "concluida"
-            return f"✅ Tarefa '{t['titulo']}' marcada como concluída."
-    return f"❌ Tarefa com ID {id_tarefa} não encontrada."
+##def concluir_tarefa(id_tarefa: int) -> str:
+    #for t in TAREFAS:
+      ##      t["status"] = "concluida"
+     #       return f"✅ Tarefa '{t['titulo']}' marcada como concluída."
+    #return f"❌ Tarefa com ID {id_tarefa} não encontrada."
 
 
 def buscar_material_rag(query: str, modelo, indices) -> str:
@@ -126,21 +118,25 @@ Ferramentas disponíveis:
    - Uso: quando o usuário perguntar sobre eventos, aulas ou compromissos.
    - JSON: {"tool": "consultar_agenda", "args": {"data": "YYYY-MM-DD"}}
 
-2. listar_tarefas
+2.adicionar_evento_agenda
+    -Uso: quando o usuário pedir para marcar/agendar um novo compromisso,aula ou prova para sua agenda.
+    - JSON: {"tool": "adicionar_evento_agenda", "args": {"data": "YYYY-MM-DD", "evento": "Nome do evento e horário"}}
+
+3. listar_tarefas
    - Uso: quando o usuário quiser ver tarefas pendentes ou concluídas.
    - JSON: {"tool": "listar_tarefas", "args": {"status": "pendente"}}
    - status pode ser: "pendente" ou "concluida"
 
-3. adicionar_tarefa
+4. adicionar_tarefa
    - Uso: quando o usuário quiser criar uma nova tarefa acadêmica.
    - JSON: {"tool": "adicionar_tarefa", "args": {"titulo": "...", "prazo": "YYYY-MM-DD", "prioridade": "alta"}}
    - prioridade pode ser: "alta", "media" ou "baixa"
 
-4. concluir_tarefa
+5. concluir_tarefa
    - Uso: quando o usuário disser que finalizou uma tarefa.
    - JSON: {"tool": "concluir_tarefa", "args": {"id_tarefa": 1}}
 
-5. buscar_material_rag
+6. buscar_material_rag
    - Uso: SEMPRE que o usuário perguntar sobre conteúdo acadêmico, conceitos ou fórmulas.
    - JSON: {"tool": "buscar_material_rag", "args": {"query": "termo ou pergunta"}}
 
