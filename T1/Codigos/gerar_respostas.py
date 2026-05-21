@@ -15,13 +15,18 @@ Dependências:
 import json
 import os
 import logging
+import re
 
 from datetime import date
 from openai import OpenAI
 from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
 
-from google_agenda import consultar_agenda_real, criar_evento_real
+from google_agenda import (
+    consultar_agenda_real, criar_evento_real, deletar_evento_real,
+    criar_task_real, concluir_task_real, deletar_task_real,
+    buscar_evento_por_titulo
+)
 from retrieval import IndicesRAG, buscar_hibrido
 
 # ============================================================
@@ -90,63 +95,66 @@ def listar_tarefas(status: str) -> str:
               for t in filtradas]
     return f"Tarefas {status}s no sistema local:\n" + "\n".join(linhas)
 
-
+# ============================================================
+# RE-IMPLEMENTAÇÃO DAS TAREFAS COM PERSISTÊNCIA REAL
+# ============================================================
 def adicionar_tarefa(titulo: str, prazo: str, prioridade: str) -> str:
     tarefas = _carregar_tarefas_do_disco()
-    
-    # Define o próximo ID autoincrementado
     novo_id = max([t["id"] for t in tarefas], default=0) + 1
+    
+    print(f"   🚀 Criando tarefa real no Google Tasks...")
+    # Cria no Google Tasks oficial
+    resultado_tasks = criar_task_real(
+        titulo=titulo,
+        prazo_str=prazo,
+        descricao=f"Prioridade: {prioridade} | Status: Pendente"
+    )
+    
+    task_google_id = resultado_tasks.get("id") if resultado_tasks.get("sucesso") else None
     
     nova_tarefa = {
         "id": novo_id,
         "titulo": titulo,
         "prazo": prazo,
         "prioridade": prioridade,
-        "status": "pendente"
+        "status": "pendente",
+        "google_event_id": task_google_id  # Guardamos o ID do Tasks aqui
     }
     
     tarefas.append(nova_tarefa)
     _salvar_tarefas_no_disco(tarefas)
     
-    resposta = f"✅ Tarefa '{titulo}' gravada localmente com ID {novo_id} (Prazo: {prazo})."
-    
-    # INTEGRAÇÃO INTELIGENTE: Cria um aviso/compromisso na Agenda do Google automaticamente
-    print(f"   🚀 Sincronizando prazo da tarefa com o Google Calendar...")
-    resultado_google = criar_evento_real(
-        titulo=f"🚨 PRAZO: {titulo}",
-        data_str=prazo,
-        descricao=f"Tarefa acadêmica registrada no Jarvis.\nPrioridade: {prioridade}\nStatus: Pendente"
-    )
-    
-    return f"{resposta}\n[Sincronização Nuvem]: {resultado_google}"
+    status_nuvem = f"Sincronizado no Google Tasks (ID: {task_google_id})" if task_google_id else f"Erro na nuvem: {resultado_tasks.get('erro')}"
+    return f"✅ Tarefa [{novo_id}] gravada no JSON.\n[Nuvem]: {status_nuvem}"
 
 
 def concluir_tarefa(id_tarefa: int) -> str:
+    """Atualiza o status da tarefa para concluída no JSON local e no Google Tasks."""
     tarefas = _carregar_tarefas_do_disco()
-    encontrada = False
     
-    for t in tarefas:
-        if t["id"] == int(id_tarefa):
-            t["status"] = "concluida"
-            encontrada = True
-            titulo_tarefa = t["titulo"]
-            prazo_tarefa = t["prazo"]
-            break
+    # Cast preventivo para garantir que o ID seja tratado como inteiro puro
+    id_alvo = int(float(id_tarefa))
+    
+    # Busca a tarefa correspondente dentro do arquivo local
+    tarefa_encontrada = next((t for t in tarefas if t["id"] == id_alvo), None)
             
-    if not encontrada:
-        return f"❌ Nenhuma tarefa com ID {id_tarefa} foi localizada."
+    if not tarefa_encontrada:
+        return f"❌ Nenhuma tarefa com ID {id_tarefa} foi localizada no banco local."
         
+    # 1. Atualiza o status no ecossistema local
+    tarefa_encontrada["status"] = "concluida"
     _salvar_tarefas_no_disco(tarefas)
     
-    # Opcional: Adiciona uma marcação visual ou evento na agenda indicando a conclusão
-    criar_evento_real(
-        titulo=f"✅ CONCLUÍDO: {titulo_tarefa}",
-        data_str=prazo_tarefa,
-        descricao=f"Tarefa concluída com sucesso no ecossistema Jarvis!"
-    )
+    # 2. Recupera a chave de sincronização da nuvem
+    google_id = tarefa_encontrada.get("google_event_id")
     
-    return f"✅ Tarefa '{titulo_tarefa}' marcada como concluída no banco local e atualizada na agenda!"
-
+    if google_id:
+        print(f"   🚀 Sincronizando conclusão com o Google Tasks...")
+        msg_google = concluir_task_real(google_id)
+    else:
+        msg_google = "Esta tarefa não possuía um ID de sincronização válido com a nuvem."
+        
+    return f"✅ Arquivo JSON atualizado! Tarefa [{id_alvo}] marcada como concluída.\n[Nuvem]: {msg_google}"
 
 def consultar_agenda(data: str) -> str:
     return consultar_agenda_real(data)
@@ -160,6 +168,26 @@ def buscar_material_rag(query: str, modelo, indices) -> str:
         contexto += f"[Trecho {i} — {r['origem']} | score: {r['score_final']}]\n{r['texto']}\n\n"
     return contexto.strip()
 
+def deletar_tarefa(id_tarefa: int) -> str:
+    """Remove a tarefa do JSON local e do Google Tasks."""
+    tarefas = _carregar_tarefas_do_disco()
+    id_alvo = int(float(id_tarefa))
+    tarefa_encontrada = next((t for t in tarefas if t["id"] == id_alvo), None)
+    
+    if not tarefa_encontrada:
+        return f"❌ Nenhuma tarefa com ID {id_alvo} para remoção."
+        
+    # Remove da lista local
+    tarefas = [t for t in tarefas if t["id"] != id_alvo]
+    _salvar_tarefas_no_disco(tarefas)
+    
+    google_id = tarefa_encontrada.get("google_event_id")
+    if google_id:
+        msg_google = deletar_task_real(google_id)
+    else:
+        msg_google = "Removida apenas localmente."
+        
+    return f"✅ Tarefa [{id_alvo}] deletada do JSON.\n[Nuvem]: {msg_google}"
 
 # ============================================================
 # DESCRIÇÃO DAS FERRAMENTAS (tool calling manual via system prompt)
@@ -178,8 +206,9 @@ texto adicional antes ou depois:
 Ferramentas disponíveis:
 
 1. consultar_agenda
-   - Uso: quando o usuário perguntar sobre eventos, aulas ou compromissos.
-   - JSON: {"tool": "consultar_agenda", "args": {"data": "YYYY-MM-DD"}}
+1. consultar_agenda
+   - Uso: quando o usuário perguntar sobre eventos, aulas, compromissos ou provas de um dia específico OU de um mês inteiro.
+   - JSON: {"tool": "consultar_agenda", "args": {"data": "YYYY-MM-DD"}} para um dia, ou {"tool": "consultar_agenda", "args": {"data": "YYYY-MM"}} para ver o mês completo.
 
 2. listar_tarefas
    - Uso: quando o usuário quiser ver tarefas pendentes ou concluídas.
@@ -199,11 +228,30 @@ Ferramentas disponíveis:
    - Uso: SEMPRE que o usuário perguntar sobre conteúdo acadêmico, conceitos ou fórmulas.
    - JSON: {"tool": "buscar_material_rag", "args": {"query": "termo ou pergunta"}}
 
+6. adicionar_evento_agenda
+   - Uso: para adicionar eventos, feriados ou lembretes (ex: aniversários) DIRETAMENTE na agenda do Google, que não sejam tarefas acadêmicas.
+   - JSON: {"tool": "adicionar_evento_agenda", "args": {"titulo": "...", "data": "YYYY-MM-DD"}}
+
+7. remover_evento_agenda
+   - Uso: quando o usuário pedir expressamente para apagar, cancelar ou remover um evento ou lembrete da agenda do Google.
+   - JSON: {"tool": "remover_evento_agenda", "args": {"titulo": "Nome do Evento"}}
+
+8. deletar_tarefa
+   - Uso: quando o usuário quiser excluir permanentemente uma tarefa do sistema.
+   - JSON: {"tool": "deletar_tarefa", "args": {"id_tarefa": 1}}
+
+9. buscar_evento_por_titulo
+   - Uso: SEMPRE que o usuário pedir para remover um evento, use esta ferramenta ANTES para descobrir a data e o horário do evento.
+   - JSON: {"tool": "buscar_evento_por_titulo", "args": {"titulo": "Nome do Evento"}}
+
 REGRAS:
-- Use buscar_material_rag ANTES de responder qualquer pergunta sobre conteúdo das aulas.
-- Quando acionar uma ferramenta, responda APENAS o JSON — sem texto antes ou depois.
-- Após receber o resultado da ferramenta, formule a resposta final normalmente em português.
-- Nunca invente dados de agenda, tarefas ou conteúdo — use sempre as ferramentas.
+- Use buscar_material_rag ANTES de responder sobre conteúdo.
+- Quando acionar uma ferramenta, responda APENAS com o JSON no formato especificado.
+- Se o usuário pedir duas ou mais coisas, você PODE e DEVE gerar os múltiplos JSONs na mesma resposta, um em cada linha.
+- REGRA DE CONFIRMAÇÃO (APENAS PARA EXCLUIR EVENTOS DA AGENDA): Se o usuário pedir para deletar ou remover um evento do calendário, NUNCA chame 'remover_evento_agenda' de imediato. Você DEVE usar 'buscar_evento_por_titulo' primeiro, apresentar a data ao usuário e perguntar "Tem certeza que deseja remover?". Aguarde o "sim" para prosseguir.
+- REGRA DE TAREFAS (SEM CONFIRMAÇÃO, AÇÃO IMEDIATA): NUNCA adivinhe o ID de uma tarefa. Se o usuário pedir para concluir ou deletar uma tarefa, use 'listar_tarefas' primeiro para descobrir o ID. ASSIM QUE O PYTHON DEVOLVER O ID, VOCÊ DEVE EMITIR O JSON DE 'concluir_tarefa' OU 'deletar_tarefa' IMEDIATAMENTE NA PRÓXIMA RODADA. NÃO peça confirmação e NÃO faça perguntas ao usuário sobre tarefas. Apenas execute.
+- NUNCA afirme textualmente que uma tarefa ou evento foi criado, concluído ou deletado a menos que você tenha visto o resultado de sucesso da ferramenta correspondente nos logs do sistema.
+- Nunca invente dados. Se não tiver certeza, diga que não encontrou a informação.
 """
 
 
@@ -217,7 +265,7 @@ def executar_ferramenta(nome: str, argumentos: dict, modelo_emb, indices) -> str
 
     # 1. Executa a ferramenta e guarda o resultado na variável
     if nome == "consultar_agenda":
-        resultado = consultar_agenda_real(**argumentos)
+        resultado = consultar_agenda_real(argumentos["data"])
     elif nome == "listar_tarefas":
         resultado = listar_tarefas(**argumentos)
     elif nome == "adicionar_tarefa":
@@ -226,10 +274,27 @@ def executar_ferramenta(nome: str, argumentos: dict, modelo_emb, indices) -> str
         resultado = concluir_tarefa(**argumentos)
     elif nome == "buscar_material_rag":
         resultado = buscar_material_rag(argumentos["query"], modelo_emb, indices)
+    elif nome == "adicionar_evento_agenda":
+        # Chama a agenda para eventos genéricos (sem ser tarefa)
+        res_google = criar_evento_real(
+            titulo=argumentos["titulo"], 
+            data_str=argumentos["data"], 
+            descricao="Adicionado pelo Jarvis"
+        )
+        if res_google.get("sucesso"):
+            resultado = f"Evento '{argumentos['titulo']}' adicionado com sucesso à Agenda do Google."
+        else:
+            resultado = f"Falha ao adicionar na Agenda: {res_google.get('erro')}"
+    elif nome == "remover_evento_agenda":
+        resultado = deletar_evento_real(argumentos["titulo"])
+    elif nome == "deletar_tarefa":
+        resultado = deletar_tarefa(**argumentos)
+    elif nome == "buscar_evento_por_titulo":
+        resultado = buscar_evento_por_titulo(argumentos["titulo"])
     else:
         resultado = f"Ferramenta '{nome}' não reconhecida."
 
-    # 2. Grava o Log no disco (Requisito de Engenharia de Software)
+    # 2. Grava o Log no disco
     mensagem_log = f"Ferramenta: {nome} | Entrada: {argumentos} | Saída: {resultado}"
     logging.info(mensagem_log)
 
@@ -259,32 +324,27 @@ Seu comportamento:
 # GERADOR DE RESPOSTA (loop de tool calling)
 # ============================================================
 
-def _detectar_tool_call(texto: str):
-    """
-    Verifica se a resposta da LLM é um JSON de tool call.
-    Retorna (nome, args) se for, ou (None, None) se não for.
-    """
-    texto = texto.strip()
-    # Tenta extrair JSON mesmo que venha dentro de bloco ```json ... ```
-    if texto.startswith("```"):
-        linhas = texto.splitlines()
-        texto = "\n".join(linhas[1:-1]).strip()
-    try:
-        dados = json.loads(texto)
-        if "tool" in dados and "args" in dados:
-            return dados["tool"], dados["args"]
-    except (json.JSONDecodeError, TypeError):
-        pass
-    return None, None
+def _detectar_tool_calls(texto: str) -> list:
+    # Encontra todas as ocorrências que batem com o formato de ferramenta
+    matches = re.finditer(r'\{\s*"tool"\s*:\s*"[^"]+"\s*,\s*"args"\s*:\s*\{[^{}]*\}\s*\}', texto)
+    
+    chamadas = []
+    for match in matches:
+        try:
+            dados = json.loads(match.group(0))
+            chamadas.append((dados["tool"], dados["args"]))
+        except json.JSONDecodeError:
+            continue
+            
+    return chamadas
 
 
 def gerar_resposta(historico: list, modelo_emb, indices) -> str:
     """
-    Recebe o histórico completo de mensagens e retorna a resposta do JARVIS.
-    Usa tool calling manual: detecta JSON de ferramenta na resposta da LLM,
-    executa, injeta o resultado e chama a LLM novamente até obter resposta final.
+    Loop de execução que suporta encadeamento dinâmico de ferramentas (Chaining).
+    Permite que a IA use uma ferramenta para buscar dados e outra para agir logo em seguida.
     """
-    mensagens  = historico.copy()
+    mensagens = historico.copy()
     MAX_RODADAS = 5
 
     for rodada in range(MAX_RODADAS):
@@ -295,25 +355,28 @@ def gerar_resposta(historico: list, modelo_emb, indices) -> str:
         )
 
         conteudo = resposta.choices[0].message.content.strip()
-        nome_tool, args_tool = _detectar_tool_call(conteudo)
+        chamadas = _detectar_tool_calls(conteudo)
 
-        # Sem tool call → resposta final
-        if nome_tool is None:
+        # Se não há mais ferramentas para chamar, este conteúdo é a resposta final para o usuário
+        if not chamadas:
             return conteudo
 
-        # Com tool call → executa e injeta resultado no histórico
-        print(f"   🔧 Tool chamada: {nome_tool}({args_tool})")
-        resultado = executar_ferramenta(nome_tool, args_tool, modelo_emb, indices)
-
-        # Adiciona a chamada da ferramenta e o resultado como mensagens
+        # Registra o comando de ferramenta da IA no histórico interno da rodada
         mensagens.append({"role": "assistant", "content": conteudo})
+        
+        resultados_acumulados = ""
+        
+        # Executa todas as ferramentas solicitadas nesta rodada
+        for nome_tool, args_tool in chamadas:
+            resultado_execucao = executar_ferramenta(nome_tool, args_tool, modelo_emb, indices)
+            resultados_acumulados += f"[Resultado de {nome_tool}]:\n{resultado_execucao}\n\n"
+
         mensagens.append({
-            "role":    "user",
-            "content": f"[Resultado da ferramenta {nome_tool}]:\n{resultado}\n\nAgora responda ao usuário com base neste resultado."
+            "role": "user",
+            "content": f"Resultados da execução:\n{resultados_acumulados.strip()}"
         })
 
     return "⚠️ Limite de rodadas de tool calling atingido. Tente reformular sua pergunta."
-
 
 # ============================================================
 # LOOP DE CONVERSA (interface de terminal)
