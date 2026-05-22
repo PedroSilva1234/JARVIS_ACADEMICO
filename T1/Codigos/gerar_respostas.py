@@ -316,6 +316,7 @@ Seu comportamento:
 - Se o contexto não contiver a informação, diga claramente que não encontrou nos materiais.
 - Incentive o aprendizado ativo: ao explicar um conceito, ofereça fazer perguntas de revisão.
 - Seja objetivo mas completo. Evite respostas vagas.
+-Se o usuário fizer uma pergunta que correlacione um conteúdo não especificado pelo contexto do rag com o conteúdo disponível, diga que apenas poderá responder sobre o que está presente nos materiais indexados, e sugira reformular a pergunta ou usar termos mais próximos do conteúdo.
 
 {DESCRICAO_FERRAMENTAS}"""
 

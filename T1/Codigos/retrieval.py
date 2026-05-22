@@ -243,5 +243,5 @@ PASTA_SAIDA = os.getenv(r'PASTA_EMBEDDINGS')
 construir_indices(PASTA_EMBEDDINGS, PASTA_SAIDA)
 
 # Passo 2 (opcional): Testa a busca híbrida
-#testar_busca("O que é o Metodo da Secante?", PASTA_SAIDA)
+#testar_busca("O que são métodos numéricos?", PASTA_SAIDA)
 
