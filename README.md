@@ -17,12 +17,12 @@ Os modelos utilizados para a implmementação ágil do trabalho foram:
 Para o correto funcionamento do sistema, é obrigatório criar um arquivo chamado `.env` na mesma pasta onde residem os códigos principais do agente. Este arquivo armazena caminhos locais e chaves privadas de forma segura.
 O formato estruturado do arquivo deve ser o seguinte:
 
-LIA_API_KEY=api_key
-PASTA_MD='caminho para pasta com os markdowns'
-PASTA_EMBEDDINGS="caminho para pasta com os embeddings"
-CREDENTIALS_JSON='credenciais do google cloud para acesso às apis'
-PASTA_PDF='caminho para a pasta com os pdfs'
-PASTA_CHUNKS='caminho para pasta com os chunks'
+- LIA_API_KEY=api_key
+- PASTA_MD='caminho para pasta com os markdowns'
+- PASTA_EMBEDDINGS="caminho para pasta com os embeddings"
+- CREDENTIALS_JSON='credenciais do google cloud para acesso às apis'
+- PASTA_PDF='caminho para a pasta com os pdfs'
+- PASTA_CHUNKS='caminho para pasta com os chunks'
 
 ## Ferramentas Implementadas (Tool Calling)
 
