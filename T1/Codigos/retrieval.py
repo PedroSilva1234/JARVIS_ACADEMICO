@@ -225,7 +225,7 @@ def testar_busca(query_teste, pasta_indices):
         print(f"  [{i}] Score final: {r['score_final']} "
               f"(semântico: {r['score_semantico']} | léxico: {r['score_lexico']})")
         print(f"       Origem : {r['origem']}")
-        print(f"       Trecho : {r['texto'][:300]}...")
+        print(f"       Trecho : {r['texto'][:500]}...")
         print()
 
 
@@ -243,5 +243,5 @@ PASTA_SAIDA = os.getenv(r'PASTA_EMBEDDINGS')
 construir_indices(PASTA_EMBEDDINGS, PASTA_SAIDA)
 
 # Passo 2 (opcional): Testa a busca híbrida
-#testar_busca("O que são métodos numéricos?", PASTA_SAIDA)
+testar_busca("Me fale, o que é regressão linear?", PASTA_SAIDA)
 
