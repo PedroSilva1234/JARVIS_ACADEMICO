@@ -6,7 +6,7 @@ O JARVIS Acadêmico é um agente inteligente desenvolvido para atuar como um org
 
 ## Modelos de Inteligência Artificial Utilizados
 
-Os modelos utilizados para a implmementação ágil do trabalho foram:
+Os modelos utilizados para a implementação ágil do trabalho foram:
 * **GPT** (OpenAI)
 * **Claude** (Anthropic)
 * **Gemini** (Google)
