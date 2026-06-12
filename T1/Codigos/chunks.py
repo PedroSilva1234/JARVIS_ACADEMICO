@@ -11,8 +11,7 @@ def extract_text_from_md(md_path):
 
 def chunk_text(text, chunk_size=800, overlap=150):
     """
-    Divide o texto em blocos de forma inteligente.
-    Garante o avanço matemático absoluto para evitar loops infinitos.
+    Divide o texto em blocos 
     """
     chunks = []
     start = 0
@@ -47,7 +46,7 @@ def chunk_text(text, chunk_size=800, overlap=150):
         if end == length:
             break
             
-        # Cálculo matemático 100% seguro do próximo passo
+        # Cálculo matemático do próximo passo
         start = end - overlap
         
     return chunks
@@ -61,7 +60,6 @@ def process_md_to_chunks(md_path, save_folder):
     file_name = base_name + '.md'
     save_path = os.path.join(save_folder, base_name + '_chunks.json')
     
-    # Usando 'origem' e 'texto' para bater com nosso sistema RAG
     chunk_data = [{'source_path': file_name, 'chunk_text': c} for c in chunks]
     
     os.makedirs(save_folder, exist_ok=True)
@@ -82,23 +80,16 @@ def processar_pasta_completa(input_folder, save_folder):
             md_path = os.path.join(input_folder, filename)
             chunks_do_arquivo = process_md_to_chunks(md_path, save_folder)
             todos_chunks.extend(chunks_do_arquivo)
-            
-    # Opcional: Salvar um arquivo "master" com todos os chunks de todos os arquivos
-   # master_path = os.path.join(save_folder, 'todos_chunks_master.json')
-    #with open(master_path, 'w', encoding='utf-8') as f:
-     #   json.dump(todos_chunks, f, ensure_ascii=False, indent=2)
-    #print(f"\n🚀 Arquivo master criado com {len(todos_chunks)} chunks totais: {master_path}")
 
 # ==========================================
 # ÁREA DE EXECUÇÃO
 # ==========================================
 
-# 1. Caminho para a pasta onde estão seus arquivos .md (Sua pasta 'data')
+# 1. Caminho para a pasta dos estão os arquivos .md 
 pasta_entrada = os.getenv(r'PASTA_MD') 
 
-# 2. Caminho para onde os JSONs devem ser salvos (Sua pasta 'rag' ou 'data')
+# 2. Caminho para onde os JSONs devem ser salvos 
 pasta_saida = os.getenv(r'PASTA_CHUNKS')
 
 # Executa o processamento para a pasta toda
-# (Lembre-se de criar alguns arquivos .md de teste na pasta de entrada antes de rodar)
 processar_pasta_completa(pasta_entrada, pasta_saida)

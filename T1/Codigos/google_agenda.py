@@ -95,7 +95,7 @@ def consultar_agenda_real(data_str: str) -> str:
         return resultado
 
     except Exception as e:
-        return f"Erro ao acessar a agenda do Google: {e}"
+        return f"Erro ao acessar a agenda do Google: {type(e).__name__}: {e}"
 
 def buscar_evento_por_titulo(titulo: str) -> str:
     """Busca eventos na agenda pelo título e retorna os detalhes para confirmação."""

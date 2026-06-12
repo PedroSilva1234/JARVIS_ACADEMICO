@@ -28,6 +28,8 @@ from google_agenda import (
     buscar_evento_por_titulo
 )
 from retrieval import IndicesRAG, buscar_hibrido
+from Planejamento import montar_plano_estudos
+from Aprendizado import iniciar_active_recall, gerar_exercicios, SessaoActiveRecall
 
 # ============================================================
 # CONFIGURAÇÃO
@@ -38,8 +40,9 @@ load_dotenv()
 
 PASTA_INDICES = os.getenv(r'PASTA_EMBEDDINGS')  # Pasta onde estão os índices FAISS e BM25
 ARQUIVO_TAREFAS = "tarefas.json"
+SESSAO_ACTIVE_RECALL = {}  # Armazena sessões de active recall por usuário (user_id -> SessaoActiveRecall)
 
-MODEL_ID      = "google/gemma-3-12b-it"
+MODEL_ID      = "Qwen/Qwen2.5-14B-Instruct-AWQ"
 TOP_K_RAG     = 4       # chunks recuperados por busca
 MAX_TOKENS    = 1024    # tamanho máximo da resposta
 PESO_SEM      = 0.6     # peso semântico na busca híbrida
@@ -59,7 +62,7 @@ if not chave_api:
     print("🚨 ERRO: A chave da API não foi encontrada! Verifique o arquivo .env")
 
 client = OpenAI(
-    base_url='https://llm.liaufms.org/v1/gemma-3-12b-it',
+    base_url='https://llm.liaufms.org/v1/qwen2-5-14b-instruct-awq',
     api_key=chave_api
 )
 
@@ -244,14 +247,38 @@ Ferramentas disponíveis:
    - Uso: SEMPRE que o usuário pedir para remover um evento, use esta ferramenta ANTES para descobrir a data e o horário do evento.
    - JSON: {"tool": "buscar_evento_por_titulo", "args": {"titulo": "Nome do Evento"}}
 
+
+10. montar_plano_estudos
+   - Uso: quando o usuário pedir um plano de estudos, priorização do dia ou estratégia para uma prova.
+   - JSON: {"tool": "montar_plano_estudos", "args": {"janela_dias": 7, "foco": ""}}
+   - janela_dias: quantos dias à frente considerar (padrão 7)
+   - foco: tema ou prova específica (deixe vazio "" para plano geral)
+
+11. iniciar_active_recall
+   - Uso: Usado EXCLUSIVAMENTE quando o usuário dizer que quer ser testado, revisar ou praticar um tema com perguntas interativas enquanto estuda.
+   - JSON: {"tool": "iniciar_active_recall", "args": {"tema": "nome do tema"}}
+
+12. gerar_exercicios
+   - Uso: SOMENTE quando o usuário pedir EXPLICITAMENTE exercícios, questões, quiz ou prática.  Exemplos: "me dá exercícios sobre X", "quero praticar X", "gera um quiz". NUNCA use esta ferramenta ao explicar um conteúdo sem pedido direto.
+   - JSON: {"tool": "gerar_exercicios", "args": {"tema": "nome do tema", "tipo": "misto", "quantidade": 3}}
+   - tipo pode ser: "multipla_escolha", "verdadeiro_falso", "aberta", "misto"
+
 REGRAS:
 - Use buscar_material_rag ANTES de responder sobre conteúdo.
 - Quando acionar uma ferramenta, responda APENAS com o JSON no formato especificado.
+- NUNCA chame gerar_exercicios ou iniciar_active_recall automaticamente ao explicar um conteúdo. Estas ferramentas só devem ser acionadas quando o usuário pedir EXPLICITAMENTE (usar palavras como "exercício", "quiz", "me teste", "quero praticar", "active recall").
 - Se o usuário pedir duas ou mais coisas, você PODE e DEVE gerar os múltiplos JSONs na mesma resposta, um em cada linha.
 - REGRA DE CONFIRMAÇÃO (APENAS PARA EXCLUIR EVENTOS DA AGENDA): Se o usuário pedir para deletar ou remover um evento do calendário, NUNCA chame 'remover_evento_agenda' de imediato. Você DEVE usar 'buscar_evento_por_titulo' primeiro, apresentar a data ao usuário e perguntar "Tem certeza que deseja remover?". Aguarde o "sim" para prosseguir.
 - REGRA DE TAREFAS (SEM CONFIRMAÇÃO, AÇÃO IMEDIATA): NUNCA adivinhe o ID de uma tarefa. Se o usuário pedir para concluir ou deletar uma tarefa, use 'listar_tarefas' primeiro para descobrir o ID. ASSIM QUE O PYTHON DEVOLVER O ID, VOCÊ DEVE EMITIR O JSON DE 'concluir_tarefa' OU 'deletar_tarefa' IMEDIATAMENTE NA PRÓXIMA RODADA. NÃO peça confirmação e NÃO faça perguntas ao usuário sobre tarefas. Apenas execute.
 - NUNCA afirme textualmente que uma tarefa ou evento foi criado, concluído ou deletado a menos que você tenha visto o resultado de sucesso da ferramenta correspondente nos logs do sistema.
 - Nunca invente dados. Se não tiver certeza, diga que não encontrou a informação.
+- DATAS RELATIVAS: Sempre que o usuário usar termos como "hoje", "amanhã", "próxima semana", ou dias da semana("segunda", "sábado", etc.), etc, você DEVE calcular a data exata no formato YYYY-MM-DD antes de chamar qualquer ferramenta. Hoje é {hoje}. Use esta data como referência para todos os cálculos. Exemplos: "sábado" = próximo sabado a partir de {hoje}."amanhã" = hoje + 1. NUNCA chame uma ferramenta de agenda com data relativa — sempre converta para YYYY-MM-DD primeiro.
+- É ABSOLUTAMENTE PROIBIDO usar sintaxe LaTeX. NÃO USE marcadores como \[ \], \( \), $ ou $$.
+- REGRA DE EXEMPLOS VS EXERCÍCIOS: Se o usuário pedir um "exemplo" (ex: "me explique e dê um exemplo"), VOCÊ MESMO deve criar e explicar o exemplo na sua resposta em texto. É PROIBIDO chamar 'iniciar_active_recall' ou 'gerar_exercicios' para dar exemplos. 
+- ATENÇÃO: As ferramentas de Active Recall e Exercícios SÓ PODEM SER ACIONADAS se o usuário usar palavras de teste claras (ex: "me teste", "faça um quiz", "quero exercícios para praticar").
+- REGRA DE CONTEÚDO PARA ACTIVE RECALL: Se o usuário pedir para ser testado ou praticar um tema, VOCÊ DEVE usar 'buscar_material_rag' para recuperar o conteúdo relevante ANTES de chamar 'iniciar_active_recall'. O conteúdo recuperado deve ser a base para as perguntas do active recall. NUNCA chame 'iniciar_active_recall' sem antes buscar o material relevante.
+- Se o usuário quando pedir pra ser testado NÃO especificar um tema, peça para ele escolher um tema específico RELACIONADO com os conteúdos disponíveis para a sessão de active recall. Você DEVE listar os temas mais relevantes encontrados no RAG e pedir para ele escolher um. APENAS DEPOIS de o usuário escolher o tema, chame 'iniciar_active_recall' com esse tema específico.
+- 
 """
 
 
@@ -291,6 +318,21 @@ def executar_ferramenta(nome: str, argumentos: dict, modelo_emb, indices) -> str
         resultado = deletar_tarefa(**argumentos)
     elif nome == "buscar_evento_por_titulo":
         resultado = buscar_evento_por_titulo(argumentos["titulo"])
+    elif nome == "montar_plano_estudos":
+        janela = int(argumentos.get("janela_dias", 7))
+        foco   = argumentos.get("foco", "")
+        contexto_plano = montar_plano_estudos(modelo_emb, indices, janela_dias=janela, foco=foco)
+        resultado = contexto_plano
+    elif nome == "iniciar_active_recall":
+        tema = argumentos.get("tema", "")
+        sessao, primeira_pergunta = iniciar_active_recall(tema, modelo_emb, indices)
+        SESSAO_ACTIVE_RECALL["atual"] = sessao
+        resultado = primeira_pergunta
+    elif nome == "gerar_exercicios":
+        tema       = argumentos.get("tema", "")
+        tipo       = argumentos.get("tipo", "misto")
+        quantidade = int(argumentos.get("quantidade", 3))
+        resultado  = gerar_exercicios(tema, modelo_emb, indices, tipo=tipo, quantidade=quantidade)
     else:
         resultado = f"Ferramenta '{nome}' não reconhecida."
 
@@ -307,6 +349,7 @@ def executar_ferramenta(nome: str, argumentos: dict, modelo_emb, indices) -> str
 
 def montar_system_prompt() -> str:
     hoje = date.today().isoformat()
+    print(f"📅 Data atual: {hoje}")
     return f"""Você é o JARVIS Acadêmico, um assistente pessoal inteligente para estudos.
 Data de hoje: {hoje}
 
@@ -409,6 +452,26 @@ def iniciar_jarvis():
         if entrada.lower() in ("sair", "exit", "quit"):
             print("👋 Até logo!")
             break
+
+        # Verifica se há uma sessão de active recall ativa
+        # Verifica se há uma sessão de active recall ativa
+        if "atual" in SESSAO_ACTIVE_RECALL and not SESSAO_ACTIVE_RECALL["atual"].encerrada:
+            sessao_ativa = SESSAO_ACTIVE_RECALL["atual"]
+            
+            # Avalia a resposta e já pega a próxima pergunta (ou o relatório final se o usuário digitou "parar")
+            feedback_e_proxima = sessao_ativa.avaliar_resposta(entrada)
+            
+            # Salva a interação no histórico para a IA principal não perder o fio da meada
+            historico.append({"role": "user", "content": entrada})
+            historico.append({"role": "assistant", "content": feedback_e_proxima})
+            
+            print(f"\nJARVIS:\n{feedback_e_proxima}")
+            
+            # Se o usuário digitou "parar", a sessão se encerra
+            if sessao_ativa.encerrada:
+                del SESSAO_ACTIVE_RECALL["atual"]
+                
+            continue # Pula o resto do loop e volta a esperar o input do usuário
 
         # Adiciona a mensagem do usuário ao histórico
         historico.append({"role": "user", "content": entrada})

@@ -58,7 +58,7 @@ async def processar_mensagem(update: Update, context: ContextTypes.DEFAULT_TYPE)
     historico.append({"role": "user", "content": texto_usuario})
     
     # Manda um "feedback" visual pro celular dizendo que tá pensando
-    mensagem_espera = await update.message.reply_text("⏳ *Consultando banco de dados...*", parse_mode="Markdown")
+    mensagem_espera = await update.message.reply_text("⏳ *...*", parse_mode="Markdown")
 
     try:
         # A MÁGICA ACONTECE AQUI: Chama a sua função RAG original
