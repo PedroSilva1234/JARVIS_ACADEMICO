@@ -1,0 +1,102 @@
+[
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Início do Documento\n\nResolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Cálculo da matriz inversa e a Fatoração de Cholesky\n\n# Cálculo da matriz inversa e a Fatoração de Cholesky\n\nLilian Berti\n\nMétodos Numéricos\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Exemplo:\n\n# Exemplo:\n\nSejam\n\n| 1 | 0 | 0 | 3 | 3 | 1 | 1 | 0 | 0 | | |\n| --- | --- | - | --- | - | ---- | ---- | --- | - | - | - |\n| L = | 1/3 | 1 | U = | 0 | −2 | 14/3 | P = | 0 | 0 | 1 |\n| 2/3 | 0 | 1 | 0 | 0 | −5/3 | 0 | 1 | 0 | | |\n\nos fatores da fatoração LU com pivoteamento parcial da matriz A.\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: a) Resolva o sistema linear Ax = b em que b = [7, 3, 5]ᵀ usando os fatores L, U e P.\n\n# a) Resolva o sistema linear Ax = b em que b = [7, 3, 5]ᵀ usando os fatores L, U e P."
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: i) Ly = Pb\n\n# i) Ly = Pb\n\n| 1 | 0 | 0 | y1 | 7 | 7 |\n| --- | - | - | -- | - | ---------- |\n| 1/3 | 1 | 0 | y2 | 5 | y = 2,6667 |\n| 2/3 | 0 | 1 | y3 | 3 | −1,6667 |"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: ii) Ux = y\n\n# ii) Ux = y\n\n| 3 | 3 | 1 | x1 | 7 | 1 |\n| - | -- | ---- | -- | ------- | ----- |\n| 0 | −2 | 14/3 | x2 | 2,6667 | x = 1 |\n| 0 | 0 | −5/3 | x3 | −1,6667 | 1 |\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\nb) Determine o determinante da matriz A, usados os fatores L, U e P\n\ndet(A) = det(PTLU) = det(PT)det(L)det(U) = (−1)pdet(U) em que p é o número de permutações realizadas.\n\ndet(A) = (−1)1 · 3 · (−2) · (−5/3) = −10\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: c) Determine a matriz A.\n\n# c) Determine a matriz A.\n\nSabemos que:\n\nPA = LU\n\nPTPA = PTLU\n\nA = PTLU\n\n| A | 1 | 0 | 0 |\n| - | - | - | - |\n| 0 | 0 | 1 | |\n| 0 | 1 | 0 | |\n\n| A | 3 | 3 | 1 | |\n| - | - | - | ---- | ---- |\n| | 0 | | −2 | 14/3 |\n| | 0 | 0 | −5/3 | |\n\n| A | 3 | 3 | 1 |\n| - | - | - | - |\n| 0 | 0 | 1 | |\n| 0 | 1 | 0 | |\n\n| A | 2 | 2 | −1 |\n| - | - | -- | -- |\n| | 1 | −1 | 5 |\n| | | | |\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Cálculo da matriz inversa\n\n# Cálculo da matriz inversa\n\nSeja A uma matriz quadrada não singular de ordem 3.\n\nDevemos ter: AA−1 = I3 e A−1A = I3.\n\nConsidere: C = A−1. Logo\n\n| a11 | a12 | a13 | c11 | c12 | c13 | 1 0 0 | | |\n| --- | --- | --- | --- | --- | --- | ----- | ----- | ----- |\n| a21 | a22 | a23 | c21 | c22 | c23 | | 0 1 0 | |\n| a31 | a32 | a33 | c31 | c32 | c33 | | | 0 0 1 |\n\nTomando Xi =\n\nc1i\nc2i\nc3i\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Resolução de sistemas lineares\n\n# Resolução de sistemas lineares\n\nEntão, devemos resolver os seguintes sistemas lineares:\n\n| 1 | 0 | 0 |\n| ------- | ------- | ------- |\n| 0 | 0 | 1 |\n| AX1 = 0 | AX2 = 1 | AX3 = 0 |\n\nAssim, A-1 = C = [X1 X2 X3].\n\nPortanto, devemos resolver três sistemas lineares com a mesma matriz A, sendo alterado somente o vetor de termos independentes.\n\nEntre a eliminação de Gauss e a fatoração LU, o método mais indicado para resolver estes três sistemas é a fatoração LU.\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\nSejam\n\n| 1 | 0 | 0 | 3 | 3 | 1 | 1 | 0 | 0 | | |\n| --- | --- | - | --- | - | ---- | ---- | --- | - | - | - |\n| L = | 1/3 | 1 | U = | 0 | −2 | 14/3 | P = | 0 | 0 | 1 |\n| 2/3 | 0 | 1 | 0 | 0 | −5/3 | 0 | 1 | 0 | | |\n\nos fatores da fatoração LU com pivoteamento parcial da matriz A.\n\nLilian Berti\n\nResolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Calcule a matriz inversa da matriz A utilizando os fatores L e U.\n\n# Calcule a matriz inversa da matriz A utilizando os fatores L e U.\n\nA−1 = [X1 X2 X3]\n\nDeterminando Xi, i=1,2,3. Resolvendo AXi = ei, (ei coluna i da matriz identidade) usando os fatores L e U."
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Determinando X1\n\n# Determinando X1\n\n1. Ly = Pe1\n\n| 1 | 0 | 0 | y1 | 1 |\n| --- | - | - | -- | - |\n| 1/3 | 1 | 0 | y2 | 0 |\n| 2/3 | 0 | 1 | y3 | 0 |\n\ny = [1, -0, 3333, -0, 6667]\n\nUX1 = y\n\n| 3 | 3 | 1 | x1 | 1 |\n| - | -- | ---- | -- | -------- |\n| 0 | −2 | 14/3 | x2 | −0, 3333 |\n| 0 | 0 | −5/3 | x3 | −0, 6667 |\n\nX1 = [1, 1, 0, 4]\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Determinando X2\n\n# Determinando X2\n\n1. Ly = Pe₂\n\n| 1 | 0 | 0 | y1 | 0 | 0 |\n| --- | - | - | -- | - | - |\n| 1/3 | 1 | 0 | y2 | = | 0 |\n| 2/3 | 0 | 1 | y3 | 1 | 1 |\n2. UX2 = y\n\n| 3 | 3 | 1 | x1 | 0 | 1, 6 |\n| - | -- | ---- | -- | - | ----- |\n| 0 | −2 | 14/3 | x2 | = | 0 |\n| 0 | 0 | −5/3 | x3 | 1 | −0, 6 |\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: i)\n\n# i)\n\n| | Ly | | y1 | | 0 |\n| --- | -- | - | -- | - | - |\n| 1/3 | 1 | 0 | y2 | = | 1 |\n| 2/3 | 0 | 1 | y3 | | 0 |"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: ii)\n\n# ii)\n\n| | UX3 | = | y | | | |\n| - | --- | ---- | -- | - | - | --------- |\n| 3 | 3 | 1 | x1 | | 0 | 0.5 |\n| 0 | −2 | 14/3 | x2 | = | 1 | X3 = −0.5 |\n| 0 | 0 | −5/3 | x3 | | 0 | |\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\nPortanto,\n\n| −0, 9 | 1, 6 | 0, 5 |\n| ----- | ----- | ----- |\n| 1, 1 | −1, 4 | −0, 5 |\n| 0, 4 | −0, 6 | 0 |\n\nb) Resolva o sistema linear Ax = b em que b = [7, 3, 5]ᵀ usando a matriz inversa A−1.\n\n| −0, 9 | 1, 6 | 0, 5 | 7 | 1 | |\n| ----- | ----- | ----- | - | - | - |\n| 1, 1 | −1, 4 | −0, 5 | 3 | = | 1 |\n| 0, 4 | −0, 6 | 0 | 5 | | |\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Definição:\n\n# Definição:\n\nUma matriz A : n × n é simétrica se AT = A, ou seja aij = aji, para ∀i,j = 1, 2, . . . n."
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Exemplo:\n\n# Exemplo:\n\n| 2 | −1 | 0 |\n| -- | -- | -- |\n| −1 | 2 | −1 |\n| 0 | −1 | 2 |\n\n| 50 | 20 | 15 |\n| -- | -- | -- |\n| 20 | 80 | 0 |\n| 15 | 0 | 60 |\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Definição\n\n# Definição\n\nUma matriz A : n × n é definida positiva se xTA x > 0 para todo x ∈ R, x ≠ 0."
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Teorema\n\n# Teorema\n\nUma matriz A : n × n é simétrica e definida positiva se e somente se A pode ser decomposta de forma única no produto GGT, em que G é uma matriz triangular inferior com diagonal positiva.\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\n# Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\nSe A = GGT, na resolução do sistema linear Ax = b, teremos\n\nGGTx = b.\n\nPara obter a solução, resolvemos:\n\n1. Gy = b\n2. GTx = y.\n\nLilian Berti"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Cálculo do fator G\n\n# Cálculo do fator G\n\nExemplo: Seja A uma matriz simétrica definida positiva.\n\n| a11 | a12 | a13 | a14 |\n| --- | --- | --- | --- |\n| a21 | a22 | a23 | a24 |\n| a31 | a32 | a33 | a34 |\n| a41 | a42 | a43 | a44 |\n\nObtendo G =\n\n| g11 | 0 | 0 | 0 |\n| --- | --- | --- | --- |\n| g21 | g22 | 0 | 0 |\n| g31 | g32 | g33 | 0 |\n| g41 | g42 | g43 | g44 |\n\nDevemos ter: A = GGT\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\n# Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\n| a₁₁ | a₁₂ | a₁₃ | a₁₄ | | g₁₁ | | 0 | 0 | g₁₁ | g₂₁ | g₃₁ | g₄₁ |\n| --- | --- | --- | --- | - | --- | --- | --- | --- | --- | --- | --- | --- |\n| a₂₁ | a₂₂ | a₂₃ | a₂₄ | = | g₂₁ | g₂₂ | 0 | 0 | g₂₂ | g₃₂ | g₄₂ | |\n| a₃₁ | a₃₂ | a₃₃ | a₃₄ | | g₃₁ | g₃₂ | g₃₃ | 0 | 0 | g₃₃ | g₄₃ | |\n| a₄₁ | a₄₂ | a₄₃ | a₄₄ | | g₄₁ | g₄₂ | g₄₃ | g₄₄ | 0 | 0 | 0 | |\n\nTemos: √\n\ng² = a₁₁ ⇒ g₁₁ = a₁₁\n\ng₂₁g₁₁ = a₂₁ ⇒ g₂₁ = a²¹\n\ng₃₁g₁₁ = a₃₁ ⇒ g₃₁ = a³¹\n\ng₄₁g₁₁ = a₄₁ ⇒ g₄₁ = a⁴¹\n\ng² + g² = a₂₂ ⇒ g₂₂ = a₂₂ − g²\n\ng₃₁g₂₁ + g₃₂g₂₂ = a₃₂ ⇒ g₃₂ = (a₃₂ − g₃₁g₂₁)/g₂₂\n\ng₄₁g₂₁ + g₄₂g₂₂ = a₄₂ ⇒ g₄₂ = (a₄₂ − g₄₁g₂₁)/g₂₂\n\ng² + g² + g² = a₃₃ ⇒ g₃₃ = a₃₃ − g² − g²\n\ng₄₁g₃₁ + g₄₂g₃₂ + g₄₃g₃₃ = a₄₃ ⇒ g₄₃ = (a₄₃ − g₄₁g₃₁ − g₄₂g₃₂)/g₃₃\n\ng² + g² + g² + g₄₄ = a₄₄ ⇒ g₄₄ = a₄₄ − g² − g² − g²"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\n# Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\nCaso geral, para A : n × n, obtemos G : n × n , por:\n\ngkk = akk - ∑j=1k-1 gkj2\ngik = (aik - ∑j=1k-1 gijgkj) / gkk\n\ni = k + 1, . . . , n"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Exemplo: Determine a fatoração de Cholesky da matriz.\n\n# Exemplo: Determine a fatoração de Cholesky da matriz.\n\n| A = | 6 | 15 | 55 |\n| --- | -- | --- | --- |\n| | 15 | 55 | 225 |\n| | 55 | 225 | 979 |\n\nObtendo G de ordem 3.\n\npara k = 1\n\ng₁₁ = √a₁₁ = 6 = 2, 4495\n\ng₂₁ = a²¹ = 15 = 6, 1237\n\ng₁₁ = 2,4495\n\ng₃₁ = a³¹ = 55 = 22, 454\n\ng₁₁ = 2,4495\n\npara k = 2\n\ng₂₂ = a₂₂ − g² = 55 − (6, 1237)² = 4, 1833\n\ng₃₂ = a³²−ᵍ²¹ᵍ³¹ = 225−6,1237(22454) = 20, 917\n\ng₂₂ = 4,1833\n\npara k = 3\n\ng₃₃ = a₃₃ − g² − g² = 979 − (22, 454)² − (20, 917)² = 6, 1101\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\n# Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky\n\nPortanto,\n\n| 2 | 4495 | 0 | 0 | | |\n| -- | ---- | ---- | --- | ---- | ---- |\n| G | 6 | 1237 | 4 | 1833 | 0 |\n| 22 | 454 | 20 | 917 | 6 | 1101 |"
+  },
+  {
+    "source_path": "Aula07_ Cholesky.md",
+    "chunk_text": "[Documento: Aula07_ Cholesky] | Seção: A fatoração de Cholesky\n\n# A fatoração de Cholesky\n\npode ser usada para verificar se uma matriz é simétrica e definida positiva; se o método falhar, a hipótese é falsa.\n\nA fatoração de Cholesky requer a metade do número de operações efetuadas na fatoração LU.\n\nLilian Berti Resolução de sistemas lineares - Cálculo da matriz inversa e a Fatoração de Cholesky"
+  }
+]

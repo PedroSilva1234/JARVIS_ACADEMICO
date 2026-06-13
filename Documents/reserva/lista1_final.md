@@ -1,0 +1,105 @@
+UFMS - Universidade Federal de Mato Grosso do Sul
+# Métodos Numéricos
+
+# 1a Lista de Exercícios
+
+# Zeros reais de funções reais
+
+1. Mostre que as seguintes equações possuem exatamente uma raiz e que cada caso está no intervalo [0, 5; 1]. Determine uma aproximação para essas raízes realizando duas iterações do método da secção.
+- (a) x² + ln(x) = 0
+- (b) xeˣ − 1 = 0
+2. Mostre que a equação
+ln x + x³ − 1 = 10, x
+
+possui uma única solução positiva.
+3. A velocidade v do paraquedista em queda livre é dada por:
+v = gm (1 − e−(c/m)t)
+
+em que g = 9,81 m/s². Para um paraquedista com um coeficiente de arrasto c = 15 kg/s calcule a massa m para que a velocidade seja v = 36 m/s em t = 10 s. Sabendo que o valor de m está entre 57,5 e 60 kg, use o método da bissecção para determinar o valor de m com precisão de 0,5.
+4. Qual o número de iterações necessárias para calcular uma raiz no intervalo [2, 7], pelo método da Bissecção, com ε = 0,000001?
+5. Qual o número mínimo de iterações k que será realizado pelo algoritmo do método da bissecção para satisfazer o critério de parada b − a &#x3C; ε supondo ε = 10⁻⁴ e o intervalo inicial tem amplitude 1?
+6. Considere a função f(x) = eˣ − 4x².
+- (a) Localize graficamente os zeros de f.
+- (b) Considere o intervalo I = [−1, 5]. Realize duas iterações do método da bissecção e escolha o ponto médio do último intervalo obtido como aproximação inicial para o método de Newton. Aplique o método de Newton e use como critério de parada o erro relativo inferior a 10⁻². Comparando com a localização dos zeros realizada no item (a), identifique qual o zero obtido neste processo e justifique por que a convergência foi para esta raiz.
+7. O método de Newton Modificado consiste em gerar a sequência xₖ através de:
+xₖ₊₁ = xₖ − (f(xₖ) / f'(x₀))
+
+em que x₀ é uma aproximação inicial.
+- (a) com auxílio de um gráfico, escreva a interpretação geométrica deste método;
+- (b) quando é conveniente utilizar este método em vez do método de Newton?
+
+
+
+
+# 8.
+
+Sabemos que, se y = f(x) é uma função contínua que satisfaz f(a)f(b) &#x3C; 0 para a &#x3C; b números reais dados, então existe pelo menos um ponto α ∈ (a, b) tal que f(α) = 0. Qual condição adicional garante a unicidade da solução neste intervalo? Justifique.
+
+# 9.
+
+Considere um pêndulo suspenso no teto de uma sala. O pêndulo balança de acordo com a seguinte expressão:
+
+d = 80 + 90cos πt,
+
+em que d(cm) representa a distância até à parede de referência e depende do número de segundos t do momento quando o pêndulo foi posto em movimento. Calcule o instante de tempo t para o qual o pêndulo toca na parede da sala. Utilize o método de Newton, use para aproximação inicial t₀ = 4 e critério de parada o erro relativo ε = 0, 05.
+
+# 10.
+
+Um certo equipamento de 20000 reais vai ser pago durante 6 anos. O pagamento anual é de 4000 reais. A relação entre o custo do equipamento P, o pagamento anual A, o número de anos n e a taxa de juro i é dado por:
+
+A = P i(1 + i)n / ((1 + i)n - 1).
+
+Utilize o método das secantes para determinar a taxa de juros utilizada nos cálculos. O valor da taxa de juros pertence ao intervalo [0, 05; 0, 15]. Para o critério de parada utilize o erro relativo ε = 0, 05.
+
+# 11.
+
+A concentração de bactéria poluente c em um lago diminui de acordo com C = 70e−1,5t + 25e−0,075t. Determine o tempo necessário para que a concentração de bactéria seja reduzida a 9 usando o método de Newton com aproximação inicial t = 10 e critério de parada erro relativo menor que 0,05.
+
+# 12.
+
+O deslocamento de uma estrutura é definido pela seguinte equação para uma oscilação amortecida:
+
+y = 8e−ktcos(ωt), onde k = 0, 5, ω = 3 e t é dado em segundos. Determine o tempo necessário para o deslocamento diminua para 4, utilizando:
+
+- (a) o método de Newton, aproximação inicial t₀ = 0, 3 e erro relativo inferior a 10−².
+- (b) o método de Secante, aproximações iniciais t₀ = 0, 2 e t₁ = 0, 4 e erro relativo inferior a 10−².
+- (c) Caso o método da Bisseção fosse utilizado, em quantas iterações o método obteria uma solução com o erro inferior a 10−2, sabendo que a solução está no intervalo [0,2; 0,4].
+- (d) Comente os resultados obtidos nos itens anteriores, analisando a convergência de cada método.
+
+
+
+
+
+
+# 1a Lista de Exercícios - Respostas
+
+1. (a)  ¯  0, 6875
+
+x =
+
+(b)  ¯  0, 5625
+
+x =
+2. Como f(1) · f(3) &#x3C; 0, f contínua, pelo teorema do Bolzano, segue que, f admite pelo menos uma raiz no intervalo (1,3). No entanto, como f (x) = 1 + 3x² + 1 > 0 para todo x em seu domínio, segue que f é estritamente crescente. Então, podemos afirmar que f admite uma única raiz positiva em seu domínio, e a raiz está no intervalo (1,3).
+3. m ≈ 59, 8438 (3 iterações)
+4. 23 iterações
+5. 14 iterações
+6. Se f (x) preservar o sinal em (a, b). Pois, se f (x) > 0, para todo x em (a, b), segue que f é estritamente crescente em (a,b). Caso f (x) &#x3C; 0, para todo x em (a, b), segue que f é estritamente decrescente em (a, b).
+
+(a)  ξ₁ ∈ (−1, 0) e ξ₂ ∈ (0, 1)
+
+(b)  x  = 4, 25 para o método de Newton; ¯  4, 3066.
+
+x =
+7. (a) o ponto xₖ₊₁ será a interseção com o eixo 0x com a reta que passa por (xₖ, f(xₖ)) e é paralela à curva de f(x) no ponto (x₀, f(x₀)).
+
+(b) Quando avaliar os pontos f (xₖ) em cada iteração k são dispendiosos.
+8. t ≈ 3, 4651 (2 iterações)
+9. i ≈ 0, 0547 (2 iterações)
+10. t ≈ 13, 6146 (2 iterações)
+11. a) t ≈ 0, 3152 (2 iterações)
+
+b) t ≈ 0, 3152 (3 iterações)
+
+c) 5 iterações
+

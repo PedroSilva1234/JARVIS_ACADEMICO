@@ -1,0 +1,98 @@
+[
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolução de sistemas lineares - Métodos iterativos\n\n# Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Métodos Numéricos\n\n# Métodos Numéricos\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Método de Gauss- Seidel\n\n# Método de Gauss- Seidel\n\nConsidere o sistema linear\n\n| a11x1 | + | a12x2 | + | a13x3 | = | b1 |\n| ----- | - | ----- | - | ----- | - | -- |\n| a21x1 | + | a22x2 | + | a23x3 | = | b2 |\n| a31x1 | + | a32x2 | + | a33x3 | = | b3 |\n\nSeja A = L + D + U em que\n\n| 0 | 0 | 0 | a11 | 0 | 0 | 0 | a12 | a13 | | |\n| --- | --- | - | --- | - | --- | - | --- | --- | - | --- |\n| a21 | 0 | 0 | D = | 0 | a22 | 0 | U = | 0 | 0 | a23 |\n| a31 | a32 | 0 | 0 | 0 | a33 | 0 | 0 | 0 | | |\n\nSupondo aii = 0\n\nAx = b\n\n(L + D + U)x = b\n\n(L + D)x = -Ux + b\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos\n\nCaso (L + D)-1 existir, então o processo iterativo é dado por:\n\nx(k+1) = −(L + D)-1U x(k) + (L + D)-1b\n\n| B | c |\n| - | - |\n\nEvitar o cálculo da inversa (L + D)-1\n\n(L + D)x(ᵏ+1) = −Ux(k) + b\n\nDx(k+1) = −Lx(k+1) − Ux(k) + b\n\nx(k+1) = −D-1(Lx(k+1) − Ux(k) + b)\n\nou seja, o esquema iterativo é dado por:\n\nx(k+1) = 1 (b1 − a1,2x(ᵏ) − a1,3x(ᵏ))\n\n1 a11 2 3\n\nx(k+1) = 1 (b2 − a2,1x(ᵏ+1) − a2,3x(ᵏ))\n\n2 a22 1 3\n\nx(k+1) = 1 (b3 − a3,1x(ᵏ+1) − a3,2x(ᵏ+1))\n\n3 a33 1 2\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolução de sistemas lineares - Métodos iterativos\n\n# Resolução de sistemas lineares - Métodos iterativos\n\nO vetor x(k+1) é obtido a partir dos elementos mais recentes, tanto do próprio x(k+1) quanto de x(k)."
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Forma geral:\n\n# Forma geral:\n\n| bi | - | i-1 | aijx(k+1) | - | n | aijx(k) |\n| -------- | ---- | ------ | --------- | - | ------------------- | ------- |\n| j | | | | | | |\n| x(k+1) = | j=1, | j=i+1, | | | i = 1, 2, . . . , n | |\n| i | | aii | | | | |"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Exemplo: Resolva o sistema linear pelo método de Gauss - Seidel\n\n# Exemplo: Resolva o sistema linear pelo método de Gauss - Seidel\n\nutilizando como aproximação inicial o vetor [0, 0, 0]T e critério de parada erro relativo inferior a 0,05.\n\n5x1 + x2 + x3 = 5\n3x1 + 4x2 + x3 = 6\n3x1 + 3x2 + 6x3 = 0"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Esquema iterativo:\n\n# Esquema iterativo:\n\n| x(k+1) = 1 (5 − x(k) − x(k)) | 1 | 5 | 2 | 3 |\n| ------------------------------- | - | - | - | - |\n| x(k+1) = 1 (6 − 3x(k+1) − x(k)) | 2 | 4 | 1 | 3 |\n| x(k+1) = 1 (−3x(k+1) − 3x(k+1)) | 3 | 6 | 1 | 2 |\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Para k = 0\n\n# Para k = 0\n\n| x(1) | = | 1(5 − x(0) − x(0)) | = | 1(5 − 0 − 0) | = | 1 |\n| ---- | - | ------------------- | - | ------------------- | - | ------- |\n| 1 | 5 | 2 | 3 | 5 | | |\n| x(1) | = | 1(6 − 3x(1) − x(0)) | = | 1(6 − 3(1) − 0) | = | 0, 75 |\n| 2 | 4 | 1 | 3 | 4 | | |\n| x(1) | = | 1(−3x(1) − 3x(1)) | = | 1(−3(1) − 3(0, 75)) | = | −0, 875 |\n| 3 | 6 | 1 | 2 | 6 | | |\n\nx(1) = [1 ; 0, 75 ; −0, 875]T\n\nER = x(1)−x(0) ∞ = max{1;0,75;0,875} = 1 > 0, 05\n\nx(1) ∞ = max{1;0,75;0,875}\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Para k = 1\n\n# Para k = 1\n\nx(2) = 1(5 − x(1) − x(1)) = 1(5 − 0, 75 − (−0, 875)) = 1, 025\n\n| 1 | 5 | 2 | 3 | 5 |\n| - | - | - | - | - |\n\nx(2) = 1(6 − 3x(2) − x(1)) = 1(6 − 3(1, 025) − (−0, 875)) = 0, 95\n\n| 2 | 4 | 1 | 3 | 4 |\n| - | - | - | - | - |\n\nx(2) = 1(−3x(2) − 3x(2)) = 1(−3(1, 025) − 3(0, 95)) = −0, 9875\n\n| 3 | 6 | 1 | 2 | 6 |\n| - | - | - | - | - |\n\nx(2) = [1, 025 ; 0, 95 ; −0, 9875]T\n\nER = x(2)−x(1) ∞ = max{0,025;0,2;0,1125} = 0,2 = 0, 1951 >\n\nx(2) ∞ max{1,025 ; 0,95 ; 0,9875} 1,025\n\n0, 05\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolução de sistemas lineares - Métodos iterativos\n\n# Resolução de sistemas lineares - Métodos iterativos\n\nPara k = 2\n\n| x(3) | = | 1(5 − x(2) − x(2)) | = | 1(5 − 1, 025 − (−0, 9875)) | = | 1, 0075 |\n| ---- | - | ------------------ | - | -------------------------- | - | ------- |\n| 1 | 5 | 2 | 3 | 5 | | |\n\n| x(3) | = | 1(6 − 3x(3) − x(2)) | = | 1(6 − 3(1, 0075) − (−0, 9875)) | = | 0, 9913 |\n| ---- | - | ------------------- | - | ------------------------------ | - | ------- |\n| 2 | 4 | 1 | 3 | 4 | | |\n\n| x(3) | = | 1(−3x(3) − 3x(3)) | = | 1(−3(1, 0075) − 3(0, 9913)) | = | −0, 9994 |\n| ---- | - | ----------------- | - | --------------------------- | - | -------- |\n| 3 | 6 | 1 | 2 | 6 | | |\n\nx(3) = [1, 0075 ; 0, 9913 ; −0, 9994]T\n\nER = x(3)−x(2) ∞ = max{0,0175;0,0413;0,0119} = 0,0413 = 0, 041 <\n\nx(3) ∞ max{1,0075 ; 0,9913 ; 0,9994} 1,0075\n\n0, 05\n\nPortanto, x (3) [1 − 9994]ᵀ\n\n¯ = x = , 0075 ; 0, 9913 ; 0, .\n\nLilian Berti"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Critério para Convergência:\n\n# Critério para Convergência:\n\n- Critério das linhas (visto aula passada)\n- Critério de Sassenfeld\n\nSejam\n\nβ₁ = (a₁₂ + a₁₃ + · · · + a₁ₙ)/a₁₁\n\nβi = (ai₁β₁ + ai₂β₂ + · · · + aii−₁βi−₁ + aii₊₁ + aii₊₂ + · · · + ain)/aii\n\nSe\n\nβ = max {βi} < 1,\n\n1≤i≤n\n\nentão o método de Gauss-Seidel gera uma sequência convergente, independente da aproximação inicial x(0). Além disso, quando menor o valor β, mais rápida a convergência.\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Exemplo:\n\n# Exemplo:\n\nVerifique se a matriz do exemplo anterior satisfaz o critério das linhas e o critério de Sassenfeld\n\n| 5 | 1 | 1 | |\n| --- | - | - | - |\n| A = | 3 | 4 | 1 |\n| | 3 | 3 | 6 |"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Verificando o Critério das linhas\n\n# Verificando o Critério das linhas\n\nTemos:\n\nα1 = 5 + 1 = 2 = 0, 4\n\n5\n\nα2 = 3 + 1 = 1\n\n4\n\nα3 = 3 + 3 = 1\n\n6\n\nComo α = max{α1, α2, α3} = 1, segue que o critério das linhas não é satisfeito, não podemos garantir a convergência.\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Verificando o Critério de Sassenfeld\n\n# Verificando o Critério de Sassenfeld\n\nTemos:\n\n| β1 = | 5 | 1 | 1 | |\n| ---- | --- | - | - | - |\n| | A = | 3 | 4 | 1 |\n| | | 3 | 3 | 6 |\n\nβ1 = 1 + 1 = 2 = 0, 4\n\nβ2 = 3β¹ + 1 = 0, 55\n\nβ3 = 3β¹ + 3β² = 0, 47\n\nComo β = max{β1, β2, β3} = 0, 55 < 1, segue que o critério de Sassenfeld é satisfeito, garantindo a convergência.\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Exemplo: Considere Ax = b em que:\n\n# Exemplo: Considere Ax = b em que:\n\n| 20 | 2 | 3 | −1 | 150 |\n| -- | -- | -- | -- | --- |\n| 2 | 8 | −1 | 1 | 4 |\n| 1 | −1 | −5 | 2 | −11 |\n| 5 | 2 | −3 | 10 | 48 |\n\nVerifique se o critério de Sassenfeld é satisfeito.\n\nTemos:\n\nβ1 = 2 + 3 + −1 = 0, 3\n\nβ2 = 2β1 + −1 + 1 = 0, 325\n\nβ3 = 1β1 + −1β2 + 2 = 0, 525\n\nβ4 = 5β1 + 2β2 + −3β3 = 0, 3725\n\nComo β = max{β1, β2, β3} = 0, 55 < 1, segue que o critério de Sassenfeld é satisfeito.\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolução de sistemas lineares - Métodos iterativos\n\n# Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Interpretação Geométrica (caso 2x2)\n\n# Interpretação Geométrica (caso 2x2)\n\nSeja:\n\n| x1 | + | x2 | = | 3 | x(0) = | 0 | x\\* = | 1,5 |\n| -- | - | --- | - | -- | ------ | - | ----- | --- |\n| x1 | − | 3x2 | = | −3 | | 0 | | 1,5 |\n\nResolvendo o sistema linear pelo método de Gauss-Jacobi.\n\nx(k+1) = 3 − x(k)\n\nx1 = 3 + x1k\n\nx(k+1) = 3 + x1k\n\nx2 = 3\n\n| x(1) | = | 3 | | | | | |\n| ---- | ---- | -------- | -------- | -------- | ------------- | - | ------ |\n| | x(2) | = | 2 | | | | |\n| | | | x(3) | = | 1 | | |\n| | | | | | x(4) | = | 1,3333 |\n| | | x(1) = 3 | x(2) = 2 | x(3) = 1 | x(4) = 1,3333 | | |\n\nLilian Berti\n\nResolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolvendo o sistema linear pelo método de Gauss-Seidel.\n\n# Resolvendo o sistema linear pelo método de Gauss-Seidel.\n\nx(k+1) = 3 − x(k)\n\n1"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolução de sistemas lineares - Métodos iterativos\n\n# Resolução de sistemas lineares - Métodos iterativos\n\nObservação: Neste exemplo:\n\n| x1 | + | x2 | = | 3 |\n| -- | - | --- | - | -- |\n| x1 | − | 3x2 | = | −3 |\n\nO critério das linhas e o critério de Sassenfeld não são satisfeitos.\n\nIsto mostra que estes critérios são apenas uma condição suficiente.\n\nE o critério de Sassenfeld também não é satisfeito.\n\nLilian Berti"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolução de sistemas lineares - Métodos iterativos\n\n# Resolução de sistemas lineares - Métodos iterativos\n\nCaso fosse permutado as equações teríamos:\n\n| x1 | − | 3x2 | = | −3 |\n| -- | - | --- | - | -- |\n| x1 | + | x2 | = | 3 |\n\nAmbos os critérios de convergência não seriam satisfeitos.\n\nResolvendo pelo método de Gauss-Jacobi:\n\n| x(k+1) | = | −3 + 3x(k) | 1 | 2 |\n| ------ | - | ---------- | - | - |\n| x(k+1) | = | 3 − x(k) | 2 | 1 |\n\n| x(0) | = | 0 | x(2) | = | −3 | x(3) | = | 6 |\n| ---- | - | - | ---- | - | -- | ---- | - | - |\n| | | 0 | | 3 | | 6 | | |\n\nTeremos divergência.\n\nLilian Berti"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Resolvendo pelo método de Gauss-Seidel:\n\n# Resolvendo pelo método de Gauss-Seidel:\n\nx(k+1) = −3 + 3x(k)\n\n1\n\nx(k+1) = 3 − x(k+1)\n\n2\n\n| x(0) | x(2) | x(3) |\n| ---- | ---- | ---- |\n| 0 | −3 | 15 |\n| | 6 | −12 |\n\nTeremos divergência.\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos\n\nExemplo: Uma transportadora tem três caminhões (C1, C2, C3) estão equipados para levar três tipos diferentes de máquinas (A, B, C) de acordo com a tabela.\n\n| | MA | MB | MC |\n| -- | -- | -- | -- |\n| C1 | 1 | 0 | 2 |\n| C2 | 1 | 1 | 1 |\n| C3 | 1 | 2 | 1 |\n\nO caminhão 1 pode levar a máquina A, nenhuma máquina B e duas máquinas C. Supondo que cada caminhão vai com a carga máxima, quantos caminhões de cada tipo devemos enviar para transportar exatamente 12 máquinas A, 10 máquinas B e 16 máquinas C?\n\nTemos:\n\nx1 + x2 + x3 = 12\n\nx2 + 2x3 = 10\n\n2x1 + x2 + x3 = 16\n\nem que: xi : quantidade de caminhão i = 1, 2, 3\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Gauss-Seidel\n\n# Gauss-Seidel\n\na) É possível garantir a convergência do método de na resolução deste problema?\n\nO critério das linhas não é satisfeito, pois α1 = 1, α2 = 2 e α3 = 3. Logo, α > 1. O critério de Sassenfeld também não é satisfeito.\n\nb) É possível permutar linhas e garantir a convergência?\n\nNão é possível.\n\nc) Podemos resolver por um método direto?\n\nSim, podemos utilizar a eliminação de Gauss.\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Métodos Diretos\n\n# Métodos Diretos\n\n- Determinam a solução em número finito de passos se a matriz é não singular;\n- Solução exata a menos de erros de arredondamento;\n- Não preservam a estrutura da matriz."
+  },
+  {
+    "source_path": "Aula09_ Gauss_Seidel.md",
+    "chunk_text": "[Documento: Aula09_ Gauss_Seidel] | Seção: Métodos Iterativos\n\n# Métodos Iterativos\n\n- Não é garantido encontrar a solução (pode ou não convergir);\n- Constrói uma sequência de aproximações;\n- Preservam a estrutura da matriz.\n\nLilian Berti Resolução de sistemas lineares - Métodos iterativos"
+  }
+]

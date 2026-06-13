@@ -1,0 +1,138 @@
+[
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Métodos Numéricos\n\n# Métodos Numéricos\n\nLilian Berti Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Sistema triangular inferior de ordem n\n\n# Sistema triangular inferior de ordem n\n\na11x1 = b1\n\na21x1 + a22x2 = b2\n\n. . .\n\n. . .\n\n. . .\n\na(n−1)1x1 + a(n−1)2x2 + · · · + an−1,n−1xn−1 = bn−1\n\nan1x1 + an2x2 + · · · + ann−1xn−1 + annxn = bn\n\nem que aii = 0, i = 1, 2, 3, ..., n."
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss\n\nPortanto,\n\nx1 = b1 / a11\n\nxi = bi - ∑j=1i-1 aijxj / aii, i = 2, . . . , n"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Algoritmo: Resolução de sistema triangular inferior.\n\n# Algoritmo: Resolução de sistema triangular inferior.\n\nDados: A (matriz triangular inferior), b\n\nx1 = b1 / a11\n\nPara i = 2, 3, . . . , n\n\nsoma = bi\n\nPara j = 1, 2, . . . , i - 1\n\nsoma = soma - aijxj\n\nfim para\n\nxi = soma / aii\n\nFim para\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Sistema triangular superior de ordem n\n\n# Sistema triangular superior de ordem n\n\na11x1 + a12x2 + · · · + a1nxn = b1\n\na22x2 + · · · + a2nxn = b2\n\n. .\n\n.\n\n.\n\nan−1n−1xn−1 + an−1nxn = bn−1\n\nannxn = bn\n\nem que aii = 0, i = 1, 2, 3, ..., n."
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Solução:\n\n# Solução:\n\nxn = bn\n\nxn−1 = (bn−1 - an−1nxn) / an−1n−1\n\nx1 = (b1 - a12x1 - · · · - a1n−1xn−1 - a1nxn) / a11\n\nLilian Berti - Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss\n\nPortanto,\n\nxn = bn\n\nxi = bi − aijxj / aii,  i = n − 1, . . . , 1\n\nAlgoritmo: Resolução de sistema triangular superior.\n\nDados: A (matriz triangular superior), b\n\nxn = bⁿⁿ\n\nPara iaⁿⁿ  −    −\n\n= n      1, n   2, . . . , 1\n\nsoma = bi\n\nPara j = i + 1, i + 2, . . . , n\n\nsoma = soma − aijxj\n\nfim para\n\nxi = soma\n\naij\n\nFim para\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Métodos Diretos\n\n# Métodos Diretos\n\nDeterminam a solução de um sistema linear em um número finito de operações."
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Método da Eliminação de Gauss\n\n# Método da Eliminação de Gauss\n\nConsiste em transformar um sistema linear em um sistema triangular superior equivalente."
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Definição\n\n# Definição\n\nDois sistemas lineares são equivalentes quando possuem a mesma solução.\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss\n\n\n\nPropriedades\n\nA solução do sistema linear Ax = b não se altera ao aplicar uma sequência de operações do tipo:\n\n1. Troca das equações\n2. Multiplicar uma equação por uma constante não nula.\n3. Soma do múltiplo de uma equação a outra.\n\nEstas operações geram um sistema ˜  ˜ Ax = b equivalente ao sistema original Ax = b.\n\nLilian Berti\n\nResolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Exemplo\n\n# Exemplo\n\n2x1 + 3x2 − x3 = 5\n\n4x1 + 4x2 − 3x3 = 3\n\n2x1 − 3x2 + x3 = −1\n\nEscrevemos a matriz A e o vetor b na forma de uma matriz aumentada\n\n| 2 | 3  | −1 | | | 5  |\n| - | -- | -- | - | -- |---|\n| 4 | 4  | −3 | | | 3  |\n| 2 | −3 | 1  | | | −1 |\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Etapa 1:\n\n# Etapa 1:\n\n|          | 2 | 3  | −1 | | | 5  | |\n| -------- | - | -- | -- | - | -- |---|---|\n| \\[A | b] | 4 | 4  | −3 | | | 3  |\n|          | 2 | −3 | 1  | | | −1 | |\n\npivˆo: a11 = 2 multiplicadores: m21 = a21 = 2  m31 = a31 = 1\n\nL2 ← L2 − m21L1\n\nL3 ← L3 − m31L1\n\n|          | 2 | 3  | −1 | | | 5  | |\n| -------- | - | -- | -- | - | -- |---|---|\n| \\[A | b] | 0 | −2 | −1 | | | −7 |\n|          | 0 | −6 | 2  | | | −6 | |"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Etapa 2:\n\n# Etapa 2:\n\npivˆo: a22 = 2 m32 = a32 = 3\n\nL3 ← L3 − m32L2\n\n|          | 2 | 3  | −1 | | | 5  | |\n| -------- | - | -- | -- | - | -- |---|---|\n| \\[A | b] | 0 | −2 | −1 | | | −7 |\n|          | 0 | 0  | 5  | | | 15 | |\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss\n\nAssim,\n\n2x1 + 3x2 − x3 = 5\n− 2x2 − x3 = −7\n+ 5x3 = 15\n\nx* = 2\n\nx3"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Exercício: Resolva o sistema linear utilizando a Eliminação de Gauss.\n\n# Exercício: Resolva o sistema linear utilizando a Eliminação de Gauss.\n\n0,25x1 + 0,36x2 + 0,12x3 = 7\n0,112x1 + 0,16x2 + 0,24x3 = 8\n0,147x1 + 0,21x2 + 0,25x3 = 9\n\nLilian Berti Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Generalizando\n\n# Generalizando\n\n|        | a11 | a12   | a1n   |     | b1 |    |   | | |\n| ------ | --- | ----- | ----- | --- | -- | -- | - |---|---|\n| \\[A|b] | a21 | a22   | · · · | a2n | |  | b2 |   |\n|        | .   | .     | .     | .   | .  | |  | . | |\n|        | .   | .     | .     | .   | .  | |  | . | |\n| an1    | an2 | · · · | ann   | |   | bn |    |   | |"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Etapa 1 (Elimina¸c˜ao na primeira coluna)\n\n# Etapa 1 (Elimina¸c˜ao na primeira coluna)\n\npivˆo: a11 = 0\n\nmi1 = aⁱ¹ ,       i = 2, 3, . . . , n\n\nLi ← Li − mi L1\n\nPara i = 2, 3, . . . , n\n\nPara j = 2, 3, . . . , n\n\naij = aij − mi1a1j\n\nfim para\n\nbi = bi − mi1b1\n\nFim para\n\nLilian Berti  Resolu¸c˜ao de sistemas lineares - Elimina¸c˜ao de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Etapa 2 (Elimina¸c˜ao na segunda coluna)\n\n# Etapa 2 (Elimina¸c˜ao na segunda coluna)\n\npivˆo: a22 = 0\n\nmi2 = ai2, i = 3, 4, . . . , n\n\nLi ← Li − mi L2\n\na22\n\nPara i = 3, 4, . . . , n\n\nPara j = 3, 4, . . . , n\n\naij = aij − mi2a2j\n\nfim para\n\nbi = bi − mi2b2\n\nFim para\n\nContinuamos o processo at´e a etapa (n-1) obtendo um sistema triangular superior.\n\nLilian Berti  Resolu¸c˜ao de sistemas lineares - Elimina¸c˜ao de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Algoritmo: Elimina¸c˜ao de Gauss\n\n# Algoritmo: Elimina¸c˜ao de Gauss\n\nDados: A, b\n\nPara k = 1, 2, . . . , n − 1 fa¸ca\n\nPara i = k + 1, . . . , n fa¸ca\n\nm = aⁱᵏ\n\nPara aᵏᵏ fa¸ca\n\nj = k + 1, . . . , n\n\naij = aij − makj\n\nFim para\n\nbi = bi − mbk\n\nFim para\n\nFim para\n\nLilian Berti  Resolu¸c˜ao de sistemas lineares - Elimina¸c˜ao de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Algoritmo: Resolução de Ax = b pela Eliminação de Gauss\n\n# Algoritmo: Resolução de Ax = b pela Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Algoritmo: Resolução de Sistema triangular superior.\n\n# Algoritmo: Resolução de Sistema triangular superior.\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss\n\n\n\n\nExemplo:\n\nSeja:\n\n| 0, 0003x1 | + 3x2 | = 2, 001 |\n| --------- | ----- | -------- |\n| x1        | + x2  | = 1      |\n\na) Resolva o sistema linear pela eliminação de Gauss, utilize 4 dígitos significativos e arredondamento.\n\nm21 = 0, 1 = 3333 L2 ← L2 − 3333L1\n\n| 0, 0003x1 | + 3x2    | = 2, 001 |\n| --------- | -------- | -------- |\n|           | − 9998x2 | = −6668  |\n\nx1 = 1 e x2 = 0, 6669\n\nNote: x1 + x2 = 1, 6669 = 1\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss\n\n\n\n\n\nb) Resolva novamente trocando as linhas\n\n| x1        | + x2  | = 1      |\n| --------- | ----- | -------- |\n| 0, 0003x1 | + 3x2 | = 2, 001 |\n\nm21 = 0,0003 = 0, 0003\n\n1\n\n| x1 | + x2 | = 1      |\n| -- | ---- | -------- |\n|    | 3x2  | = 2, 001 |\n\nx1 = 0, 333 e x2 = 0, 667.\n\nLilian Berti  Resolu¸c˜ao de sistemas lineares - Elimina¸c˜ao de Gauss\n\n\n\nObservação: A escolha do maior elemento em módulo entre os candidatos a pivô faz com que os multiplicadores em módulo estejam entre 0 e 1, o que evita a ampliação dos erros de arredondamento."
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Estratégia de pivoteamento parcial\n\n# Estratégia de pivoteamento parcial\n\nNa etapa k, escolhemos para pivô o elemento de maior módulo entre os coeficientes:\n\n|aₖᵣ| = max |air| ⇒ pivô akr\n\n1≤i≤n\n\nTroca-se as linhas k e r se necessário.\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Exemplo:\n\n# Exemplo:\n\n| 0, 1 7 | −0, 3 | x1    |    | −19, 3 |       |\n| ------ | ----- | ----- | -- | ------ | ----- |\n| 0, 3   | −0, 2 | 10    | x2 | =      | 71, 4 |\n| 3      | −0, 1 | −0, 2 | x3 | 7, 85  |       |\n\n[A | b] =\n\n| 0, 3 | −0, 2 | 10    | | | 71, 4 |\n| ---- | ----- | ----- | - | ----- |---|\n| 3    | −0, 1 | −0, 2 | | | 7, 85 |"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Etapa 1:\n\n# Etapa 1:\n\npivˆo: a31 = 3 L1 ↔ L3\n\n| 3 | −0, 1 | −0, 2 | | | 7, 85 |\n| - | ----- | ----- | - | ----- |---|\n\n[A | b] =\n\n| 0 | −0, 19  | 10, 02   | | | 70, 615   |\n| - | ------- | -------- | - | --------- |---|\n| 0 | 7, 0033 | −0, 2933 | | | −19, 5614 |\n\nLilian Berti\n\nResolu¸c˜ao de sistemas lineares - Elimina¸c˜ao de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Etapa 2:\n\n# Etapa 2:\n\npivô: a32 = 7, 0033    L2 ↔ L3\n\n|            | 3 | −0, 1   | −0, 2    | | | 7, 85     | |\n| ---------- | - | ------- | -------- | - | --------- |---|---|\n| \\[A | b] = | 0 | 7, 0033 | −0, 2933 | | | −19, 5614 |\n|            | 0 | −0, 19  | 10, 02   | | | 70, 615   | |\n\nL3 ← L3 + 0, 0271L2\n\n|            | 3 | −0, 1   | −0, 2    | | | 7, 85     | |\n| ---------- | - | ------- | -------- | - | --------- |---|---|\n| \\[A | b] = | 0 | 7, 0033 | −0, 2933 | | | −19, 5614 |\n|            | 0 | 0       | 10, 0121 | | | 70, 0849  | |\n\nPortanto,\n\nx1 = 3, x2 = −2, 5 e x3 = 7\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Método de Gauss-Jordan\n\n# Método de Gauss-Jordan\n\nUma variação da Eliminação de Gauss:\n\nAx = b      ≈      Ix = c\n\nem que I é a matriz identidade.\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Exemplo\n\n# Exemplo\n\n| 2 | 1 | −1 | x1 | 1    |\n| - | - | -- | -- | ---- |\n| 5 | 2 | 2  | x2 | = −4 |\n| 3 | 1 | 1  | x3 | 5    |\n\nTemos:\n\n| 2 | 1 | −1 | | | 1  |\n| - | - | -- | - | -- |---|\n| 5 | 2 | 2  | | | −4 |\n| 3 | 1 | 1  | | | 5  |\n\nL1 ← 0, 5L1\n\n| 1 | 0, 5 | −0, 5 | | | 0, 5 |\n| - | ---- | ----- | - | ---- |---|\n| 5 | 2    | 2     | | | −4   |\n| 3 | 1    | 1     | | | 5    |\n\nLilian Berti  Resolu¸c˜ao de sistemas lineares - Elimina¸c˜ao de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss\n\n| L2 ← −5L1 | L3 ← −3L1 |       |   |       | |\n| --------- | --------- | ----- | - | ----- |---|\n| 1         | 0, 5      | −0, 5 | | | 0, 5  |\n| 0         | −0, 5     | 4, 5  | | | −6, 5 |\n| 0         | −0, 5     | 2, 5  | | | 3, 5  |\n\n| L2 ← −2L2 |       |       |   |      | |\n| --------- | ----- | ----- | - | ---- |---|\n| 1         | 0, 5  | −0, 5 | | | 0, 5 |\n| 0         | 1     | −9    | | | 13   |\n| 0         | −0, 5 | 2, 5  | | | 3, 5 |\n\n|   | L1 ← L1 − 0, 5L2 |    | L3 ← L3 + 0, 5L2 |    | |\n| - | ---------------- | -- | ---------------- | -- |---|\n| 1 | 0                | 4  | |                | −6 |\n| 0 | 1                | −9 | |                | 13 |\n| 0 | 0                | −2 | |                | 10 |\n\n\n\n\n\n\nL3 ← −0, 5L3\n1 0 4      | −6\n0 1 −9     |  13\n0 0 1      | −5\n\nL1 ← L1 − 4L3 e L2 ← L2 + 9L3\n1 0 0   |     14\n0 1 0   | −32\n0 0 1   | −5\n\nPortanto,\n\nx1 = 14,, x2 = −32 e x3 = −5\n\nLilian Berti  Resolu¸c˜ao de sistemas lineares - Elimina¸c˜ao de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Cálculo de determinantes usando a eliminação de Gauss\n\n# Cálculo de determinantes usando a eliminação de Gauss\n\nAo final do processo de eliminação de Gauss:\n\n| a11 | a12 | · · · | a1n | | | b1 |\n| --- | --- | ----- | --- | - | -- |---|\n| 0   | a22 | · · · | a2n | | | b2 |\n| .   | .   | .     | .   | | | .  |\n| .   | .   | .     | .   | | | .  |\n| 0   | 0   | · · · | ann | | | bn |\n\nDet(A) = a11a22 · · · ann.\n\nQuando utilizamos pivoteamento parcial:\n\nDet(A) = a11a22 · · · ann(−1)p,\n\nem que p indica o número de linhas permutadas.\n\nLilian Berti  Resolução de sistemas lineares - Eliminação de Gauss"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss\n\n| 2 | 1 | −1 |   |   |\n| - | - | -- | - | - |\n| 5 | 2 | 2  | = | 2 |\n| 3 | 1 | 1  |   |   |\n\nL1 ↔ L2\n\n| 5 | 2 | 2  |   |    |\n| - | - | -- | - | -- |\n| 2 | 1 | −1 | = | −2 |\n| 3 | 1 | 1  |   |    |\n\nL2 ↔ L3\n\n| 5 | 2 | 2  |   |   |\n| - | - | -- | - | - |\n| 3 | 1 | 1  | = | 2 |\n| 2 | 1 | −1 |   |   |"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Exemplo: Resolva o sistema complexo:\n\n# Exemplo: Resolva o sistema complexo:\n\n| 3 + 2i | 4 | z1 | = | 2 + i |\n| ------ | - | -- | - | ----- |\n| −i     | 1 | z2 |   | 3     |"
+  },
+  {
+    "source_path": "aula05_gauss.md",
+    "chunk_text": "[Documento: aula05_gauss] | Seção: Resolução de sistemas lineares - Eliminação de Gauss\n\n# Resolução de sistemas lineares - Eliminação de Gauss"
+  }
+]

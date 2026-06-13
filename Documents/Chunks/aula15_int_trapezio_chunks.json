@@ -1,0 +1,50 @@
+[
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Integração Numérica\n\n# Integração Numérica\n\nSe uma função f(x) é contínua em um intervalo [a, b] e sua primitiva F(x) é conhecida então:\n\nb\n\nf(x)dx = F(b) − F(a) em que F (x) = f(x).\n\na\n\nNo entanto, pode ser complicado obter F(x) ou mesmo não é conhecida a expressão da função f(x).\n\nLilian Berti Integração Numérica"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: (a)\n\n# (a)\n\nNa tabela, temos a leitura de velocidades instantânea de um veículo ao percorrer uma pista.\n\n| t(min) | 0 | 10 | 20 | 30 | 40 | 50 | 60 |\n| ------- | -- | -- | -- | -- | -- | -- | -- |\n| V(km/h) | 23 | 28 | 40 | 47 | 60 | 60 | 50 |\n\nQual a distância s percorrida?\n\ns =\n∫01 v(t) dt"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: (c)\n\n# (c)\n\n∫01 e-x2 dx\n\nLilian Berti Integração Numérica"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Integração Numérica\n\n# Integração Numérica\n\nSabemos que a integral definida (de Riemann) de uma função contínua f em [a, b] é\n\nb\nI = ∫ f(x)dx = lim Σ f(xk)∆x\na n→∞ k=1\n\nem que ∆x = b−a e xk são pontos amostrais do intervalo [a, b].\n\nNa integração numérica, aproximamos I por uma soma finita, na qual f é amostrada em alguns pontos.\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Integração Numérica\n\n# Integração Numérica\n\nNa fórmula de integração de numérica de n + 1 pontos, temos\n\nI =\nn\n∑\nk=1\nAkf(xk) + R\n\nem que x0, x1, · · · , xn ∈ [a, b] são os pontos para a integração, A0, A1, · · · , An são os pesos, R é o resto.\n\nDessa forma, na integração numérica definimos:\n\nI =\nb\n∫\na\nf(x)dx ≈\nn\n∑\nk=1\nAkf(xk)\n\nNosso objetivo será escolher os pontos xk nos quais f é amostrada e também determinar os pesos Ak.\n\nLilian Berti\n\nFórmulas de Newton-Cotes\n\nsubstitui a função a ser integrada ou aproxima os dados por um polinômio de grau n, que interpola f em pontos igualmente espaçados no intervalo de integração [a, b].\n\nOs pontos de integração são definidos por: xi+1 = xi + h, i = 0, 1, · · · , n − 1 em que x0 = a, xn = b e h = b−a (n: número de subintervalos).\n\nAs fórmulas são do tipo:\n\n| b | f(x) dx | ≈ | pn(x) dx | | |\n| - | ------- | -- | -------- | ----------------------------------------------- | ------------------------------------------------ |\n| | xn | xn | | \\[f(x₀)L₀(x) + f(x₁)L₁(x) + · · · + f(xₙ)Lₙ(x)] | dx |\n| a | xn | xn | ≈ | f(x0) | L0(x) dx + f(x1) L1(x) dx + · · · f(xn) Ln(x) dx |\n| | xn | xn | | x0 | |\n| | | | ≈ | f(xi)Ai | |\n| | i=0 | | | | |\n\nem que Ai = xn Li(x) dx.\n\nLilian Berti\n\nIntegração Numérica"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Regra do Trapézio\n\n# Regra do Trapézio\n\nCaso n = 1 (f(x) ≈ p1(x)): Interpolando f(x) em x0 e x1 (x1 = x0 + h). Temos:\n\n∫ab f(x) dx ≈ f(x0)A0 + f(x1)A1\n\nem que\n\nA0 = ∫x0x1 L0(x) dx = ∫x0x1 x − x1 dx\n\n= − 1 ∫x0x1 x1 (x − x1) dx = − 1/h ∫x0x1 x0 − x1 dx\n\n= − 1/h [x1 (x0 − x1)] = − 1/h [x0 − x1]\n\n= − 1 [−(x1 − x0)2] = 1/2h2 = h\n\nLilian Berti Integração Numérica\n\nDe maneira análoga, é possível verificar que:\n\nA1 = ∫x0x1 L1(x) dx = h.\n\nPortanto,\n\n∫ab f(x) dx ≈ f(x0) h + f(x1) h"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Erro\n\n# Erro\n\nO erro do polinômio de interpolação é dado por:\n\nE(x) = f(x) − pn(x) = (x − x0)(x − x1) · · · (x − xn) fn+1(ξ) em"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Integração Numérica\n\n# Integração Numérica\n\nf(x) dx = [p₁(x) + E(x)] dx = p1(x) dx + E(x) dx\n\nLogo, o erro da integração é dado por:\n\nET = b E(x) dx = b(x − x0)(x − x1) f (ξ) dx\n\na a 2\n\nPelo teorema do Valor médio para integrais, existe γ ∈ [a, b], tal que:\n\nET = f (γ) b(x − x0)(x − x1) dx = − 1 f (γ) (b − a)³\n\n2 a 2 6\n\n= − 1 f (γ)h³\n\n12\n\nLogo,\n\n|ET| ≤ h³ max |f (x)|.\n\n12 x∈[a,b]\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Exemplo:\n\n# Exemplo:\n\nCalcule I =      4 √x dx utilizando a regra do trapézio.\n\n1\n\nTemos h = b − a = 4 − 1 = 3 e f(x) = √x. Tomando x0 = 1 e x2 = 4, então:\n\nI ≈ h [f(x0) + f(x1)] = 3 [√1 + √4] = 4, 5\n\n2\n\nErro:          h3          33          1\n\n|ET| ≤          max |f (x)| = max          − ~~√~~          ≈ 0, 5625"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Regra do Trapézio Repetida\n\n# Regra do Trapézio Repetida\n\nConsiderando n subintervalos em [a, b].\n\n| b | x1 | x2 | xn |\n| --------- | ---------- | ---------- | ---------------- |\n| f(x) dx ≈ | p1(x) dx + | p1(x) dx + | · · · + p1(x) dx |\n| a | x0 | x1 | xn−1 |\n\n≈ h [f(x0) + f(x1)] + h [f(x1) + f(x2)] + · · · + h [f(xn−1) + f(xn)]\n\n2\n\n≈ h f(x0) + f(xn) + 2 ∑i=1n−1 f(xi) = ITR\n\n2\n\nErro\n\nETR = − n h³ f(γi) em que γi ∈ [xi−1, xi]\n\ni=1 12\n\n= −n h³ f(γi)\n\n12\n\n|ETR| ≤ n h³ max |f (x)| com h = b − a\n\n12 x∈[a,b]\n\n≤ (b − a) h² max |f (x)|\n\n12 x∈[a,b]\n\nLilian Berti Integração Numérica"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Exemplo:\n\n# Exemplo:\n\nCalcule I = 4 √x dx utilizando a regra do trapézio com:\n\n(a) 2 repetições, ou seja, 2 subintervalos em [1,4].\n\nTemos:\n\nb − a = 4 − 1\n\nn = 2, h = n = 2 = 1, 5\n\n| x | 1 | 2,5 | 4 |\n| ---- | - | ----- | - |\n| f(x) | 1 | √₂, 5 | 2 |\n\nI ≈ h [f(1) + f(4) + 2f(2, 5)] = 4, 6217.\n\nLilian Berti Integração Numérica\n\n(b) 4 repetições, ou seja, 4 subintervalos em [1,4].\n\nTemos:\n\nb − a      4 − 1\n\nn = 4 e h = n      =      4      = 0, 75\n\n| x | 1 | 1,75 | 2,5 | 3,25 | 4 |\n| ---- | - | ------ | ----- | ------ | - |\n| f(x) | 1 | √₁, 75 | √₂, 5 | √₃, 25 | 2 |\n\nI ≈ h [f(1) + f(4) + 2(f(1, 75) + f(2, 5) + f(3, 25))] = 4, 6550.\n\n|ETR| ≤ (b − a) h² max |f (x)| = (4 − 1)0, 75² · 1 = 0, 0352\n\n12 x∈[a,b]\n\n12\n\nLilian Berti Integração Numérica"
+  },
+  {
+    "source_path": "aula15_int_trapezio.md",
+    "chunk_text": "[Documento: aula15_int_trapezio] | Seção: Exemplo\n\n# Exemplo\n\nNa tabela, temos a leitura de velocidades instantânea de um veículo ao percorrer uma pista.\n\n| t(min) | 0 | 10 | 20 | 30 | 40 | 50 | 60 |\n| ------- | -- | -- | -- | -- | -- | -- | -- |\n| V(km/h) | 23 | 28 | 40 | 47 | 60 | 60 | 50 |\n\nQual a distância s percorrida? Deixando as grandezas na mesma unidade.\n\n| t(h) | 0 | 1/6 | 2/6 | 3/6 | 4/6 | 5/6 | 1 |\n| ------- | -- | --- | --- | --- | --- | --- | -- |\n| V(km/h) | 23 | 28 | 40 | 47 | 60 | 60 | 50 |\n\ns = 1 v(t)dt ≈ 1/6 [23 + 50 + 2(28 + 40 + 47 + 60 + 60)] ≈ 45, 25km\n\nLilian Berti Integração Numérica\n\nExemplo: Uma linha reta foi traçada de modo a tangenciar as margens de um rio nos pontos A e B. Para medir a área do trecho entre o rio e a reta AB foram traçadas perpendiculares em relação a reta com um intervalo de 0,05m. Qual é esta área?\n\n| p | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |\n| - | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| c | 3,28 | 4,02 | 4,64 | 5,26 | 4,98 | 3,62 | 3,82 | 4,68 | 5,26 | 5,82 | 3,24 |\n\nem que p é a perpendicular e c é o comprimento em metros\n\nLilian Berti Integração Numérica\n\nResposta:\n\n0,5\n\nárea = I = f(x)dx ≈ IT\n\nIT = 0,05 [3, 28+2(4, 02+4, 64+5, 26+4, 98+3, 62+3, 82+4, 68+5, 26+5, 82)+3, 24] =\n\n2\n\n2, 268\n\nLilian Berti Integração Numérica"
+  }
+]

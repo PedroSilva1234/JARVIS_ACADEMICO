@@ -1,0 +1,110 @@
+[
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Início do Documento\n\nZeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Zeros reais de Funções reais - Método da Bissecção\n\n# Zeros reais de Funções reais - Método da Bissecção\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Definição:\n\n# Definição:\n\nUm número real γ é zero de função f(x) ou uma raiz da equação f(x) = 0 se f(γ) = 0."
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Exemplos\n\n# Exemplos\n\na) f(x) = 2x − 1\n\nf(x) = 0 ⇔ x = 1\n\nb) f(x) = ax² + bx + c, para a, b, c ∈ R, a ≠ 0\n\nf(x) = 0 ⇔ x = −b ± √b² − 4ac\n\nc) f(x) = x³ + x² − 10x + 8\n\nx =? tal que f(x) = 0\n\nd) f(x) = eˣ + x² − 2\n\nx =? tal que f(x) = 0\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Zeros reais de Funções reais - Método da Bissecção\n\n# Zeros reais de Funções reais - Método da Bissecção\n\nVeremos métodos numéricos que encontram uma solução aproximada para estas raízes.\n\nO cálculo de uma raiz pode ser dividido em duas etapas:"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Etapa 1: Isolamento da raiz\n\n# Etapa 1: Isolamento da raiz\n\nEncontra um intervalo (a, b) que contenha uma raiz de f(x) = 0."
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Etapa 2: Refinamento da raiz\n\n# Etapa 2: Refinamento da raiz\n\nA partir de um valor inicial x0 ∈ (a, b) gera uma sequência {x0, x1, . . . , xk, . . . } que convirga para uma raiz de f(x) = 0.\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Exemplos:\n\n# Exemplos:\n\na) f(x) = x + ln(x − 1)\n\nf(x) = 0 ⇔ x + ln(x − 1) = 0 ⇔ ln(x − 1) = −x\n\n| 25 | 05 | 38 | 23 | -38 |\n| -- | -- | -- | -- | --- |\n\nO intervalo (1, 2) contém uma raiz.\n\nLilian Berti\n\nZeros reais de Funções reais - Método da Bissecção\n\nb) f(x) = ex² + x² − 2\n\nf(x) = 0 ⇔ ex = −x2 + 2\n\nPossui uma raiz em (−√2, 0) e uma raiz em (√2, 0).\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Teorema de Bolzano\n\n# Teorema de Bolzano\n\nSe f : [a, b] → R é uma função contínua tal que f(a)f(b) < 0 então existe x∗ ∈ (a, b) tal que f(x∗) = 0."
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Exemplo:\n\n# Exemplo:\n\nMostre que existe pelo menos uma solução da equação ex + x² − 2 = 0 em (√2, 0).\n\nSeja f(x) = ex + x² − 2. Temos:\n\nf(0) = −1 e f(√2) = 4, 1133.\n\nComo f(0) · f(√2) < 0 e f é contínua em (√2, 0) pelo Teorema de Bolzano existe pelo menos um zero de f em (√2, 0).\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Exemplo:\n\n# Exemplo:\n\nDetermine os intervalos que contenha as raízes de x3 − 9x + 3 = 0\n\nAnalisando os valores da função em (−4, 3).\n\n| x | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 |\n| ---- | --- | -- | -- | -- | - | -- | -- | - |\n| f(x) | -25 | 3 | 13 | 11 | 3 | -5 | -7 | 3 |\n\nTemos uma raiz em cada um dos seguintes intervalos (−4, −3), (0, 1) e (2, 3).\n\nLilian Berti\n\nZeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Proposição:\n\n# Proposição:\n\nSe f : [a, b] → R é uma função diferenciável, f(a)f(b) < 0 e f'(x) > 0 (ou f'(x) < 0) para todo x ∈ (a, b), então existe um único x∗ tal que f(x∗) = 0."
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Exemplo:\n\n# Exemplo:\n\nf(x) = ex + x2 − 2\n\nTemos: Df = R\n\nf'(x) = ex + 2x > 0, ∀x ∈ (0, √2).\n\nComo f(0) · f(√2) < 0 e f é contínua e f'(x) > 0 para todo x em (0, √2), segue que existe um único zero de f em (0, √2).\n\nLilian Berti\n\nZeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Exemplo: Localize os zeros de f(x) = √x − 5e−x\n\n# Exemplo: Localize os zeros de f(x) = √x − 5e−x\n\nTemos: Df = R+\n\n| x | 0 | 1 | 2 |\n| ---- | -- | ------- | ------ |\n| f(x) | -5 | -0,8394 | 0,7375 |\n\nComo f(1) · f(2) < 0, f' é contínua e f = 1 + 5e−x > 0, para todo x ∈ D, então f é estritamente crescente. Dessa forma, admite um único zero que pertence ao intervalo (1, 2).\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Etapa 2: Refinamento da raiz\n\n# Etapa 2: Refinamento da raiz\n\nUma sequência x0, x1, . . . , xk é gerada a partir do intervalo (a,b) obtido na Etapa 1."
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Critério de parada:\n\n# Critério de parada:\n\ninterrompe a sequência gerada pelo método. Avalia se xk está suficientemente próximo da raiz.\n\nx̄ = xk é raiz aproximada com precisão se pelo menos um dos critérios:\n\n- |xk − xk−1| ≤\n- |xk − xk−1| ≤ |xk|\n- |f(xk)| ≤\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Método da Bissecção\n\n# Método da Bissecção\n\nSeja f(x) uma função contínua em (a, b) com f(a)f(b) < 0. Suponha que exista uma única raiz de f(x) = 0 em (a, b). O método consiste em reduzir a amplitude do intervalo que contém a raiz até atingir a precisão requerida |b − a| < ε. É utilizado a divisão sucessiva do intervalo ao meio.\n\nLilian Berti\n\nZeros reais de Funções reais - Método da Bissecção\n\nExemplo Seja f(x) = x3 − 9x + 3. Determine um zero de f sabendo que ele está contido no intervalo I = (0, 1). Utilize o método da bisseção com precisão = 0, 09."
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: 1a iteração:\n\n# 1a iteração:\n\nI = (0, 1)\n\nx1 = a+b = 1 = 0, 5\n\n2\n\nf(0) = 3\n\nf(0,5) = -1,375\n\nf(1) = -5\n\nNovo intervalo I = (0; 0, 5)\n\n|b − a| = 0, 5 >\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: 2a iteração: I = (0; 0, 5)\n\n# 2a iteração: I = (0; 0, 5)\n\nx2 = a + b = 0,5 = 0, 25\n\n| f(0) | > | 0 |\n| ------- | - | ------ |\n| f(0,25) | = | 0,7656 |\n| f(0,5) | < | 0 |\n\nNovo intervalo I = (0, 25; 0, 5)\n\n|b − a| = 0, 25 >\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: 3a iteração: I = (0, 25; 0, 5)\n\n# 3a iteração: I = (0, 25; 0, 5)\n\nx3 = a + b = 0, 375\n\n| f(0,25) | > | 0 |\n| -------- | - | ------- |\n| f(0,375) | = | -0,3223 |\n| f(0,5) | < | 0 |\n\nNovo intervalo I = (0, 25; 0, 375)\n\n|b − a| = 0, 125 >\n\nLilian Berti\n\nZeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: 4a iteração: I = (0, 25; 0, 375)\n\n# 4a iteração: I = (0, 25; 0, 375)\n\nx4 = a + b = 0, 3125\n\n| f(0,25) | > | 0 |\n| --------- | - | ----- |\n| f(0,3125) | = | 0,218 |\n| f(0,375) | < | 0 |\n\nNovo intervalo I = (0, 3125; 0, 375)\n\n|b − a| = 0, 0625 &#x3C;\n\nPortanto, x̄ = 0,3125 + 0,375"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Algoritmo: Método da Bissecção\n\n# Algoritmo: Método da Bissecção\n\nDados: f(x), a, b, N (número máximo de iterações)\n\n1. Para i = 1, 2, . . . , N\n2. x = (a + b)/2\n3. Se f(a)f(x) &#x3C; 0 então\n4. b = x\n5. Caso contrário\n6. a = x\n7. Se |b − a| ≤\n8. solução: x = (a + b)/2 Pare!\n\nLilian Berti\n\nZeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Considerações sobre a convergência do método da Bissecção\n\n# Considerações sobre a convergência do método da Bissecção\n\nSe f(x) é contínua no intervalo (a,b) e f(a)f(b) &#x3C; 0 o método da Bissecção gera uma sequência que converge para a raiz da equação f(x) = 0."
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Número de iterações\n\n# Número de iterações\n\nbk−ak = bk−1 − ak−1 = bk−2 − ak−2 = · · · = b0 − a0 = b − a\n\nDevemos ter: |bk − ak| &#x3C; . Logo:\n\n| 2 | 22 | 2k | | | | |\n| --------- | --------------------- | ----------- |---|---|---|---|\n| \\|b − a\\| | 2k | > \\|b − a\\| |\n| | 2k | > \\|b − a\\| | | |\n| k | > log \\|b − a\\| − log | | | |\n| log 2 | | | | | | |\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Ordem de convergência\n\n# Ordem de convergência\n\nSeja o erro da iteração k definido por ek = xk − x∗. Um crtitério para avaliar a convergência do método é:\n\nlim k→+∞ |ek+1| = C ≥ 0\n\n|ek|p\n\nem que p ≥ 1 é a ordem de convergência do método gerador da sequência, C é a constante assintótica.\n\nAssim, nas proximidades de x∗, temos:\n\n|ek+1| ≈ C|ek|p.\n\nQuanto maior o valor de p mais rápida a sequência convergirá para a raiz.\n\nLilian Berti\n\nZeros reais de Funções reais - método da Bissecção\n\nExemplo:\n\nC=0,5 e e3 = 0, 012\n\npara p = 1\n\ne4 ≈ 0, 5(0, 012)1 = 0, 006\n\npara p = 2\n\ne4 ≈ 0, 5(0, 012)2 = 0, 000072\n\nLilian Berti\n\nZeros reais de Funções reais - Método da Bissecção"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Zeros reais de Funções reais - Método da Bissecção\n\n# Zeros reais de Funções reais - Método da Bissecção\n\nNo método da Bissecção, temos:\n\nek = bk − ak\n\nek+1 ≈ 1/2 ek\n\nAssim, p = 1, o método converge linearmente.\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula02_bisseccao.md",
+    "chunk_text": "[Documento: aula02_bisseccao] | Seção: Considerações sobre o método da bissecção:\n\n# Considerações sobre o método da bissecção:\n\nUma dificuldade para aplicação do método é a sua inicialização;\n\nAs iterações envolvem cálculo simples, mas a sua convergência é lenta;\n\nCaso o intervalo inicial b − a >> e for muito pequeno, o número de iterações pode ser grande.\n\nLilian Berti Zeros reais de Funções reais - Método da Bissecção"
+  }
+]

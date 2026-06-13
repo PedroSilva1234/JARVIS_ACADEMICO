@@ -1,0 +1,102 @@
+[
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Resolução de sistemas lineares - Método de Gauss - Jacobi\n\n# Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Resolução de sistemas lineares - Método de Gauss - Jacobi\n\n# Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Resolução de sistemas lineares - Método de Gauss - Jacobi\n\n# Resolução de sistemas lineares - Método de Gauss - Jacobi\n\nO sistema linear Ax = b em que A : n × n e b : n × 1 é transformado em um sistema equivalente da forma\n\nx = Bx + c\n\nem que B : n × n e c : n × 1. Assim, partindo de uma aproximação inicial x(0) a sequência x(1), x(2), . . . é gerada por:\n\nx(k+1) = Bx(k) + c,      k = 0, 1, 2, . . .\n\nem que B é denominada matriz de iteração e o processo de iteração poderá convergir ou não dependendo das equações envolvidas.\n\nLilian Berti"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Norma: mede o tamanho dos vetores.\n\n# Norma: mede o tamanho dos vetores.\n\nSeja x = [x1, x2, . . . , xn]T."
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Norma euclidianda:\n\n# Norma euclidianda:\n\nx2 = x12 + x22 + · · · + xn2"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Norma Infinito:\n\n# Norma Infinito:\n\nx∞ = max{|x1|, |x2|, . . . , |xn|}"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Exemplo:\n\n# Exemplo:\n\nSeja x = [5, 2, −1]T. Temos:\n\n- x2 = 52 + 22 + (−1)2 = √30\n- x1 = |5| + |2| + |−1| = 8\n- x∞ = max{|5|, |2|, |−1|} = 5\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Critério de Parada\n\n# Critério de Parada\n\nEA = x(k) − x(k−1) ∞ = max {|x(k) − x(k−1)|}\n\n1≤i≤n i i\n\nmax {|x(k) − x(k−1)|}\n\nER = x(k)−x(k−1) ∞ = 1≤i≤n i ( i\n\nx(k) ∞ max {|xi k)|}\n\n1≤i≤n\n\nDada uma precisão o vetor x(k) será considerado solução, isto é,\n\nx (k)\n\n¯ = x se EA < ou ER <\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Método de Gauss- Jacobi\n\n# Método de Gauss- Jacobi\n\nConsidere o sistema linear\n\n| a11x1 | + | a12x2 | + | a13x3 | = | b1 |\n| ----- | - | ----- | - | ----- | - | -- |\n| a21x1 | + | a22x2 | + | a23x3 | = | b2 |\n| a31x1 | + | a32x2 | + | a33x3 | = | b3 |\n\nSeja A = L + D + U em que\n\n| 0 | 0 | 0 | a11 | 0 | 0 | 0 | a12 | a13 |\n| --- | --- | - | --- | --- | --- | - | --- | --- |\n| a21 | 0 | 0 | 0 | a22 | 0 | U | 0 | a23 |\n| a31 | a32 | 0 | 0 | 0 | a33 | 0 | 0 | 0 |\n\nSupondo aii = 0\n\nAx = b\n\n(L + D + U)x = b\n\nDx = −(L + U)x + b\n\nx(k+1) = −D−1(L + U)x(k) + D−1b\n\nB\n\nc\n\nLilian Berti\n\nResolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: 1\n\n# 1\n\n| a₁₁ | 0 | 0 | a₁₂ | a₁₃ |\n| --- | ----- | ----- | --- | --- |\n| 0 | 1/a₂₂ | a₂₁ | 0 | a₂₃ |\n| 0 | 0 | 1/a₃₃ | a₃₁ | a₃₂ |\n\nEntão, podemos escrever o sistema de iteração como:\n\nx(k+1) = 1 (b₁ − a₁₂x(ᵏ) − a₁₃x(ᵏ))\n\n1 a₁₁ 2 3\n\nx(k+1) = 1 (b₂ − a₂₁x(ᵏ) − a₂₃x(ᵏ))\n\n2 a₂₂ 1 3\n\nx(k+1) = 1 (b₃ − a₃₁x(ᵏ) − a₃₂x(ᵏ))\n\n3 a₃₃ 1 2\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi\n\nEm resumo:\n\nDado uma aproximação inicial x(0) o método de Gauss - Jacobi consiste em obter x(1), x(2), . . . , x(k), x(k+1), . . . através\n\n| x(k+1) = | n | | | |\n| ------------------- | ---- | --------- | - | - |\n| | bi − | ∑ aijx(k) | | |\n| j=1,i=j | | | | |\n| i = 1, 2, . . . , n | | | | |\n\naté que o critério de parada seja satisfeito.\n\nNa falta de informação de uma aproximação inicial pode-se tomar x(0) como sendo o vetor nulo.\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Exemplo: Resolva o sistema linear pelo método de Gauss - Jacobi\n\n# Exemplo: Resolva o sistema linear pelo método de Gauss - Jacobi\n\nutilizando como aproximação inicial o vetor [1, 1; 0, 8; 0, 9]T e critério de parada ER < 0, 05\n\n8x1 + x2 − x3 = 8\nx1 − 7x2 + 2x3 = −4\n2x1 + x2 + 9x3 = 12"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Esquema iterativo:\n\n# Esquema iterativo:\n\n| x(k+1) | | | = | 1 | (8 − x(k) + x(k)) | 8 | 2 | 3 | |\n| ------ | - | - | - | -- | ------------------- | - | - | - | - |\n| x(k+1) | | | = | −1 | (−4 − x(k) − 2x(k)) | 2 | 7 | 1 | 3 |\n| x(k+1) | | | = | 1 | (12 − 2x(k) − x(k)) | 3 | 9 | 1 | 2 |\n\nLilian Berti\n\nResolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Resolução de sistemas lineares - Método de Gauss - Jacobi\n\n# Resolução de sistemas lineares - Método de Gauss - Jacobi\n\nx(k+1) = 1 (8 − x(k) + x(k))\n\n1 8 2 3\n\nx(k+1) = − 1 (−4 − x(k) − 2x(k))\n\n2 7 1 3\n\nx(k+1) = 1 (12 − 2x(k) − x(k))\n\n3 9 1 2"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Para k = 0\n\n# Para k = 0\n\nx(1) = [1, 0125 ; 0, 9857 ; 1]T\n\nER = x(1)−x(0) ∞ = max{0,0875;0,1857;0,1} = 0,1857 = 0, 1834 > 0, 05\n\nx(1) ∞ max{1,0125;0,9857;1} 1,0125"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Para k = 1\n\n# Para k = 1\n\nx(2) = [1, 0018 ; 1, 0018 ; 0, 9988]T\n\nER = x(2)−x(1) ∞ = max{0,0107;0,0161;0,0012} = 0,0161 = 0, 0161 < 0, 05\n\nx(2) ∞ max{1,0018;1,0018;0,9988} 1,0018\n\nPortanto, x (2) [1 9988]ᵀ\n\n¯ = x = , 0018 ; 1, 0018 ; 0,"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Convergência: (Critério das linhas)\n\n# Convergência: (Critério das linhas)\n\nSeja o sistema linear Ax = b em que A : n × n e seja\n\nn\nαi = ∑j=1, i=j aij / aii i = 1, 2, . . . , n.\n\nSe α = max αi < 1, então o método de Gauss - Jacobi gera uma sequência convergente para a solução do sistema independente da aproximação inicial x(0).\n\nObservação: Verificar se critério das linhas é satisfeito é equivalente a verificar se a matriz é estritamente diagonal dominante.\n\nn\n∑j=1, i=j aij < aii i = 1, 2, . . . , n\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Exemplo:\n\n# Exemplo:\n\nVerifique se a matriz do exemplo anterior satisfaz o critério das linhas.\n\n| 8 | 1 | −1 |\n| - | -- | -- |\n| 1 | −7 | 2 |\n| 2 | 1 | 9 |\n\nTemos:\n\nα1 = |1|+|−1| = 2 = 0, 25\n\n|8| 8\n\nα2 = |1|+|2| = 3 = 0, 43\n\n|−7| 7\n\nα3 = |2||+|1| = 3 = 0, 33\n\n9| 9\n\nComo α = max{α1, α2, α3} = 0, 43 < 1, segue que o critério das linhas é satisfeito. Portanto, podemos afirmar que o método de Gauss-Jacobi irá convergir para a solução.\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Exemplo: Seja:\n\n# Exemplo: Seja:\n\n2x1 − 6x2 − x3 = −38\n−3x1 − x2 + 7x3 = −34\n−8x1 + x2 − 2x3 = −20"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: a)\n\n# a)\n\nVerifique se o critério das linhas é satisfeito. Temos:\n\nα1 = −6 + −1 = 7 = 3, 5\n2\n\nα2 = −3 + 7 = 10\n−1\n\nα3 = −8 + 1 = 9 = 4, 5\n−2 2\n\nComo α = max{α1, α2, α3} = 10 > 1, segue que o critério das linhas não é satisfeito. Logo, não podemos afirmar que o método de Gauss-Jacobi irá convergir para a solução.\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi\n\nb) Realize duas iterações do método de Gauss-Jacobi usando x(0) = [2; 6; 1]T. Sabendo que x∗ = [4, 8, −2]T, compare com a aproximação x(2) obtida."
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Esquema iterativo:\n\n# Esquema iterativo:\n\n| x(k+1) | = | 1 | (−38 + 6x(k) + x(k)) | | | | | |\n| ------ | - | ---------------------- | -------------------- | - | - | - | - | - |\n| 1 | | 2 | | 3 | | | | |\n| x(k+1) | = | −(−34 + 3x(k) − 7x(k)) | | | | | | |\n| | | 2 | | 1 | | 3 | | |\n| x(k+1) | = | − 1 | (−20 + 8x(k) − x(k)) | | | | | |\n| | | 3 | | 2 | | 1 | | 2 |"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Para k = 1\n\n# Para k = 1\n\nx(2) = [88, 5 ; 70, 5 ; 29, 5]T\n\nA sequência de aproximações está divergindo da solução exata.\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi\n\nc) Faça permutação entre as linhas do sistema linear de modo a garantir a convergência do método.\n\nPermutando as linhas 1 e 3.\n\n−8x1 + x2 − 2x3 = −20\n−3x1 − x2 + 7x3 = −34\n2x1 − 6x2 − x3 = −38\n\nPermutando as linhas 2 e 3.\n\n−8x1 + x2 − 2x3 = −20\n2x1 − 6x2 − x3 = −38\n−3x1 − x2 + 7x3 = −34\n\nTemos:\n\nα1 = |1|+|−2| = 3 = 0, 375\n\nα2 = |2|+|−1| = 3 = 0, 5\n\n|−8| 8\n\nα3 = |−3||+|−1| = 4 = 0, 5714\n\n7| 7\n\nComo α = max{α1, α2, α3} = 0, 5713 < 1, segue que o critério das linhas é satisfeito. Logo, podemos afirmar que o método de Gauss-Jacobi irá convergir para a solução.\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: d) Realize duas iterações do método de Gauss-Jacobi no sistema linear permutado no item anterior usando a aproximação inicial x(0) = [2; 6; 1]T\n\n# d) Realize duas iterações do método de Gauss-Jacobi no sistema linear permutado no item anterior usando a aproximação inicial x(0) = [2; 6; 1]T"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Esquema iterativo:\n\n# Esquema iterativo:\n\n| x(k+1) | = | − 1 | (−20 − x(k) + 2x(k)) | 8 | 2 | 3 |\n| ------ | - | --- | -------------------- | - | - | - |\n| x(k+1) | = | − 1 | (−38 − 2x(k) + x(k)) | 6 | 1 | 3 |\n| x(k+1) | = | 1 | (−34 + 3x(k) + x(k)) | 7 | 1 | 2 |"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Para k = 1\n\n# Para k = 1\n\nx(2) = [4, 1399 ; 7, 8572 ; −2, 5952]T\n\nA sequência de aproximações está convergindo para a solução exata.\n\nLilian Berti Resolução de sistemas lineares - Método de Gauss - Jacobi"
+  },
+  {
+    "source_path": "Aula08_ Gauss_Jacobi.md",
+    "chunk_text": "[Documento: Aula08_ Gauss_Jacobi] | Seção: Resolução de sistemas lineares - Método de Gauss - Jacobi\n\n# Resolução de sistemas lineares - Método de Gauss - Jacobi\n\nObservação: O critério das linhas é uma condição suficiente para a convergência do método de Gauss - Jacobi. Caso, o critério não seja satisfeito não implica que o método irá divergir, nada se pode afirmar.\n\nLilian Berti"
+  }
+]

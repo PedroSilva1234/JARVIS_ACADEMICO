@@ -1,0 +1,78 @@
+[
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Método de Newton (ou Método de Newton-Raphson)\n\n# Método de Newton (ou Método de Newton-Raphson)\n\nEste método combina duas ideias comuns nas aproximações numéricas: linearização e iteração.\n\nf(x) ↑\n\nf(x0)\n\nRaiz\n\nf(x1)\n\nf(x2)        x0     >\n\nx\n\nDada uma aproximação inicial x0, temos:\n\ntgα = f(x0) = f'(x0)\n\nx0−x1\n\nx0 − x1 = f(x0) ⇒ x1 = x0 −      f(x0)\n\nf'(x0)             f(x0)\n\nf(x1) = f'(x1) ⇒ x2 = x1 −   f(x1)\n\nx1−x2                        f'(x1)\n\nLilian Berti      Zeros reais de Funções reais - Método de Newton"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Zeros reais de Funções reais - Método de Newton\n\n# Zeros reais de Funções reais - Método de Newton\n\nDe modo geral:\n\nxk+1 = xk − f(xk)\n\nf (xk)\n\npara k = 0, 1, . . . , e f (xk) = 0.\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Exemplo:\n\n# Exemplo:\n\nEncontre um zero de f(x) = x3 − 9x + 3, pelo método de Newton utilizando x0 = 0,5 e com critério de parada xk+1 − xk ≤ 0,09"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Fórmula do Método de Newton:\n\n# Fórmula do Método de Newton:\n\nxk+1 = xk − f(xk) para k = 0, 1, . . . .\n\nTemos: f(x) = x3 − 9x + 3 e f'(x) = 3x2 − 9."
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Para k = 0\n\n# Para k = 0\n\nf(x0) = (−1,375)\n\nx1 = x0 − f(0) = 0,5 − (−8,25) = 0,3333\n\nER = x1 − x0 = 0,3333 − 0,5 = 0,5002 > x1"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Para k = 1\n\n# Para k = 1\n\nf(x1) = 0,0373\n\nx2 = x1 − f(1) = 0,3333 − (−8,6667) = 0,3376\n\nER = x2 − x1 = 0,3376 − 0,3333 = 0,0127 &#x3C; x2\n\nPortanto, um zero de f(x) é x̄ = x2 = 0,3376.\n\nLilian Berti  Zeros reais de Funções reais - Método de Newton"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Teorema de Taylor\n\n# Teorema de Taylor\n\nSe a função f e suas primeiras n + 1 derivadas forem contínuas em um intervalo contendo a e x, então o valor da função em x é dado por:\n\nf(x) = f(a) + f'(a)(x − a) + f''(a)(x − a)2 + · · · + f(n)(a)(x − a)n + f(n+1)(c)(x − a)n+1"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Pela expansão em Taylor de f(x) em torno de xk\n\n# Pela expansão em Taylor de f(x) em torno de xk\n\nf(x) ≈ f(xk) + f'(xk)(x − xk)\n\nf(xk+1) ≈ f(xk) + f'(xk)(xk+1 − xk)\n\nNa intersecção com o eixo x, f(xk+1) deveria ser zero, ou\n\nf(xk) + f'(xk)(xk+1 − xk) = 0\n\nque pode ser escrita como\n\nxk+1 − xk = − f(xk) / f'(xk)\n\nou seja\n\nxk+1 = xk − f(xk) / f'(xk)\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Zeros reais de Funções reais - Método de Newton\n\n# Zeros reais de Funções reais - Método de Newton\n\n\n\n\n\nPortanto, o método de Newton consiste em avançar da aproximação xk para a aproximação xk+1, usando a fórmula\n\nxk+1 = xk − f(xk) / f'(xk)\n\npara k = 0, 1, . . . ,\n\nO processo é repetido até que o critério de parada seja satisfeito."
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Algoritmo:\n\n# Algoritmo:\n\n1. Dados x0, f(x), f'(x), e N.\n2. Para k = 0, 1, . . . , N faça\n3. xk+1 = xk − f(xk)\n4. Se xk+1 − xk f(xk) &#x3C; e então\n5. - x̄ = xk+1 Pare!\n\nFim se\n6. Se k = N então\n7. - ’O método não converge para a solução.’ Pare!\n\nFim se\n8. Fim para\n\nLilian Berti Zeros reais de Funções reais - Método de Newton"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Convergência do método de Newton\n\n# Convergência do método de Newton\n\nTemos:   ∗             ∗  f(x )\n\nxk+1 − x = xk − x − f ( k )\n\nLogo,         − f(xk)\n\nek+1 = ek     f (xk)."
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Expandindo f(x) em torno de xk\n\n# Expandindo f(x) em torno de xk\n\nf(x) = f(xk) + f'(xk)(x − xk) + f''(γ) (x − xk)2 para γ ∈ (x, xk)\n\nDessa forma,\n\n0 = f(x*) = f(xk) + f'(xk)(x* − xk) + f''(γ) (x* − xk)2\n\nf(xk) = f'(xk)(xk − x*) + f''(γ) (xk − x*)2\n\nf(xk) = f'(xk)ek + f''(γ) ek2\n\nEntão, ek+1 = ek −             (   ) 2  k       ⇒  ek+1 = − f''(γ)ek\n\nf'(xk)                 2f (xk)\n\nLilian Berti  Zeros reais de Funções reais - Método de Newton\n\n\n\nSupondo a convergência, xk e c acabariam aproximados pela raiz x*, então\n\nf (x*) e2\n\nek+1 = − ------------------\n\n2f (x*)\n\n|ek+1| =  − f (x*) |e2| = C |ek|2\n\nPortanto, Método de Newton tem convergência quadrática (p=2). Isto significa que nas proximidades da raiz o número de dígitos corretos dobra a cada iteração.\n\nLilian Berti  Zeros reais de Funções reais - Método de Newton"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Exemplo:\n\n# Exemplo:\n\nDetermine a raiz positiva de f(x) = x10 − 1, tomando aproximação inicial x0 = 0, 5.\n\nTemos: f (x) = 10x9\n\nPara k = 0\n\nx1 = x0 − f(x0) = 0, 5 − (−0,999) = 51, 73\n\nf (x0) 0,0195\n\nA aproximação se afastou da solução!\n\nLilian Berti Zeros reais de Funções reais - Método de Newton"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Observações:\n\n# Observações:\n\nSe x0 não for uma aproximação razoável o que fazer?\n\nAplicar um método menos restritivo para iniciar.\n\nDerivada quase nula\n\nA reta tangente é praticamente paralela ao eixo horizontal, fazendo que sua intersecção com o eixo acontecerá muito distante. Dessa forma, pode ir para outra raiz ou mesmo divergir.\n\nLilian Berti\n\n\n\n\nN˜ao existe um critério de convergência geral para o Método de Newton. Sua convergência depende da natureza da função e da precisão da aproximação inicial. É bom ter uma aproximação inicial “suficientemente” próxima da raiz. E para algumas Funções não funcionária."
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Zeros reais de Funções reais - Método de Newton\n\n# Zeros reais de Funções reais - Método de Newton\n\n\n\n\n\nExemplo:\n\nUma gamela de comprimento L tem seção transversal semicircular com raio r. Quando a gamela está cheia com água até uma distancia h do topo, o volume V de água é\n\nV = L   0, 5πr2 − r2arcsen  h − h(r2 − h2) 1 .\n\n2\n\nr\n\nSuponha que L = 10, r = 1 p´e e V = 12, 4 p´es3. Determine da profundidade da água na gamela com precisão de 0, 01 p´e.\n\nLilian Berti  Zeros reais de Funções reais - Método de Newton\n\n\n\n\nVimos que ao substituir os dados, temos a equação:\n\n10 0, 5π − arcsen (h) − h(1 − h2) 1 − 12, 4 = 0\n\n2\n\nSeja f(h) = 0, 5π − arcsen (h) − h(1 − h2) 1 − 1, 24.\n\n2\n\nTemos:\n\n−2(1 − h2)\n\nf (h) = √₁ − h2\n\nVimos que, f admite um zero no intervalo (0,1), tomando x0 = 0.5 como aproximação inicial para o Método de Newton.\n\nLilian Berti"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Método de Newton usando x0 = 0, 5 e ER &#x3C; 0, 01\n\n# Método de Newton usando x0 = 0, 5 e ER &#x3C; 0, 01"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Para k = 0\n\n# Para k = 0\n\n| f(x)           | (−0,6258)                |\n| -------------- | ------------------------ |\n| x1 = x0 − f(0) | 0,5 − (−1,7351) = 0,1387 |\n| ER             | x1 − x0 = 2,6049 >       |"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Para k = 1\n\n# Para k = 1\n\n| f(x)           | 0,0543                      |\n| -------------- | --------------------------- |\n| x2 = x1 − f(1) | 0,1387 − (−1,9807) = 0,1661 |\n| ER             | x2 − x1 = 0,1649 >          |"
+  },
+  {
+    "source_path": "aula03_metodo_de_newton.md",
+    "chunk_text": "[Documento: aula03_metodo_de_newton] | Seção: Para k = 2\n\n# Para k = 2\n\n| f(x)           | 0,0001                      |\n| -------------- | --------------------------- |\n| x3 = x2 − f(2) | 0,1661 − (−1,9722) = 0,1662 |\n| ER             | x3 − x2 = 0,0006 <          |\n\nx̄ = 0,1662\n\nPortanto, h ≈ 0,1662.\n\nLilian Berti  Zeros reais de Funções reais - Método de Newton\n\n\n\nExemplo: Seja\n\nC(x) = 10 − 20(e−0,2x − e−0,75x)\n\na equação que pode ser usada para calcular o nível de concentração de oxigênio C em um rio, em função da distância x, medida a partir do local de descarga de poluentes. Calcule a distância para a qual o nível de oxigênio seja 5. Utilize x0 = 1 e realize três iterações do método de Newton.\n\nLilian Berti  Zeros reais de Funções reais - Método de Newton"
+  }
+]

@@ -1,0 +1,94 @@
+[
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Ajuste de Curvas pelo Método de Quadrados Mínimos\n\n# Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Métodos Numéricos\n\n# Métodos Numéricos\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Ajuste de Curvas\n\n# Ajuste de Curvas\n\nObjetivo: Aproximar uma função f(x) por outra função g(x) ou dado um conjunto de pontos encontrar uma função que melhor os ajusta."
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Exemplo:\n\n# Exemplo:\n\nA tabela abaixo fornece o número de habitantes de um determinado país (em milhões):\n\n| ano(t) | 2000 | 2005 | 2012 | 2015 | 2019 |\n| --------------- | ---- | ---- | ----- | ----- | ----- |\n| habitantes p(t) | 70,2 | 93,1 | 119,0 | 146,2 | 169,8 |\n\nQual o número de habitantes em 2021?\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Caso discreto\n\n# Caso discreto\n\nDada a tabela:\n\n| | x1 | x2 | · · · | xn−1 | xn |\n| - | -- | -- | ----- | ---- | -- |\n| | y1 | y2 | · · · | yn−1 | yn |\n\ncom x1, x2, · · · , xn ∈ [a, b]. O problema de ajuste de curva consiste em escolhidas m funções g1(x), g2(x), · · · , gm(x), com m < n contínuas em [a, b], obter m constantes α1, α2, · · · , αm tais que a função:\n\ng(x) = α1g1(x) + α2g2(x) + · · · + αmgm(x)\n\nmelhor se ajusta aos pontos.\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: 1 Aproximação por uma reta\n\n# 1 Aproximação por uma reta\n\ng1(x) = 1 e g2(x) = x"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: 2 Aproximação por uma parábola\n\n# 2 Aproximação por uma parábola\n\ng1(x) = 1, g2(x) = x e g3(x) = x2"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: 3 Aproximação por\n\n# 3 Aproximação por\n\ng1(x) = 1/x e g2(x) = x2.\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Método dos Quadrados Mínimos\n\n# Método dos Quadrados Mínimos\n\nDetermina αj para j = 1, 2, · · · , m de forma a minimizar os resíduos, ou seja\n\n| minimiza | | |\n| :------: | - | --------------- |\n| n | = | n |\n| ∑ (ri)² | = | ∑ (yi − g(xi))² |\n| i=1 | | i=1 |\n\n<svg height=\"100\" width=\"300\">\n<line x1=\"0\" y1=\"50\" x2=\"300\" y2=\"50\" style=\"stroke: black;\"></line>\n<line x1=\"50\" y1=\"0\" x2=\"50\" y2=\"100\" style=\"stroke: black;\"></line>\n<text x=\"10\" y=\"55\">5</text>\n<text x=\"10\" y=\"45\">4</text>\n<text x=\"10\" y=\"35\">3</text>\n<text x=\"10\" y=\"25\">2</text>\n<text x=\"10\" y=\"15\">1</text>\n<text x=\"10\" y=\"5\">0</text>\n<text x=\"150\" y=\"70\">0</text>\n<text x=\"200\" y=\"70\">1</text>\n<text x=\"250\" y=\"70\">2</text>\n<text x=\"300\" y=\"70\">3</text>\n<text x=\"350\" y=\"70\">4</text>\n<text x=\"400\" y=\"70\">5</text>\n</svg>\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Ajuste de Curvas pelo Método de Quadrados Mínimos\n\n# Ajuste de Curvas pelo Método de Quadrados Mínimos\n\nConsidere\n\nF(α1, α2, · · · , αn) =   (yi − g(xi))² =\n\nPor simplicidade, tomando m = 2, obtemos:\n\nn\n[yi − α₁g₁(xi) − α₂g₂(xi)] · (−g (x )) = 0 para j = 1, 2\nj\ni=1\n\nObtemos:\n\n| n | g1(xi)g1(xi) α1 + g1(xi)g2(xi) α2 = yig1(xi) | i=1 |\n| -------------------------------------------- | -------------------------------------------- | --- |\n| g2(xi)g1(xi) α1 + g2(xi)g2(xi) α2 = yig2(xi) | i=1 | |\n\num sistema de m equações e m variáveis, denominado sistema de\n\nequações normais.\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados M´ınimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Lembrando: Produto escalar\n\n# Lembrando: Produto escalar\n\nDados x, y ∈ Rn,\n\nUtilizando a notação de produto escalar, podemos reescrever:\n\nn n\n\ng (x )g (x ) =&#x3C; g ( )\n\n¯ , g\n\n¯ > y g x =&#x3C; y\n\n¯, g\n\nk i j i k j k j i ¯j >\n\ni=1 i=1\n\nem que g [ ( ) ( ) · · · ( )]ᵀ\n\n¯k = gk x1 gk x2 gk xn e\n\ny [ · · · ]ᵀ · · · · · ·\n\n¯ = y1 y2 yn , para k = 1, 2, , m e j = 1, 2, , m.\n\nPodemos reescrever o sistema como:\n\n&#x3C; g\n\n¯ , g\n\n¯ > α + &#x3C; g\n\n¯ , g\n\n¯ > α = &#x3C; y\n\n¯, g\n\n1 1 1 1 2 2 ¯1 >\n\n&#x3C; g\n\n¯ , g\n\n¯ > α + &#x3C; g\n\n¯ , g\n\n¯ > α = &#x3C; y\n\n¯, g\n\n2 1 1 2 2 2 ¯2 > .\n\nCaso o determinante da matriz de coeficientes é diferente de zero,\n\no sistema admite única solução, sendo α1, α2 que minimiza F.\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Exemplo\n\n# Exemplo\n\nAjustar os dados da tabela por uma reta\n\n| x | 0 | 0,25 | 0,5 | 0,75 | 1 |\n| - | - | ----- | ------ | ----- | ------ |\n| y | 1 | 1,284 | 1,6487 | 2,117 | 2,7183 |\n\n3.0\n\n2.5\n\n2.0\n\n> 1.5\n\n1.0\n\n0.5\n\n0.0\n0.00 0.25 0.50 0.75 1.00 1.25 1.50\n\n-0.50 -0.25\n\nX\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados M´ınimos\n\nPara ajustar com uma reta, tomamos\n\ng(x) = α1g1(x) + α2g2(x),\n\nem que g1(x) = 1 e g2(x) = x.\n\nDeterminamos a melhor reta que se ajusta aos dados, ou seja, encontramos os valores de α1 e α2, resolvendo o seguinte sistema:\n\n| ¯, g1 ¯ | α1 | + | ¯, g2 ¯ | α2 | = | ¯, g1 ¯ |\n| ------- | -- | - | ------- | -- | - | ------- |\n| ¯, g2 ¯ | α1 | + | ¯, g2 ¯ | α2 | = | ¯, g2 ¯ |\n\nem que\n\n| g1 | 1 | 1 | 1 | 1 | |\n| -- | - | ----- | ------ | ----- | ------ |\n| g2 | 0 | 0,25 | 0,5 | 0,75 | 1 |\n| y | 1 | 1,284 | 1,6487 | 2,117 | 2,7183 |\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos\n\nLogo,"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: 2, 5α1 + 1, 875α2 = 5, 4514\n\n# 2, 5α1 + 1, 875α2 = 5, 4514\n\nFazendo, L2 ← L2 − 0, 5L1, temos:"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: 0, 625α2 = 1, 0674\n\n# 0, 625α2 = 1, 0674\n\nAssim: α1 = 0, 8997 e α2 = 1, 7078.\n\nPortanto, a reta que melhor se ajusta aos dados é:"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: g(x) = 0, 8997 + 1, 7078x\n\n# g(x) = 0, 8997 + 1, 7078x\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Tabela de Resíduos\n\n# Tabela de Resíduos\n\n| x | 0 | 0,25 | 0,5 | 0,75 | 1 | |\n| ---- | ------ | ------- | ------- | ------- | ------ | ------ |\n| y | | 1 | 1,284 | 1,6487 | 2,117 | 2,7183 |\n| g(x) | 0,8997 | 1,3267 | 1,7536 | 2,1806 | 2,6075 | |\n| r(x) | 0,1003 | -0,0427 | -0,1049 | -0,0636 | 0,1108 | |\n\nn (ri)² = 0, 0392.\n\ni=1"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Ajuste de Curvas pelo Método de Quadrados Mínimos\n\n# Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Lilian Berti Ajuste de Curvas pelo Método de Quadrados M´ınimos\n\n# Lilian Berti Ajuste de Curvas pelo Método de Quadrados M´ınimos\n\n| 3.0 | 2.5 | 2.0 | - | 1.5 | 1.0 | 0.5 |\n| ----- | ----- | ---- | ---- | ---- | -------- | --- |\n| y | 0.0 | 0.50 | 0.75 | 1.00 | 1.25g(x) | |\n| -0.50 | -0.25 | 0.00 | 0.25 | 1.50 | x | |"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Observação:\n\n# Observação:\n\nNo caso, g1(x) = 1 e g2(x) = x, com n pontos tabelados, podemos escrever o sistema linear como:\n\n| n | α1 | + | Σi=1n xi α2 | = | Σi=1n yi |\n| - | ----------- | - | -------------- | - | ---------- |\n| n | Σi=1n xi α1 | + | Σi=1n (xi)² α2 | = | Σi=1n xiyi |\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Exemplo:\n\n# Exemplo:\n\nAjustar os dados por uma parábola\n\n| x | -2 | -1 | 1 | 2 |\n| - | -- | -- | - | - |\n| y | 1 | -3 | 1 | 9 |"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Lilian Berti\n\n# Lilian Berti\n\nAjuste de Curvas pelo Método de Quadrados Mínimos\n\ny ≈ α1g1(x) + α2g2(x) + α3g3(x),\n\nem que g1(x) = 1, g2(x) = x e g3(x) = x2.\n\nDeterminando α1, α2 e α3.\n\n| | α1 | | α2 | | α3 | = | 1> |\n| - | -- | - | -- | - | -- | - | -- |\n| | α1 | | α2 | | α3 | = | 2> |\n| | α1 | | α2 | | α3 | = | 3> |\n\nem que\n\n| g1 | 1 | 1 | 1 | T | |\n| -- | -- | -- | - | - | - |\n| g2 | −2 | −1 | 1 | 2 | T |\n| g3 | 4 | 1 | 1 | 4 | T |\n\ne\n\n| ȳ | 1 | −3 | 1 | 9 | T |\n| -- | - | -- | - | - | - |\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Assim:\n\n# Assim:\n\n| 4α1 | + 10α3 | = 8 |\n| ---- | ------ | ---- |\n| 10α2 | = 20 | |\n| 10α1 | + 34α3 | = 38 |\n| 4α1 | + 10α3 | = 8 |\n| 10α2 | = 20 | |\n| 9α3 | = 18 | |\n\nObtemos: α1 = −3, α2 = 2 e α3 = 2.\n\nPortanto, a parábola que melhor se ajusta aos dados é:\n\ng(x) = −3 + 2x + 2x².\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos\n\nO consumo de gás natural sofre uma redução significativa durante os meses de verão. Na tabela estão registrados alguns valores recolhidos ao longo do ano de 2006.\n\n| x (mês) | 1 | 3 | 4 | 6 | 9 | 12 |\n| ----------- | -- | --- | --- | - | -- | -- |\n| y (consumo) | 20 | 7,5 | 6,5 | 7 | 10 | 15 |\n\nUma companhia de gás sugeriu um modelo do tipo\n\nM(x) = ax2 + b1x\n\npara estimar o consumo de gás em qualquer mês do ano. Determine os parâmetros a e b.\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  },
+  {
+    "source_path": "aula11_ajuste_linear.md",
+    "chunk_text": "[Documento: aula11_ajuste_linear] | Seção: Ajuste de Curvas pelo Método de Quadrados Mínimos\n\n# Ajuste de Curvas pelo Método de Quadrados Mínimos\n\ny ≈ M(x) = ax2 + b\n\nem que g1(x) = x2 e g2(x) = 1/x\n\nDeterminando a e b, resolvendo:\n\n| 1, g1> | a | + | 1, g1> | b | = | 1, g1> |\n| ------ | - | - | ------ | - | - | ------ |\n| 1, g1> | a | + | 1, g1> | b | = | 2, g2> |\n\nem que\n\n| g1 | 9 | 16 | 36 | 81 | 144 | |\n| -- | --- | --- | --- | --- | ---- | -- |\n| g2 | 1/3 | 1/4 | 1/6 | 1/9 | 1/12 | |\n| y | 20 | 7,5 | 6,5 | 7 | 10 | 15 |\n\nLilian Berti\n\nLogo,\n\n28931a + 35b = 3413, 5\n\n35a + 1, 2207b = 27, 6528\n\nUtilizando o método de eliminação de gauss, (L₂ ← L₂ − 0, 0012L₁) obtemos:\n\n28931a + 35b = 3413, 5\n\n1, 1787b = 23, 5566\n\nAssim: a = 0, 0938 e b = 19, 9631.\n\nPortanto, M(x) = 0, 0938x2 + 19, 9631\n\nx\n\nLilian Berti Ajuste de Curvas pelo Método de Quadrados Mínimos"
+  }
+]
