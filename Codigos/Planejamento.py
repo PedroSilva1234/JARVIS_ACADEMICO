@@ -51,18 +51,12 @@ def _dias_ate(prazo_str: str) -> int:
 
 
 def _score_prioridade(tarefa: dict) -> float:
-    """
-    Calcula um score numérico para ordenar tarefas.
-    Quanto menor o score, mais urgente/importante.
-      - Prioridade alta   → peso 1
-      - Prioridade media  → peso 2
-      - Prioridade baixa  → peso 3
-      - Dias restantes    → adicionado ao peso (negativo = atrasado, vem primeiro)
-    """
+    #Calcula um score combinando dias até o prazo e peso da prioridade
     pesos = {"alta": 1, "media": 2, "baixa": 3}
     peso_prio = pesos.get(tarefa.get("prioridade", "baixa"), 3)
     dias = _dias_ate(tarefa.get("prazo", "9999-12-31"))
-    return peso_prio * 10 + dias
+    return (dias * 100) + peso_prio
+
 
 
 # ============================================================
@@ -91,24 +85,34 @@ def montar_plano_estudos(modelo_emb, indices_rag,
     plano = []
     plano.append(f"=== DADOS COLETADOS PARA PLANEJAMENTO ({hoje.isoformat()}) ===\n")
 
-    # ── 1. AGENDA ─────────────────────────────────────────────
+   # ── 1. AGENDA ─────────────────────────────────────────────
     plano.append("📅 EVENTOS NA AGENDA (próximos dias):")
     eventos_encontrados = False
+    
+    dias_semana = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"]
 
-    for i in range(janela_dias):
-        dia = (hoje + timedelta(days=i)).isoformat()
-        resultado_agenda = consultar_agenda_real(dia)
+    # Reduz a janela se for véspera de prova (ex: prova amanhã, estuda só hoje)
+    if "prova" in foco.lower() and janela_dias > 1:
+        # Reserva o último dia para a prova, não agenda estudo nele
+        janela_estudo = janela_dias - 1 
+    else:
+        janela_estudo = janela_dias
 
-        # Filtra respostas vazias
+    for i in range(janela_estudo):
+        data_alvo = hoje + timedelta(days=i)
+        dia_iso = data_alvo.isoformat()
+        nome_dia = dias_semana[data_alvo.weekday()]
+        
+        resultado_agenda = consultar_agenda_real(dia_iso)
+
         if "Nenhum evento" not in resultado_agenda:
-            plano.append(f"  {resultado_agenda.strip()}")
+            plano.append(f"-> Dia {dia_iso} ({nome_dia}):\n  {resultado_agenda.strip()}")
             eventos_encontrados = True
+        else:
+            plano.append(f"-> Dia {dia_iso} ({nome_dia}):\n  LIVRE (Nenhum evento).")
 
-    if not eventos_encontrados:
-        plano.append(f"  Nenhum evento nos próximos {janela_dias} dias.")
-
-    plano.append("")
-
+    plano.append("\nSISTEMA: Utilize EXATAMENTE as datas e dias da semana listados acima. Não invente ou altere as datas.")
+    
     # ── 2. TAREFAS ────────────────────────────────────────────
     plano.append("📋 TAREFAS PENDENTES (ordenadas por urgência):")
     tarefas = _carregar_tarefas()
@@ -154,23 +158,35 @@ def montar_plano_estudos(modelo_emb, indices_rag,
 
         if resultados:
             for i, r in enumerate(resultados, 1):
-                trecho = r['texto'][:300].replace('\n', ' ')
+                trecho = r['texto'][:1000].replace('\n', ' ') 
                 plano.append(
                     f"  [{i}] Origem: {r['origem']} (score: {r['score_final']})\n"
-                    f"       Trecho: {trecho}..."
+                    f"       Conteúdo: {trecho}..."
                 )
         else:
             plano.append("  Nenhum material relevante encontrado no RAG.")
     except Exception as e:
         plano.append(f"  Erro ao consultar RAG: {e}")
+    instrucao_llm = f"""
+    === INSTRUÇÕES PARA O JARVIS (TREINADOR ACADÊMICO) ===
+    Sua missão é montar um roteiro de estudos usando timeboxing. 
 
-    plano.append("")
-    plano.append("=== FIM DOS DADOS ===")
-    plano.append(
-        "\nCom base nos dados acima, monte um plano de estudos claro e priorizado. "
-        "Considere os prazos das tarefas, os eventos da agenda e os materiais disponíveis. "
-        "Organize por dia e indique o que estudar primeiro."
-        + (f" Foco especial em: {foco}." if foco.strip() else "")
-    )
+    ⚠️ REGRAS DE TEMPO E AGENDA:
+    1. CÁLCULO DE JANELAS LIVRES: Leia os eventos da agenda com cuidado. Se há um evento das 15:25 às 17:25, a janela do meio (ex: 15:30 ou 16:00) ESTÁ BLOQUEADA.
+    2. O DIA DA PROVA: O foco do estudo é ({foco}). Localize na agenda a que horas é a prova disso. É ESTRITAMENTE PROIBIDO agendar qualquer bloco de estudo *depois* do horário em que a prova já começou.
+    3. PROIBIÇÃO MATEMÁTICA: O horário do seu bloco de estudo SÓ PODE acontecer dentro de uma janela totalmente vazia.
+
+    FORMATO DE SAÍDA EXIGIDO PARA CADA DIA:
+    [Dia da Semana Exato] ([Data])
+    - Ocupado: [Resuma rigorosamente os horários indisponíveis]
+    - Janelas Livres: [Identifique as horas vagas reais]
+    - [HH:MM] às [HH:MM]: [Sua recomendação de estudo]
+
+    Finalize a mensagem perguntando EXATAMENTE: "Gostaria que eu adicione esses blocos de estudo (os horários com o símbolo ⏱️) na sua agenda do Google?"
+    """
+    plano.append(instrucao_llm)
+
+    return "\n".join(plano)
+    plano.append(instrucao_llm)
 
     return "\n".join(plano)
