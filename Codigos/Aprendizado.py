@@ -272,12 +272,8 @@ def gerar_exercicios(tema: str, modelo_emb, indices_rag,
             "Você é um professor avaliando uma resposta de um aluno. "
             "REGRA 1: Avalie APENAS o que foi pedido. Se a pergunta pede uma fórmula e o aluno deu a fórmula, considere EXCELENTE e sem lacunas. Não exija explicações extras se não foram solicitadas na pergunta. "
             "REGRA 2: O aluno PODE usar formatação LaTeX ou texto livre. NUNCA critique a formatação da resposta do aluno. "
-            "REGRA 3 (PARA VOCÊ): Nas SUAS explicações e feedbacks, É PROIBIDO usar LaTeX (como \\[, \\], \\frac, $$). Escreva matemática em texto simples.\n\n"
-            "Estruture exatamente assim:\n"
-            "✅ Acertos: ...\n"
-            "❌ Lacunas: ... (Deixe vazio se a resposta atendeu ao que foi perguntado)\n"
-            "💡 Complemento: ... (Adicione curiosidades ou contexto aqui sem penalizar o aluno)\n"
-            "⭐ Avaliação: [Excelente / Boa / Parcial / Insuficiente]"
+            "REGRA 3 (PARA VOCÊ): Nas SUAS explicações e feedbacks, É PROIBIDO usar LaTeX (como \\[, \\], \\frac, $$). Escreva matemática em texto simples."
+            "REGRA 4: Ao final de todos os exercícios, forneça um pequeno gabarito para o usuário comparar suas respostas. O gabarito deve ser claro, direto e baseado exclusivamente no contexto fornecido. Se o contexto não fornecer uma resposta clara, indique isso no gabarito.\n\n"
         )
     prompt_usuario = (
         f"Tema: {tema}\n\n"

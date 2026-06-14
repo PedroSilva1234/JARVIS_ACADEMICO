@@ -1,6 +1,0 @@
-[
-  {
-    "source_path": "lista4_ajjuste.md",
-    "chunk_text": "# Functions and Graphs\n\nLet g(x) = a√x + bex.\n\nLet f(x) = x4 − 5x.\n\nLet y ≈ abx and y ≈ axb.\n\nEvaluate y(x) at x = 7.\n\n# Functions and Equations\n\nu(t)\n\nx(t) = t/(at + b)\n\ny(t) = abt\n\ng(x) = 1 + a.ebx\n\n# Equations\n\ng(x) = a 1 + 10 + bx\n\n# Graphical Representation\n\n| 8 | 8 |\n| ------------------------ | -------------------------------- |\n| g(x) = 0, 21667x + 0.175 | r2 = (f(xi) − g(xi))2 = 0, 08833 |\n| i = 1 | i = 1 |\n\ng(x) = 0, 0155x2 + 0, 0772x + 0, 4074.\n\ny = 07335x + 0, 7167\n\ng(x) = −3 − 5x + 6 x2\n\ng(x) = a.bx a = 32, 1528 b = 1, 4269\n\ng(x) = a.xb a = 38, 86 b = 0, 963\n\ny(t) = abt\n\ng(x) = 1 + 0, 9871e1,0036x"
-  }
-]

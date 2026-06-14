@@ -274,7 +274,8 @@ Ferramentas disponíveis:
    - tipo pode ser: "multipla_escolha", "verdadeiro_falso", "aberta", "misto"
 
 13. consultar_proximos_eventos
-   - Uso: quando o usuário perguntar sobre compromissos da "próxima semana", "próximos dias", ou perguntar "quando é meu próximo compromisso".
+   - Uso: quando o usuário perguntar sobre "próxima semana", "próximos dias", ou perguntar "quando é meu próximo compromisso".
+   - ⚠️ REGRA DE INTERPRETAÇÃO: O "próximo" compromisso é SEMPRE o primeiro evento da lista que a ferramenta retornar, MESMO QUE SEJA HOJE. A palavra "próximo" não significa "amanhã". NUNCA pule ou oculte os eventos do dia atual.
    - JSON: {"tool": "consultar_proximos_eventos", "args": {"dias_frente": 7}}
    - dias_frente: use 7 por padrão para cobrir a próxima semana, ou 30 se o usuário quiser saber quando é o próximo compromisso em geral.
 

@@ -44,28 +44,28 @@ def consultar_agenda_real(data_str: str) -> str:
     """Busca eventos na agenda do Google para um dia (YYYY-MM-DD) ou mês completo (YYYY-MM)."""
     try:
         servico = autenticar_google()
-        
         data_str = data_str.strip()
         
         # Detecta se a busca é por mês (YYYY-MM) ou por dia (YYYY-MM-DD)
         if len(data_str) == 7:
-            # Converte para o primeiro dia do mês solicitado
             data_inicio = datetime.datetime.strptime(data_str, "%Y-%m")
-            inicio_periodo = data_inicio.isoformat() + 'Z'
+            # Força o fuso horário local (-04:00) em vez do Zulu ('Z')
+            inicio_periodo = f"{data_str}-01T00:00:00-04:00"
             
-            # Calcula o primeiro dia do próximo mês para fechar a janela de busca
             if data_inicio.month == 12:
                 data_fim = datetime.datetime(data_inicio.year + 1, 1, 1)
             else:
                 data_fim = datetime.datetime(data_inicio.year, data_inicio.month + 1, 1)
-            fim_periodo = data_fim.isoformat() + 'Z'
+            fim_periodo = f"{data_fim.strftime('%Y-%m-%d')}T00:00:00-04:00"
             
             print(f"📅 Buscando todos os eventos na nuvem para o mês: {data_str}...")
         else:
             # Comportamento padrão por dia
             data_inicio = datetime.datetime.strptime(data_str, "%Y-%m-%d")
-            inicio_periodo = data_inicio.isoformat() + 'Z'
-            fim_periodo = (data_inicio + datetime.timedelta(days=1)).isoformat() + 'Z'
+            # Força o fuso horário local (-04:00) 
+            inicio_periodo = f"{data_str}T00:00:00-04:00"
+            data_fim = data_inicio + datetime.timedelta(days=1)
+            fim_periodo = f"{data_fim.strftime('%Y-%m-%d')}T00:00:00-04:00"
             
             print(f"📅 Buscando eventos na nuvem para o dia: {data_str}...")
         
@@ -85,18 +85,15 @@ def consultar_agenda_real(data_str: str) -> str:
         resultado = f"Eventos encontrados no Google Calendar para [{data_str}]:\n"
         for evento in eventos:
             inicio = evento['start'].get('dateTime', evento['start'].get('date'))
-            
-            # Extrai o dia e mês (DD/MM) para ficar legível num relatório mensal
             dia_mes = f"{inicio[8:10]}/{inicio[5:7]}"
             horario = inicio[11:16] if 'T' in inicio else 'O dia todo'
-            
             resultado += f"  • [{dia_mes}] às {horario} - {evento['summary']}\n"
             
         return resultado
 
     except Exception as e:
         return f"Erro ao acessar a agenda do Google: {type(e).__name__}: {e}"
-
+    
 def buscar_evento_por_titulo(titulo: str) -> str:
     """Busca eventos na agenda pelo título e retorna os detalhes para confirmação."""
     try:

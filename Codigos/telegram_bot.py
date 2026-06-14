@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from sentence_transformers import SentenceTransformer
+from retrieval import IndicesRAG
+from gerar_respostas import gerar_resposta, montar_system_prompt, SESSAO_ACTIVE_RECALL
 
 # Importa as peças do seu JARVIS (Garanta que a pasta está correta)
 from retrieval import IndicesRAG
@@ -55,10 +57,40 @@ async def processar_mensagem(update: Update, context: ContextTypes.DEFAULT_TYPE)
         memorias_usuarios[chat_id] = [{"role": "system", "content": montar_system_prompt()}]
         
     historico = memorias_usuarios[chat_id]
+
+    if "atual" in SESSAO_ACTIVE_RECALL and not SESSAO_ACTIVE_RECALL["atual"].encerrada:
+        sessao_ativa = SESSAO_ACTIVE_RECALL["atual"]
+        
+        # Manda o feedback visual pro celular
+        mensagem_espera = await update.message.reply_text("⏳ *Avaliando resposta...*", parse_mode="Markdown")
+        
+        try:
+            # Envia a resposta direto para a classe de aprendizado (sem IA do Jarvis interferir)
+            feedback = sessao_ativa.avaliar_resposta(texto_usuario)
+            
+            # Atualiza o histórico para o JARVIS não ficar confuso depois do teste
+            historico.append({"role": "user", "content": texto_usuario})
+            historico.append({"role": "assistant", "content": feedback})
+            
+            # Se a palavra 'parar' encerrou a sessão, limpamos o dicionário
+            if sessao_ativa.encerrada:
+                del SESSAO_ACTIVE_RECALL["atual"]
+                
+            # Entrega a nota pro usuário
+            await mensagem_espera.edit_text(feedback)
+            
+            # 🛑 ENCERRA A FUNÇÃO AQUI! O 'return' impede que o código continue 
+            # e chame a função gerar_resposta lá embaixo.
+            return 
+            
+        except Exception as e:
+            await mensagem_espera.edit_text(f"⚠️ Erro ao avaliar a resposta: {e}")
+            return
+    # =========================================================
+
+    # Se não houver Active Recall rodando, segue o fluxo normal de conversa
     historico.append({"role": "user", "content": texto_usuario})
-    
-    # Manda um "feedback" visual pro celular dizendo que tá pensando
-    mensagem_espera = await update.message.reply_text("⏳ *...*", parse_mode="Markdown")
+    mensagem_espera = await update.message.reply_text("⏳ *Consultando...*", parse_mode="Markdown")
 
     try:
         # A MÁGICA ACONTECE AQUI: Chama a sua função RAG original
