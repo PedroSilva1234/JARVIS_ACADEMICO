@@ -1,8 +1,12 @@
 .env
 venv/
+<<<<<<< HEAD
 __pycache__/
 credentials.json
 token.json
 *.log
 lista1.pdf
 tarefas.json
+=======
+__pycache__/
+>>>>>>> b87cad8bdec4b4772c5c3021ecc5cf81ff31a865
