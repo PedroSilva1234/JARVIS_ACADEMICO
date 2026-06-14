@@ -44,11 +44,6 @@ client = OpenAI(
 MODEL_ID   = "Qwen/Qwen2.5-14B-Instruct-AWQ"
 MAX_TOKENS = 1024
 
-
-# ============================================================
-# HELPER: CHAMADA SIMPLES À LLM
-# ============================================================
-
 def _chamar_llm(system: str, user: str) -> str:
     """Faz uma chamada simples à LLM sem histórico."""
     resposta = client.chat.completions.create(

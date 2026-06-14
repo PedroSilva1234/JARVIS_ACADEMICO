@@ -125,19 +125,33 @@ def buscar_evento_por_titulo(titulo: str) -> str:
     except Exception as e:
         return f"Erro ao buscar o evento: {e}"
     
-def criar_evento_real(titulo: str, data_str: str, descricao: str = "") -> dict:
+def criar_evento_real(titulo: str, data_str: str, descricao: str = "", hora_inicio: str = None, hora_fim: str = None) -> dict:
     try:
         servico = autenticar_google()
         evento = {
             'summary': titulo,
             'description': descricao,
-            'start': {'date': data_str},
-            'end': {'date': data_str}
         }
+        # Se recebeu os horários, cria o evento de "timebox" com o fuso local (Campo Grande)
+        if hora_inicio and hora_fim:
+            evento['start'] = {
+                'dateTime': f"{data_str}T{hora_inicio}:00",
+                'timeZone': 'America/Campo_Grande'
+            }
+            evento['end'] = {
+                'dateTime': f"{data_str}T{hora_fim}:00",
+                'timeZone': 'America/Campo_Grande'
+            }
+        else:
+            # Evento de dia inteiro (padrão antigo)
+            evento['start'] = {'date': data_str}
+            evento['end'] = {'date': data_str}
+            
         evento_criado = servico.events().insert(calendarId='primary', body=evento).execute()
         return {"sucesso": True, "id": evento_criado.get('id')}
     except Exception as e:
         return {"sucesso": False, "erro": str(e)}
+
 
 def deletar_evento_real(titulo: str) -> str:
     """Busca um evento pelo título e remove da Agenda do Google."""
@@ -160,6 +174,41 @@ def deletar_evento_real(titulo: str) -> str:
     except Exception as e:
         return f"Erro ao remover evento da agenda: {e}"
 
+def consultar_proximos_eventos(dias_frente: int = 7) -> str:
+    """Busca eventos na agenda a partir de hoje até 7 dias para frente."""
+    try:
+        servico = autenticar_google()
+        
+        # Pega o momento atual (timeMin)
+        agora = datetime.datetime.utcnow()
+        inicio_periodo = agora.isoformat() + 'Z'
+        
+        # Calcula o teto (timeMax)
+        fim_periodo = (agora + datetime.timedelta(days=dias_frente)).isoformat() + 'Z'
+        
+        eventos_result = servico.events().list(
+            calendarId='primary', 
+            timeMin=inicio_periodo,
+            timeMax=fim_periodo,
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+        
+        eventos = eventos_result.get('items', [])
+
+        if not eventos:
+            return f"A agenda está livre! Nenhum evento encontrado para os próximos {dias_frente} dias."
+
+        resultado = f"Próximos compromissos (janela de {dias_frente} dias):\n"
+        for evento in eventos:
+            inicio = evento['start'].get('dateTime', evento['start'].get('date'))
+            dia_mes = f"{inicio[8:10]}/{inicio[5:7]}"
+            horario = inicio[11:16] if 'T' in inicio else 'O dia todo'
+            resultado += f"  • [{dia_mes}] às {horario} - {evento['summary']}\n"
+            
+        return resultado
+    except Exception as e:
+        return f"Erro ao acessar os próximos eventos: {e}"
 # ============================================================
 # TAREFAS (GOOGLE TASKS)
 # ============================================================

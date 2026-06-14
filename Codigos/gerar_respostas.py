@@ -25,7 +25,7 @@ from dotenv import load_dotenv
 from google_agenda import (
     consultar_agenda_real, criar_evento_real, deletar_evento_real,
     criar_task_real, concluir_task_real, deletar_task_real,
-    buscar_evento_por_titulo
+    buscar_evento_por_titulo, consultar_proximos_eventos
 )
 from retrieval import IndicesRAG, buscar_hibrido
 from Planejamento import montar_plano_estudos
@@ -255,9 +255,9 @@ Ferramentas disponíveis:
    - Uso: SEMPRE que o usuário pedir para remover um evento, use esta ferramenta ANTES para descobrir a data e o horário do evento.
    - JSON: {"tool": "buscar_evento_por_titulo", "args": {"titulo": "Nome do Evento"}}
 
-
 10. montar_plano_estudos
-   - Uso: quando o usuário pedir um plano de estudos, priorização do dia ou estratégia para uma prova.
+   - Uso: OBRIGATÓRIO SEMPRE que o usuário pedir um plano de estudos.
+   - REGRA DE DATA: Se o usuário informar quando é a prova, calcule matematicamente quantos dias faltam a partir de hoje e passe esse número exato no "janela_dias". O plano de estudos DEVE acabar um dia antes da prova. Nunca use o padrão de 7 dias se a prova for antes disso.
    - JSON: {"tool": "montar_plano_estudos", "args": {"janela_dias": 7, "foco": ""}}
    - janela_dias: quantos dias à frente considerar (padrão 7)
    - foco: tema ou prova específica (deixe vazio "" para plano geral)
@@ -273,18 +273,27 @@ Ferramentas disponíveis:
    - JSON: {"tool": "gerar_exercicios", "args": {"tema": "nome do tema", "tipo": "misto", "quantidade": 3}}
    - tipo pode ser: "multipla_escolha", "verdadeiro_falso", "aberta", "misto"
 
+13. consultar_proximos_eventos
+   - Uso: quando o usuário perguntar sobre compromissos da "próxima semana", "próximos dias", ou perguntar "quando é meu próximo compromisso".
+   - JSON: {"tool": "consultar_proximos_eventos", "args": {"dias_frente": 7}}
+   - dias_frente: use 7 por padrão para cobrir a próxima semana, ou 30 se o usuário quiser saber quando é o próximo compromisso em geral.
+
 REGRAS:
-- Use buscar_material_rag ANTES de responder sobre conteúdo.
-- NUNCA chame gerar_exercicios ou iniciar_active_recall automaticamente ao explicar um conteúdo. Estas ferramentas só devem ser acionadas quando o usuário pedir EXPLICITAMENTE (usar palavras como "exercício", "quiz", "me teste", "quero praticar", "active recall").
-- Ao final de uma explicação de conteúdo, você PODE oferecer ao usuário a opção de praticar ("Quer fazer exercícios ou perguntas de revisão sobre este tema?"), mas NÃO acione a ferramenta sem confirmação.
-- Quando acionar uma ferramenta, responda APENAS com o JSON no formato especificado.
-- Se o usuário pedir duas ou mais coisas, você PODE e DEVE gerar os múltiplos JSONs na mesma resposta, um em cada linha.
-- REGRA DE CONFIRMAÇÃO (APENAS PARA EXCLUIR EVENTOS DA AGENDA): Se o usuário pedir para deletar ou remover um evento do calendário, NUNCA chame 'remover_evento_agenda' de imediato. Você DEVE usar 'buscar_evento_por_titulo' primeiro, apresentar a data ao usuário e perguntar "Tem certeza que deseja remover?". Aguarde o "sim" para prosseguir.
-- REGRA DE TAREFAS (SEM CONFIRMAÇÃO, AÇÃO IMEDIATA): NUNCA adivinhe o ID de uma tarefa. Se o usuário pedir para concluir ou deletar uma tarefa, use 'listar_tarefas' primeiro para descobrir o ID. ASSIM QUE O PYTHON DEVOLVER O ID, VOCÊ DEVE EMITIR O JSON DE 'concluir_tarefa' OU 'deletar_tarefa' IMEDIATAMENTE NA PRÓXIMA RODADA. NÃO peça confirmação e NÃO faça perguntas ao usuário sobre tarefas. Apenas execute.
-- NUNCA afirme textualmente que uma tarefa ou evento foi criado, concluído ou deletado a menos que você tenha visto o resultado de sucesso da ferramenta correspondente nos logs do sistema.
-- Nunca invente dados. Se não tiver certeza, diga que não encontrou a informação.
-- REGRA DE CONTEÚDO PARA ACTIVE RECALL: Se o usuário pedir para ser testado ou praticar um tema, VOCÊ DEVE usar 'buscar_material_rag' para recuperar o conteúdo relevante ANTES de chamar 'iniciar_active_recall'. O conteúdo recuperado deve ser a base para as perguntas do active recall. NUNCA chame 'iniciar_active_recall' sem antes buscar o material relevante.
-- Se o usuário quando pedir pra ser testado NÃO especificar um tema, peça para ele escolher um tema específico RELACIONADO com os conteúdos disponíveis para a sessão de active recall. Você DEVE listar os temas mais relevantes encontrados no RAG e pedir para ele escolher um. APENAS DEPOIS de o usuário escolher o tema, chame 'iniciar_active_recall' com esse tema específico.
+- Ao usar uma ferramenta, sua resposta deve conter EXCLUSIVAMENTE o(s) bloco(s) JSON válido(s), sem textos adicionais ou saudações. 
+- Se o pedido do usuário exigir duas ou mais ações, você PODE e DEVE emitir todos os JSONs necessários na mesma resposta, um em cada linha.
+- Converta qualquer data relativa ("hoje", "amanhã", "próxima segunda") para o formato YYYY-MM-DD antes de acionar as ferramentas. A data base é {hoje}. Nunca envie dias da semana em formato de texto para as APIs.
+- Escreva qualquer equação, fração ou expressão matemática EXCLUSIVAMENTE em texto simples de teclado. É proibido o uso de formatação gráfica ou LaTeX (ex: escreva 'a^2 + b^2 = c^2' ou '1/2').
+- Sempre que o assunto for acadêmico, conceitual ou explicativo, você DEVE usar 'buscar_material_rag' ANTES de responder. 
+- Baseie sua resposta e eventuais "exemplos" EXCLUSIVAMENTE no material recuperado. Nunca invente dados. Se não tiver certeza ou a informação não constar nos materiais, diga claramente que não a encontrou.
+- Ferramentas interativas ('iniciar_active_recall' e 'gerar_exercicios') NUNCA devem ser usadas por iniciativa própria ao explicar um conteúdo. Acione-as SOMENTE mediante comando explícito do usuário (ex: "exercício", "quiz", "me teste", "quero praticar").
+- Ao final de uma explicação, você PODE oferecer a opção de praticar ("Quer fazer exercícios sobre este tema?"), mas NÃO acione a ferramenta até que o usuário confirme.
+- Se o usuário pedir para ser testado mas NÃO especificar um tema, interrompa a ação. Liste os temas mais relevantes encontrados no RAG e exija que ele escolha um. APENAS DEPOIS da escolha, chame a ferramenta 'iniciar_active_recall' com o tema específico. 
+- O conteúdo recuperado pelo 'buscar_material_rag' deve ser a base estrita para as perguntas geradas no active recall.
+- Para deletar ou remover um evento do calendário, NUNCA chame 'remover_evento_agenda' diretamente.
+- Você DEVE usar 'buscar_evento_por_titulo' primeiro. Em seguida, apresente a data/evento ao usuário e pergunte: "Tem certeza que deseja remover?". Aguarde o "sim" explícito para só então prosseguir com a exclusão.
+- NUNCA adivinhe o ID de uma tarefa. Se o usuário pedir para concluir ou deletar uma tarefa, use 'listar_tarefas' primeiro.
+- ASSIM QUE O SISTEMA DEVOLVER A LISTA COM O ID, você deve emitir o JSON de 'concluir_tarefa' ou 'deletar_tarefa' IMEDIATAMENTE na próxima rodada. NÃO peça confirmação e NÃO faça perguntas ao usuário. Apenas execute.
+- Você é ESTRITAMENTE PROIBIDO de confirmar textualmente ao usuário que uma tarefa ou evento foi criado, concluído ou deletado sem antes ler o retorno real de sucesso fornecido pelos logs do sistema local. Nunca invente resultados.
 """
 
 
@@ -308,11 +317,12 @@ def executar_ferramenta(nome: str, argumentos: dict, modelo_emb, indices) -> str
     elif nome == "buscar_material_rag":
         resultado = buscar_material_rag(argumentos["query"], modelo_emb, indices)
     elif nome == "adicionar_evento_agenda":
-        # Chama a agenda para eventos genéricos (sem ser tarefa)
         res_google = criar_evento_real(
             titulo=argumentos["titulo"], 
             data_str=argumentos["data"], 
-            descricao="Adicionado pelo Jarvis"
+            hora_inicio=argumentos.get("hora_inicio"),
+            hora_fim=argumentos.get("hora_fim"),
+            descricao="Adicionado pelo Jarvis Acadêmico"
         )
         if res_google.get("sucesso"):
             resultado = f"Evento '{argumentos['titulo']}' adicionado com sucesso à Agenda do Google."
@@ -346,6 +356,9 @@ def executar_ferramenta(nome: str, argumentos: dict, modelo_emb, indices) -> str
         tipo       = argumentos.get("tipo", "misto")
         quantidade = int(argumentos.get("quantidade", 3))
         resultado  = gerar_exercicios(tema, modelo_emb, indices, tipo=tipo, quantidade=quantidade)
+    elif nome == "consultar_proximos_eventos":
+        from google_agenda import consultar_proximos_eventos
+        resultado = consultar_proximos_eventos(int(argumentos.get("dias_frente", 7)))
     else:
         resultado = f"Ferramenta '{nome}' não reconhecida."
 
